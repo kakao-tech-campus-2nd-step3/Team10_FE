@@ -30,7 +30,7 @@ module.exports = {
     project: "./tsconfig.json",
   },
   ignorePatterns: ["node_modules/"],
-  plugins: ["@typescript-eslint", "react", "import"],
+  plugins: ["@typescript-eslint", "react", "import", "chakra-ui"],
   rules: {
     "no-extra-semi": "error",
     "react/react-in-jsx-scope": "off",
@@ -74,6 +74,9 @@ module.exports = {
         },
       },
     ],
+    "chakra-ui/props-order": "error",
+    "chakra-ui/props-shorthand": "error",
+    "chakra-ui/require-specific-component": "error",
   },
   settings: {
     "import/resolver": {
