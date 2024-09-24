@@ -16,5 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", ".eslintrc.cjs"]
+  "include": ["src", ".eslintrc.cjs"],
+  "extends": "./tsconfig.paths.json"
 }
