@@ -29,7 +29,7 @@ module.exports = {
     sourceType: "module",
     project: "./tsconfig.json",
   },
-  ignorePatterns: ["node_modules/"],
+  ignorePatterns: ["node_modules/", "craco.config.js"],
   plugins: ["@typescript-eslint", "react", "import", "chakra-ui"],
   rules: {
     "no-extra-semi": "error",
