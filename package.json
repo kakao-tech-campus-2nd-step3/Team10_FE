@@ -38,10 +38,8 @@
     "typescript-eslint": "^8.6.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "craco start",
+    "build": "craco build",
     "lint": "eslint src --ext .ts,.tsx"
   },
   "eslintConfig": {
