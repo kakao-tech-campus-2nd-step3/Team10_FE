@@ -1,6 +1,6 @@
-import * as ReactDOM from "react-dom/client";
-import * as React from "react";
-import AppRouter from "./routes/AppRouter";
+import ReactDOM from "react-dom/client";
+import React from "react";
+import AppRouter from "@routes/AppRouter";
 
 const container = document.getElementById("root");
 if (!container) throw new Error("Failed to find the root element");
