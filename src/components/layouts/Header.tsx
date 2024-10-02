@@ -1,7 +1,7 @@
-import * as React from "react";
-import { Input, Box, Flex, Text, Image } from "@chakra-ui/react";
+import { useState } from "react";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import poomasi from "../../assets/logo/logo.png";
+import { Input, Box, Flex, Text, Image, Icon } from "@chakra-ui/react";
+import poomasi from "@assets/logo/logo.png";
 
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState<string>("소개");
@@ -10,29 +10,29 @@ const Header = () => {
     setActiveMenu(menu);
   };
   return (
-    <Flex flexDirection="column" backgroundColor="#FFFFFF">
-      <Flex justifyContent="flex-end" padding="10px 50px">
-        <Text marginRight="12px" fontSize="8px" fontWeight="regular" color="#1C4532" cursor="pointer">
+    <Flex direction="column" bgColor="#FFFFFF">
+      <Flex justify="flex-end" p="10px 50px">
+        <Text mr="12px" color="#1C4532" fontSize="8px" fontWeight="regular" cursor="pointer">
           회원가입
         </Text>
-        <Text fontSize="20px" fontWeight="regular" color="#1C4532" cursor="pointer">
+        <Text color="#1C4532" fontSize="20px" fontWeight="regular" cursor="pointer">
           로그인
         </Text>
       </Flex>
 
-      <Flex alignItems="center" justifyContent="space-between" padding="20px 50px">
-        <Image src={poomasi} alt="poomasi" boxSize="50px" />
+      <Flex align="center" justify="space-between" p="20px 50px">
+        <Image boxSize="50px" alt="poomasi" src={poomasi} />
 
-        <Flex alignItems="center" marginLeft="20px" marginX="20px">
+        <Flex align="center" mx="20px" ml="20px">
           {["소개", "상점", "농장"].map(menu => (
             <Text
               key={menu}
-              marginX="30px"
+              mx="30px"
+              color={activeMenu === menu ? "#1C4532" : "#999999"}
               fontSize="20px"
               fontWeight="regular"
-              color={activeMenu === menu ? "#1C4532" : "#999999"}
-              onClick={() => handleMenuClick(menu)}
               cursor="pointer"
+              onClick={() => handleMenuClick(menu)}
             >
               {menu}
             </Text>
@@ -40,22 +40,22 @@ const Header = () => {
         </Flex>
 
         <Input
-          placeholder="검색어를 입력해주세요."
-          marginLeft="50px"
-          width="400px"
+          w="400px"
+          h="50px"
+          ml="50px"
+          px="20px"
           borderColor="#1C4532"
           borderRadius="12px"
-          paddingX="20px"
-          height="50px"
           _placeholder={{ color: "#B3B3B3" }}
+          placeholder="검색어를 입력해주세요."
         />
 
-        <Flex alignItems="center" marginLeft="100px">
-          <Box marginX="10px" cursor="pointer" color="#1C4532">
-            <HeartOutlined />
+        <Flex align="center" ml="100px">
+          <Box mx="10px" color="#1C4532" cursor="pointer">
+            <Icon as={HeartOutlined} />
           </Box>
-          <Box marginX="10px" cursor="pointer" color="#1C4532">
-            <ShoppingCartOutlined />
+          <Box mx="10px" color="#1C4532" cursor="pointer">
+            <Icon as={ShoppingCartOutlined} />
           </Box>
         </Flex>
       </Flex>
