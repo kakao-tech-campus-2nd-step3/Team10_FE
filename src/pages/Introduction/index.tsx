@@ -1,11 +1,5 @@
-import Introduction from "../../components/features/IntroductionPage/Introduction";
-import Header from "../../components/layouts/Header";
+import Introduction from "@components/features/IntroductionPage/Introduction";
 
-const IntroductionPage = () => (
-  <>
-    <Header />
-    <Introduction />
-  </>
-);
+const IntroductionPage = () => <Introduction />;
 
 export default IntroductionPage;

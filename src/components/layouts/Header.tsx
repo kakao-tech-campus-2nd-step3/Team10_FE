@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Input, Box, Flex, Text, Image } from "@chakra-ui/react";
+import { Input, Box, Flex, Text, Image, Icon } from "@chakra-ui/react";
 import poomasi from "@assets/logo/logo.png";
 
 const Header = () => {
@@ -53,10 +53,10 @@ const Header = () => {
 
         <Flex ml={250}>
           <Box mx="10px" color="#1C4532" cursor="pointer">
-            <HeartOutlined style={{ fontSize: "25px" }} />
+            <Icon as={HeartOutlined} fontSize="25px" />
           </Box>
           <Box mx="10px" color="#1C4532" cursor="pointer">
-            <ShoppingCartOutlined style={{ fontSize: "25px" }} />
+            <Icon as={ShoppingCartOutlined} fontSize="25px" />
           </Box>
         </Flex>
       </Flex>

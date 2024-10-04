@@ -1,11 +1,11 @@
 import { Box, Image, Text, Flex } from "@chakra-ui/react";
-import Intro1 from "../../../assets/Image/Intro/Intro1.png";
-import Intro2 from "../../../assets/Image/Intro/Intro2.png";
-import Intro3 from "../../../assets/Image/Intro/Intro3.png";
-import Intro5 from "../../../assets/Image/Intro/Intro5.png";
-import Intro6 from "../../../assets/Image/Intro/Intro6.png";
-import Intro7 from "../../../assets/Image/Intro/Intro7.png";
-import Intro8 from "../../../assets/Image/Intro/Intro8.png";
+import Intro1 from "@assets/Image/Intro/Intro1.png";
+import Intro2 from "@assets/Image/Intro/Intro2.png";
+import Intro3 from "@assets/Image/Intro/Intro3.png";
+import Intro5 from "@assets/Image/Intro/Intro5.png";
+import Intro6 from "@assets/Image/Intro/Intro6.png";
+import Intro7 from "@assets/Image/Intro/Intro7.png";
+import Intro8 from "@assets/Image/Intro/Intro8.png";
 
 const Introduction = () => (
   <Box overflowY="auto" w="1512px" h="100vh">
