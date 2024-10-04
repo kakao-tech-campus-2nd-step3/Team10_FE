@@ -5,8 +5,9 @@ on:
     branches:
       - Master
       - Develop
-      - Weekly
+      - Weekly*
       - Review
+      - weekly*
   workflow_dispatch:
 
 jobs:
