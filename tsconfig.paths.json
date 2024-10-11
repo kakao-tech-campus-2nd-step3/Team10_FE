@@ -10,9 +10,11 @@
       "@pages/*": ["src/pages/*"],
       "@api/*": ["src/api/*"],
       "@types/*": ["src/types/*"],
+      "@type": ["src/types/index.ts"],
       "@utils/*": ["src/utils/*"],
       "@routes/*": ["src/routes/*"],
       "@styles/*": ["src/styles/*"],
+      "@mocks/*": ["src/mocks/*"],
       "@theme": ["src/theme"]
     }
   }
