@@ -1,8 +1,8 @@
-import { ViewProps } from "@components/ItemView/BaseView";
+import { ViewProps } from "@components/ItemView/type";
 import Card, { CardProps } from "@components/common/Card";
 import type { Item } from "@type";
 
-export type ListViewProps<T> = ViewProps<T> & {
+export type ListViewProps<T extends Item> = ViewProps<T> & {
   maxItems: number;
 } & CardProps;
 
