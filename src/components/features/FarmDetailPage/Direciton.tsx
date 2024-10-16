@@ -1,5 +1,4 @@
 import { Text, Flex, Image, Divider } from "@chakra-ui/react";
-import farm2 from "@assets/Image/Farm/Farm2.png";
 
 const Direction = () => (
   <Flex direction="column">
@@ -14,7 +13,6 @@ const Direction = () => (
       borderColor="rgba(56, 56, 56, 0.5)"
       orientation="horizontal"
     />
-    <Image w="800px" h="600px" mt={5} mb={100} ml={200} alt="direction" src={farm2} />
   </Flex>
 );
 
