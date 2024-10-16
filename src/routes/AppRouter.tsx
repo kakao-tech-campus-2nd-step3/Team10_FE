@@ -5,6 +5,7 @@ import FarmDetailPage from "@pages/FarmDetailPage";
 import Home from "@pages/Home";
 import IntroductionPage from "@pages/Introduction";
 import SellerMyPage from "@pages/SellerMyPage";
+import StoreDetailPage from "@pages/StoreDetailPage";
 
 const routers = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const routers = createBrowserRouter([
       {
         path: "SellerMyPage",
         element: <SellerMyPage />,
+      },
+      {
+        path: "StoreDetail",
+        element: <StoreDetailPage />,
       },
       {
         path: "FarmDetail",
