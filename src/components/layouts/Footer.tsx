@@ -1,5 +1,6 @@
-import { Box, Divider, Flex, Image, Link, Text } from "@chakra-ui/react";
+import { Box, Divider, Flex, Link, Text } from "@chakra-ui/react";
 import poomasi from "@assets/logo/logo.png";
+import Image from "@components/common/Image";
 import size from "@constants/size";
 
 const Footer = () => (
