@@ -17,3 +17,9 @@ export type Product = Item & {
   tag?: string;
   farm: Farm;
 };
+
+export type Schedule = Item & {
+  name: string;
+  farm: Farm;
+  mainImage?: string;
+};
