@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Input, Box, Flex, Text, Image, Icon } from "@chakra-ui/react";
+import { Input, Box, Flex, Text, Icon } from "@chakra-ui/react";
 import poomasi from "@assets/logo/logo.png";
+import Image from "@components/common/Image";
 
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState<string>("소개");
