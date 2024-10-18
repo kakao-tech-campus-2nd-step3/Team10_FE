@@ -1,6 +1,6 @@
 import { GridItem, SimpleGrid, SimpleGridProps } from "@chakra-ui/react";
 import { ViewProps } from "@components/ItemView/type";
-import type { Item } from "@type";
+import { Item } from "@type/index";
 
 export type GridViewProps<T extends Item> = ViewProps<T> & SimpleGridProps;
 
