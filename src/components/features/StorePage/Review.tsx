@@ -1,23 +1,24 @@
-import { Box, Image, Text, Flex } from "@chakra-ui/react";
+import { Box, Text, Flex } from "@chakra-ui/react";
+import Image from "@components/common/Image";
 import store1 from "../../../assets/Image/Store/Store1.png";
 import store2 from "../../../assets/Image/Store/Store2.png";
 
 const Review = () => (
   <Box pos="relative">
-    <Text mt={20} ml={200} color="#000000" fontSize="16px" fontWeight="medium">
+    <Text mt={20} color="#000000" fontSize="16px" fontWeight="medium">
       후기 좋은 상품
     </Text>
     <Flex direction="row">
       <Flex direction="row">
         <Flex direction="column">
-          <Image w="300px" h="200px" mt={2} ml={200} alt="store1" src={store1} />
-          <Text mt={2} ml={200} color="#000000" fontSize="16px" fontWeight="bold">
+          <Image w="300px" h="200px" mt={2} alt="store1" src={store1} />
+          <Text mt={2} color="#000000" fontSize="16px" fontWeight="bold">
             건호네 맛있는 포도
           </Text>
-          <Text mt={2} ml={200} color="#276749" fontSize="12px" fontWeight="medium">
+          <Text mt={2} color="#276749" fontSize="12px" fontWeight="medium">
             충청북도 충주시 00군 492-8번지
           </Text>
-          <Text mt={2} ml={200} color="#B3B3B3" fontSize="12px" fontWeight="light">
+          <Text mt={2} color="#B3B3B3" fontSize="12px" fontWeight="light">
             진택이네는 토마토가 정말 맛있어요.
             <br />
             접근성 좋은 진택이네 토마토 농장 꼭 한번 들러주세요!

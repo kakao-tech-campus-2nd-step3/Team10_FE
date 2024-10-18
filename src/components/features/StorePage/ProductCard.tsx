@@ -1,5 +1,7 @@
-import { Flex, Image, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
+import Avatar from "@components/common/Avatar";
 import Card, { CardProps } from "@components/common/Card";
+import Image from "@components/common/Image";
 import { Product } from "@type/index";
 
 type ProductCardProps = {
@@ -8,7 +10,7 @@ type ProductCardProps = {
 
 const ProductCard = ({ item, ...props }: ProductCardProps) => (
   <Card {...props}>
-    <Image w="full" bg="#f5f5f5" borderRadius="2xl" alt={item.name} aspectRatio="1" src={item.mainImage} />
+    <Image w="full" borderRadius="2xl" alt={item.name} aspectRatio="1" src={item.mainImage} />
     <Flex py="3">
       <Text maxW="70%" fontSize="lg" fontWeight="bold" isTruncated>
         {item.name}
@@ -26,7 +28,7 @@ const ProductCard = ({ item, ...props }: ProductCardProps) => (
     </Text>
     <Text color="#999">{item.farm.address}</Text>
     <Flex align="center" py="3">
-      <Image h="35px" bg="#f5f5f5" borderRadius="full" alt={item.farm.name} aspectRatio="1" src={item.farm.profile} />
+      <Avatar src={item.farm.profile} />
       <Text ml="1">{item.farm.name}</Text>
     </Flex>
   </Card>
