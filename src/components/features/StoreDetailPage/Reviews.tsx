@@ -1,5 +1,5 @@
 import StarRatings from "react-star-ratings";
-import { Text, Flex, Divider } from "@chakra-ui/react";
+import { Text, Flex, Divider, Button } from "@chakra-ui/react";
 
 const Reviews = () => (
   <Flex direction="column">
@@ -90,9 +90,9 @@ const Reviews = () => (
       </Flex>
     </Flex>
     <Flex align="center" justify="center" w="1100px" h="50px" mt={10} ml={200} borderRadius="12px" bgColor="#F5F5F5">
-      <Text color="#5C5C5C" fontSize="16px" fontWeight="bold">
+      <Button color="#5C5C5C" fontSize="16px" fontWeight="bold" _hover={{ bgColor: "#F5F5F5" }} bgColor="#F5F5F5">
         23건 후기 모두 보기
-      </Text>
+      </Button>
     </Flex>
   </Flex>
 );
