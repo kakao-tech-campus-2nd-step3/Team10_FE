@@ -1,27 +1,16 @@
-import { Box, Image, Text, Flex, Divider } from "@chakra-ui/react";
+import { Box, Image, Text, Flex } from "@chakra-ui/react";
 import store1 from "@assets/Image/Store/Store1.png";
 import store5 from "@assets/Image/Store/Store5.png";
 import store6 from "@assets/Image/Store/Store6.png";
 import store7 from "@assets/Image/Store/Store7.png";
 
 const ProductDescription = () => (
-  <Flex direction="column">
-    <Text mt={100} ml={200} color="#1C4532" fontSize="24px" fontWeight="bold">
-      상품 설명
-    </Text>
-    <Divider
-      w="1100px"
-      mt={3}
-      ml={200}
-      borderWidth="0.7px"
-      borderColor="rgba(56, 56, 56, 0.5)"
-      orientation="horizontal"
-    />
-    <Text mt={10} ml={200} color="#000000" fontSize="32px" fontWeight="bold">
+  <Flex direction="column" mb={50}>
+    <Text mt={10} color="#000000" fontSize="32px" fontWeight="bold">
       건호네 포도에 대해서 소개합니다😀
     </Text>
     <Flex direction="row">
-      <Image w="500px" h="490px" mt={10} ml={200} borderRadius="12px" alt="store1" src={store1} />
+      <Image w="500px" h="490px" mt={10} borderRadius="12px" alt="store1" src={store1} />
       <Flex direction="column">
         <Box w="520px" h="150px" mt={10} ml={10} borderRadius="12px" bgColor="#22543D">
           <Flex direction="row">
