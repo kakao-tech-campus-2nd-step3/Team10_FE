@@ -1,4 +1,4 @@
-import { Text, Flex, Image, Divider } from "@chakra-ui/react";
+import { Text, Flex, Divider } from "@chakra-ui/react";
 
 const Direction = () => (
   <Flex direction="column">
