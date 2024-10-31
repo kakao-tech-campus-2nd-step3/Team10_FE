@@ -45,6 +45,7 @@ module.exports = {
     "import/extensions": "off",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
     "react/function-component-definition": [
       "error",
       {
