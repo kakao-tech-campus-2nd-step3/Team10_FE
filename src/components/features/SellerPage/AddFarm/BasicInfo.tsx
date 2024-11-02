@@ -61,7 +61,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ setFarmImage }) => {
           onClick={() => document.getElementById("file-input")?.click()}
         />
         <Input display="none" accept="image/*" id="file-input" onChange={handleImageChange} type="file" />
-        <Text mt={5} ml={450} color="#CECECE" fontSize="28px" fontWeight="bold">
+        <Text mt={5} ml={470} color="#CECECE" fontSize="28px" fontWeight="bold">
           {farmImageState}
         </Text>
       </Flex>
