@@ -1,14 +1,15 @@
 import { Map, MapMarker, useKakaoLoader } from "react-kakao-maps-sdk";
 import { Box, BoxProps } from "@chakra-ui/react";
 import ResetMapBounds from "@components/common/KaKaoMap/ResetMapBounds";
-import { Pin } from "@components/common/KaKaoMap/type";
+import { Pin, PinComponentType } from "@components/common/KaKaoMap/type";
 
-type KaKaoMapProps = {
-  pins: Pin[];
-  onClickPin?: (pin: Pin) => void;
+type KaKaoMapProps<T extends Pin> = {
+  pins: T[];
+  onClickPin?: (pin: T) => void;
+  PinComponent?: PinComponentType<T>;
 } & BoxProps;
 
-const KaKaoMap = ({ pins, onClickPin, ...rest }: KaKaoMapProps) => {
+const KaKaoMap = <T extends Pin>({ pins, onClickPin, PinComponent, ...rest }: KaKaoMapProps<T>) => {
   useKakaoLoader({
     appkey: process.env.REACT_APP_KAKAO_API_KEY || "",
     libraries: ["clusterer", "drawing", "services"],
@@ -33,16 +34,20 @@ const KaKaoMap = ({ pins, onClickPin, ...rest }: KaKaoMapProps) => {
 
   return (
     <Box as={Map} center={calculateCenter()} isPanto {...rest}>
-      {pins.map(pin => (
-        <MapMarker
-          key={pin.key}
-          position={{
-            lat: pin.lat,
-            lng: pin.lng,
-          }}
-          onClick={() => onClickPin && onClickPin(pin)}
-        />
-      ))}
+      {pins.map(pin =>
+        PinComponent ? (
+          <PinComponent key={pin.key} pin={pin} onClick={onClickPin} />
+        ) : (
+          <MapMarker
+            key={pin.key}
+            position={{
+              lat: pin.lat,
+              lng: pin.lng,
+            }}
+            onClick={() => onClickPin && onClickPin(pin)}
+          />
+        ),
+      )}
       <ResetMapBounds pins={pins} />
     </Box>
   );
