@@ -6,6 +6,7 @@ import Home from "@pages/Home";
 import IntroductionPage from "@pages/Introduction";
 import SellerMyPage from "@pages/SellerMyPage";
 import StoreDetailPage from "@pages/StoreDetailPage";
+import StorePage from "@pages/StorePage";
 
 const routers = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const routers = createBrowserRouter([
       {
         path: "FarmDetail",
         element: <FarmDetailPage />,
+      },
+      {
+        path: "store",
+        element: <StorePage />,
       },
     ],
   },
