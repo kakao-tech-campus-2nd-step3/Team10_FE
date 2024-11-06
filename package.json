@@ -12,6 +12,7 @@
     "framer-motion": "^6.5.1",
     "jotai": "^2.10.0",
     "react": "^18.3.1",
+    "react-awesome-stars-rating": "^0.16.2",
     "react-dom": "^18.3.1",
     "react-icons": "^3.11.0",
     "react-router-dom": "^6.26.2",
