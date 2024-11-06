@@ -44,7 +44,7 @@ const ReviewList = () => {
   };
 
   return (
-    <Flex align="flex-start" direction="column" mb={50} ml={-140}>
+    <Flex align="flex-start" direction="column" mb={50}>
       <Flex mt={5}>
         <Select w="1090px" placeholder="최신순">
           <option value="option1">인기순</option>
