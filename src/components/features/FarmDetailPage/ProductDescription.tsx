@@ -5,7 +5,7 @@ import farm5 from "@assets/Image/Farm/Farm5.png";
 import farm6 from "@assets/Image/Farm/Farm6.png";
 
 const ProductDescription = () => (
-  <Flex direction="column">
+  <Flex direction="column" mt={200} ml={200}>
     <Text mt={5} color="#000000" fontSize="32px" fontWeight="bold">
       지민이네 복숭아 따기 농장을 소개합니다🥰
     </Text>

@@ -66,10 +66,10 @@ const PriceInfo = () => (
         배송비
       </Text>
       <Input
-        w="300px"
+        w="200px"
         h="35px"
         mt="30px"
-        ml="440px"
+        ml="495px"
         p="10px"
         color="#06070c"
         fontSize="20px"
@@ -83,8 +83,11 @@ const PriceInfo = () => (
         _placeholder={{ color: "transparent" }}
         bgColor="#F5F5F5"
       />
+      <Text mt={6} ml={5} color="#000000" fontSize="28px" fontWeight="medium">
+        원
+      </Text>
     </Flex>
-    <Divider w="500px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
+    <Divider w="550px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
   </Flex>
 );
 
