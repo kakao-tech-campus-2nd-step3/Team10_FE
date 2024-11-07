@@ -58,7 +58,7 @@ const SellerCategory = () => {
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
         >
-          품절 예정인 상품
+          품절된 상품
         </Button>
 
         <Text mt={10} ml={3} color="#000000" fontSize="20px" fontWeight="bold">
