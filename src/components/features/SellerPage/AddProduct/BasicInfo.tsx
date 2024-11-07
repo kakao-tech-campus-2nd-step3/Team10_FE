@@ -2,18 +2,13 @@ import { useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import { Flex, Input, Icon, Text, Divider, Select } from "@chakra-ui/react";
 
-interface BasicInfoProps {
-  setProductImage: (file: File) => void;
-}
-
-const BasicInfo: React.FC<BasicInfoProps> = ({ setProductImage }) => {
+const BasicInfo = () => {
   const [productImageState, setProductImageState] = useState<string>("000.jpg");
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setProductImageState(file.name);
-      setProductImage(file);
     }
   };
 

@@ -2,24 +2,19 @@ import React, { useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import { Flex, Button, Input, Icon, Text, Divider, Select } from "@chakra-ui/react";
 
-interface BasicInfoProps {
-  setFarmImage: (file: File) => void;
-}
-
-const BasicInfo: React.FC<BasicInfoProps> = ({ setFarmImage }) => {
+const BasicInfo = () => {
   const [farmImageState, setFarmImageState] = useState<string>("000.jpg");
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setFarmImageState(file.name);
-      setFarmImage(file);
     }
   };
 
   return (
     <Flex direction="column">
-      <Text mt={20} ml={20} color="#000000" fontSize="36px" fontWeight="bold">
+      <Text mt={10} ml={20} color="#000000" fontSize="36px" fontWeight="bold">
         기본 정보
       </Text>
       <Flex direction="row">
