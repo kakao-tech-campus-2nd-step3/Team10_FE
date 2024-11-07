@@ -9,7 +9,7 @@ interface BasicModalProps {
 const BasicModal: React.FC<BasicModalProps> = ({ isOpen, onClose, children }) => (
   <Modal isOpen={isOpen} onClose={onClose}>
     <ModalOverlay>
-      <ModalContent maxW="550px">
+      <ModalContent maxW="1200px">
         <ModalHeader>{/* Modal Title */}</ModalHeader>
         <ModalCloseButton _hover={{ bg: "#FFFFFF" }} />
         <ModalBody>{children}</ModalBody>
