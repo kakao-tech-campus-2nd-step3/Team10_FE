@@ -1,15 +1,15 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import BasicInfo from "./BasicInfo";
 import DetailInfo from "./DetailInfo";
 import PriceInfo from "./PriceInfo";
 
 interface AddProductProps {
-  setProductImage: (file: File) => void;
+  setIsAddProductVisible: (visible: boolean) => void;
 }
 
-const AddProduct: React.FC<AddProductProps> = ({ setProductImage }) => (
-  <Box w="1000px" h="1250px" ml={10} bgColor="#FFFFFF">
-    <BasicInfo setProductImage={setProductImage} />
+const AddProduct: React.FC<AddProductProps> = ({ setIsAddProductVisible }) => (
+  <Flex direction="column" w="1000px" h="1250px" mt={-450} ml={350} bgColor="#FFFFFF">
+    <BasicInfo />
     <DetailInfo />
     <PriceInfo />
     <Flex justify="center" direction="row" gap="5px" mt={20} mb={10}>
@@ -27,6 +27,7 @@ const AddProduct: React.FC<AddProductProps> = ({ setProductImage }) => (
           borderColor: "#22543D",
         }}
         bgColor="#FFFFFF"
+        onClick={() => setIsAddProductVisible(false)}
       >
         취소하기
       </Button>
@@ -48,7 +49,7 @@ const AddProduct: React.FC<AddProductProps> = ({ setProductImage }) => (
         등록하기
       </Button>
     </Flex>
-  </Box>
+  </Flex>
 );
 
 export default AddProduct;

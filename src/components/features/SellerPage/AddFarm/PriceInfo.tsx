@@ -11,21 +11,22 @@ const PriceInfo = () => (
       </Text>
       <Input
         w="200px"
-        h="35px"
-        mt="30px"
-        ml="520px"
+        h="40px"
+        mt={5}
+        ml={520}
         p="10px"
         color="#06070c"
         fontSize="20px"
         fontWeight="medium"
-        border="none"
-        borderRadius="10px"
+        borderWidth="0.7px"
+        borderColor="#000000"
+        borderRadius="12px"
         _focus={{
           outline: "none",
-          border: "0.5px solid #22543D",
+          border: "0.7px solid #22543D",
         }}
         _placeholder={{ color: "transparent" }}
-        bgColor="#F5F5F5"
+        bgColor="#FFFFFF"
       />
       <Text mt={6} ml={5} color="#000000" fontSize="28px" fontWeight="medium">
         원
@@ -39,21 +40,22 @@ const PriceInfo = () => (
       </Text>
       <Input
         w="100px"
-        h="35px"
-        mt="30px"
-        ml="535px"
+        h="40px"
+        mt={5}
+        ml={535}
         p="10px"
         color="#06070c"
         fontSize="20px"
         fontWeight="medium"
-        border="none"
-        borderRadius="10px"
+        borderWidth="0.7px"
+        borderColor="#000000"
+        borderRadius="12px"
         _focus={{
           outline: "none",
-          border: "0.5px solid #22543D",
+          border: "0.7px solid #22543D",
         }}
         _placeholder={{ color: "transparent" }}
-        bgColor="#F5F5F5"
+        bgColor="#FFFFFF"
       />
       <Text mt={6} ml={5} color="#000000" fontSize="28px" fontWeight="medium">
         인

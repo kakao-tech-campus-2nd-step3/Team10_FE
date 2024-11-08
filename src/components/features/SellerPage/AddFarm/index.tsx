@@ -4,12 +4,12 @@ import DetailInfo from "./DetailInfo";
 import PriceInfo from "./PriceInfo";
 
 interface AddFarmProps {
-  setFarmImage: (file: File) => void;
+  setIsAddFarmVisible: (visible: boolean) => void;
 }
 
-const AddFarm: React.FC<AddFarmProps> = ({ setFarmImage }) => (
-  <Box w="1000px" h="1250px" ml={10} bgColor="#FFFFFF">
-    <BasicInfo setFarmImage={setFarmImage} />
+const AddFarm: React.FC<AddFarmProps> = ({ setIsAddFarmVisible }) => (
+  <Box w="1000px" h="1250px" mt={-450} ml={350} bgColor="#FFFFFF">
+    <BasicInfo />
     <DetailInfo />
     <PriceInfo />
     <Flex justify="center" direction="row" gap="5px" mt={20} mb={10}>
@@ -27,6 +27,7 @@ const AddFarm: React.FC<AddFarmProps> = ({ setFarmImage }) => (
           borderColor: "#22543D",
         }}
         bgColor="#FFFFFF"
+        onClick={() => setIsAddFarmVisible(false)}
       >
         취소하기
       </Button>

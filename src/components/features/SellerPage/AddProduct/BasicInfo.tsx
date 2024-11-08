@@ -2,18 +2,13 @@ import { useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import { Flex, Input, Icon, Text, Divider, Select } from "@chakra-ui/react";
 
-interface BasicInfoProps {
-  setProductImage: (file: File) => void;
-}
-
-const BasicInfo: React.FC<BasicInfoProps> = ({ setProductImage }) => {
+const BasicInfo = () => {
   const [productImageState, setProductImageState] = useState<string>("000.jpg");
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setProductImageState(file.name);
-      setProductImage(file);
     }
   };
 
@@ -28,21 +23,22 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ setProductImage }) => {
         </Text>
         <Input
           w="200px"
-          h="35px"
-          mt="30px"
-          ml="500px"
+          h="40px"
+          mt={5}
+          ml={500}
           p="10px"
           color="#06070c"
           fontSize="20px"
           fontWeight="medium"
-          border="none"
-          borderRadius="10px"
+          borderWidth="0.7px"
+          borderColor="#000000"
+          borderRadius="12px"
           _focus={{
             outline: "none",
-            border: "0.5px solid #22543D",
+            border: "0.7px solid #22543D",
           }}
           _placeholder={{ color: "transparent" }}
-          bgColor="#F5F5F5"
+          bgColor="#FFFFFF"
         />
       </Flex>
       <Divider w="600px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
