@@ -4,6 +4,7 @@ import BuyerMyPage from "@pages/BuyerMyPage";
 import FarmDetailPage from "@pages/FarmDetailPage";
 import Home from "@pages/Home";
 import IntroductionPage from "@pages/Introduction";
+import MyPage from "@pages/MyPage";
 import SellerMyPage from "@pages/SellerMyPage";
 import SellerPage from "@pages/SellerPage";
 import StoreDetailPage from "@pages/StoreDetailPage";
@@ -41,6 +42,10 @@ const AppRouter = () => {
         {
           path: "Seller",
           element: <SellerPage />,
+        },
+        {
+          path: "MyPage",
+          element: <MyPage />,
         },
       ],
     },
