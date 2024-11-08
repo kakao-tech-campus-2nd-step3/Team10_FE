@@ -24,21 +24,22 @@ const DetailInfo = () => {
         </Text>
         <Input
           w="300px"
-          h="35px"
-          mt="30px"
-          ml="420px"
+          h="40px"
+          mt={5}
+          ml={420}
           p="10px"
           color="#06070c"
           fontSize="20px"
           fontWeight="medium"
-          border="none"
-          borderRadius="10px"
+          borderWidth="0.7px"
+          borderColor="#000000"
+          borderRadius="12px"
           _focus={{
             outline: "none",
-            border: "0.5px solid #22543D",
+            border: "0.7px solid #22543D",
           }}
           _placeholder={{ color: "transparent" }}
-          bgColor="#F5F5F5"
+          bgColor="#FFFFFF"
         />
       </Flex>
       <Divider w="500px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
@@ -49,21 +50,22 @@ const DetailInfo = () => {
         </Text>
         <Input
           w="300px"
-          h="35px"
-          mt="30px"
-          ml="475px"
+          h="40px"
+          mt={5}
+          ml={475}
           p="10px"
           color="#06070c"
           fontSize="20px"
           fontWeight="medium"
-          border="none"
-          borderRadius="10px"
+          borderWidth="0.7px"
+          borderColor="#000000"
+          borderRadius="12px"
           _focus={{
             outline: "none",
-            border: "0.5px solid #22543D",
+            border: "0.7px solid #22543D",
           }}
           _placeholder={{ color: "transparent" }}
-          bgColor="#F5F5F5"
+          bgColor="#FFFFFF"
         />
       </Flex>
       <Divider w="500px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
@@ -102,63 +104,66 @@ const DetailInfo = () => {
         </Text>
         <Input
           w="50px"
-          h="35px"
-          mt="30px"
-          ml="340px"
+          h="40px"
+          mt={7}
+          ml={340}
           p="10px"
           color="#06070c"
           fontSize="20px"
           fontWeight="medium"
-          border="none"
-          borderRadius="10px"
+          borderWidth="0.7px"
+          borderColor="#000000"
+          borderRadius="12px"
           _focus={{
             outline: "none",
-            border: "0.5px solid #22543D",
+            border: "0.7px solid #22543D",
           }}
           _placeholder={{ color: "transparent" }}
-          bgColor="#F5F5F5"
+          bgColor="#FFFFFF"
         />
         <Text mt={6} ml={5} color="#000000" fontSize="28px" fontWeight="bold">
           -
         </Text>
         <Input
           w="100px"
-          h="35px"
-          mt="30px"
+          h="40px"
+          mt={7}
           ml={5}
           p="10px"
           color="#06070c"
           fontSize="20px"
           fontWeight="medium"
-          border="none"
-          borderRadius="10px"
+          borderWidth="0.7px"
+          borderColor="#000000"
+          borderRadius="12px"
           _focus={{
             outline: "none",
-            border: "0.5px solid #22543D",
+            border: "0.7px solid #22543D",
           }}
           _placeholder={{ color: "transparent" }}
-          bgColor="#F5F5F5"
+          bgColor="#FFFFFF"
         />
         <Text mt={6} ml={5} color="#000000" fontSize="28px" fontWeight="bold">
           -
         </Text>
         <Input
           w="100px"
-          h="35px"
-          mt="30px"
+          h="40px"
+          mt={7}
           ml={5}
           p="10px"
           color="#06070c"
           fontSize="20px"
           fontWeight="medium"
-          border="none"
-          borderRadius="10px"
+          borderWidth="0.7px"
+          borderColor="#000000"
+          borderRadius="12px"
           _focus={{
             outline: "none",
-            border: "0.5px solid #22543D",
+            border: "0.7px solid #22543D",
           }}
           _placeholder={{ color: "transparent" }}
-          bgColor="#F5F5F5"
+          bgColor="#FFFFFF"
         />
       </Flex>
       <Divider w="440px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
