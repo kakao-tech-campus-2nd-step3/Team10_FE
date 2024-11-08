@@ -1,7 +1,7 @@
 import { useState } from "react";
 import StarRatings from "react-star-ratings";
 import { Button, Text, Image, Flex, Select, Divider } from "@chakra-ui/react";
-import store8 from "@assets/Image/Store/Store8.png";
+import farm3 from "@assets/Image/Farm/Farm3.png";
 
 const reviewsData = [
   {
@@ -9,8 +9,8 @@ const reviewsData = [
     name: "김*호",
     rating: 5,
     purchase: "첫번째 구매",
-    product: "건호네 하나뿐인 미나리",
-    image: store8,
+    product: "지민이네 복숭아 농장",
+    image: farm3,
     comment: "기대 안하고 샀는데 생각보다 괜찮네요.",
     date: "2024.09.14",
   },
@@ -19,9 +19,9 @@ const reviewsData = [
     name: "이*진",
     rating: 4,
     purchase: "두번째 구매",
-    product: "신선한 미나리",
-    image: store8,
-    comment: "상상보다 신선하고 맛있어요!",
+    product: "지민이네 복숭아 농장",
+    image: farm3,
+    comment: "상상보다 신선하고 재밌었어요!",
     date: "2024.09.15",
   },
   {
@@ -29,9 +29,9 @@ const reviewsData = [
     name: "박*진",
     rating: 5,
     purchase: "두번째 구매",
-    product: "신선한 미나리",
-    image: store8,
-    comment: "원래 미나리 안 먹는데 벌써 재구매!",
+    product: "지민이네 복숭아 농장",
+    image: farm3,
+    comment: "가족끼리 뜻깊은 시간을 보냈어요!",
     date: "2024.09.25",
   },
 ];
