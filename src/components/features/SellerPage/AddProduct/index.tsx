@@ -8,7 +8,7 @@ interface AddProductProps {
 }
 
 const AddProduct: React.FC<AddProductProps> = ({ setIsAddProductVisible }) => (
-  <Flex direction="column" w="1000px" h="1250px" mt={-450} ml={80} bgColor="#FFFFFF">
+  <Flex direction="column" w="1000px" h="1250px" mt={-450} ml={350} bgColor="#FFFFFF">
     <BasicInfo />
     <DetailInfo />
     <PriceInfo />

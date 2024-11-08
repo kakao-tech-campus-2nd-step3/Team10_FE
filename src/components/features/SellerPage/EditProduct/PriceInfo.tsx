@@ -1,4 +1,4 @@
-import { Flex, Button, Text, Divider } from "@chakra-ui/react";
+import { Flex, Input, Text, Divider } from "@chakra-ui/react";
 
 const PriceInfo = () => (
   <Flex direction="column">
@@ -9,88 +9,85 @@ const PriceInfo = () => (
       <Text mt={5} ml={20} color="#000000" fontSize="28px" fontWeight="bold">
         가격
       </Text>
-      <Text mt={5} ml={32} color="#000000" fontSize="25px" fontWeight="medium">
-        27,600원
-      </Text>
-      <Button
-        w="100px"
+      <Input
+        w="200px"
         h="40px"
         mt={5}
-        ml={430}
-        color="#5C5C5C"
-        fontSize="25px"
+        ml={520}
+        p="10px"
+        color="#06070c"
+        fontSize="20px"
         fontWeight="medium"
-        borderWidth="1px"
+        borderWidth="0.7px"
         borderColor="#000000"
-        borderRadius="40px"
-        _hover={{
-          bgColor: "#FFFFFF",
-          borderColor: "#000000",
+        borderRadius="12px"
+        _focus={{
+          outline: "none",
+          border: "0.7px solid #22543D",
         }}
         bgColor="#FFFFFF"
-      >
-        수정
-      </Button>
+      />
+      <Text mt={6} ml={5} color="#000000" fontSize="28px" fontWeight="medium">
+        원
+      </Text>
     </Flex>
-    <Divider w="690px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
+    <Divider w="550px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
 
     <Flex direction="row">
       <Text mt={5} ml={20} color="#000000" fontSize="28px" fontWeight="bold">
         최대 수량
       </Text>
-      <Text mt={5} ml={71} color="#000000" fontSize="25px" fontWeight="medium">
-        30개
-      </Text>
-      <Button
+      <Input
         w="100px"
         h="40px"
         mt={5}
-        ml={480}
-        color="#5C5C5C"
-        fontSize="25px"
+        ml={565}
+        p="10px"
+        color="#06070c"
+        fontSize="20px"
         fontWeight="medium"
-        borderWidth="1px"
+        borderWidth="0.7px"
         borderColor="#000000"
-        borderRadius="40px"
-        _hover={{
-          bgColor: "#FFFFFF",
-          borderColor: "#000000",
+        borderRadius="12px"
+        _focus={{
+          outline: "none",
+          border: "0.7px solid #22543D",
         }}
         bgColor="#FFFFFF"
-      >
-        수정
-      </Button>
+      />
+      <Text mt={6} ml={5} color="#000000" fontSize="28px" fontWeight="medium">
+        개
+      </Text>
     </Flex>
-    <Divider w="690px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
+    <Divider w="650px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
 
     <Flex direction="row">
       <Text mt={5} ml={20} color="#000000" fontSize="28px" fontWeight="bold">
         배송비
       </Text>
-      <Text mt={5} ml={24} color="#000000" fontSize="25px" fontWeight="medium">
-        무료배송
-      </Text>
-      <Button
-        w="100px"
+      <Input
+        w="200px"
         h="40px"
         mt={5}
-        ml={450}
-        color="#5C5C5C"
-        fontSize="25px"
+        ml={495}
+        p="10px"
+        color="#06070c"
+        fontSize="20px"
         fontWeight="medium"
-        borderWidth="1px"
+        borderWidth="0.7px"
         borderColor="#000000"
-        borderRadius="40px"
-        _hover={{
-          bgColor: "#FFFFFF",
-          borderColor: "#000000",
+        borderRadius="12px"
+        _focus={{
+          outline: "none",
+          border: "0.7px solid #22543D",
         }}
         bgColor="#FFFFFF"
-      >
-        수정
-      </Button>
+      />
+      <Text mt={6} ml={5} color="#000000" fontSize="28px" fontWeight="medium">
+        원
+      </Text>
     </Flex>
-    <Divider w="690px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
+    <Divider w="550px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
   </Flex>
 );
 
