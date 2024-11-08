@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
-import { Flex, Button, Input, Icon, Text, Divider, Select } from "@chakra-ui/react";
+import { Flex, Input, Icon, Text, Divider, Select } from "@chakra-ui/react";
 
 const BasicInfo = () => {
   const [farmImageState, setFarmImageState] = useState<string>("000.jpg");
@@ -21,30 +21,27 @@ const BasicInfo = () => {
         <Text mt={5} ml={20} color="#000000" fontSize="28px" fontWeight="bold">
           농장 이름
         </Text>
-        <Text mt={5} ml={47} color="#000000" fontSize="25px" fontWeight="medium">
-          지민이네 복숭아 농장
-        </Text>
-        <Button
-          w="100px"
+        <Input
+          w="200px"
           h="40px"
           mt={5}
-          ml={350}
-          color="#5C5C5C"
-          fontSize="25px"
+          ml={520}
+          p="10px"
+          color="#06070c"
+          fontSize="20px"
           fontWeight="medium"
-          borderWidth="1px"
+          borderWidth="0.7px"
           borderColor="#000000"
-          borderRadius="40px"
-          _hover={{
-            bgColor: "#FFFFFF",
-            borderColor: "#000000",
+          borderRadius="12px"
+          _focus={{
+            outline: "none",
+            border: "0.7px solid #22543D",
           }}
+          _placeholder={{ color: "transparent" }}
           bgColor="#FFFFFF"
-        >
-          수정
-        </Button>
+        />
       </Flex>
-      <Divider w="690px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
+      <Divider w="600px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
 
       <Flex direction="row">
         <Text mt={5} ml={20} color="#000000" fontSize="28px" fontWeight="bold">
@@ -70,10 +67,7 @@ const BasicInfo = () => {
         <Text mt={5} ml={20} color="#000000" fontSize="28px" fontWeight="bold">
           재배 품목
         </Text>
-        <Text mt={5} ml={47} color="#000000" fontSize="25px" fontWeight="medium">
-          과일
-        </Text>
-        <Select w="200px" mt={5} ml={420} placeholder="과일">
+        <Select w="200px" mt={5} ml={520} placeholder="과일">
           <option value="option1">잎채소</option>
           <option value="option2">열매채소</option>
           <option value="option3">곡물</option>
