@@ -67,14 +67,11 @@ const DetailInfo = () => (
       <Text mt={5} ml={20} color="#000000" fontSize="28px" fontWeight="bold">
         농산물 설명
       </Text>
-      <Text mt={5} ml={14} color="#000000" fontSize="25px" fontWeight="medium">
-        건호네 포도를 소개합니다.
-      </Text>
       <Button
         w="100px"
         h="40px"
         mt={5}
-        ml={275}
+        ml={585}
         color="#5C5C5C"
         fontSize="25px"
         fontWeight="medium"

@@ -4,12 +4,12 @@ import DetailInfo from "./DetailInfo";
 import PriceInfo from "./PriceInfo";
 
 interface AddProductProps {
-  setProductImage: (file: File) => void;
+  setIsEditProductVisible: (visible: boolean) => void;
 }
 
-const EditProduct: React.FC<AddProductProps> = ({ setProductImage }) => (
-  <Box w="1000px" h="1250px" ml={10} bgColor="#FFFFFF">
-    <BasicInfo setProductImage={setProductImage} />
+const EditProduct: React.FC<AddProductProps> = ({ setIsEditProductVisible }) => (
+  <Box w="1000px" h="1250px" mt={-450} ml={350} bgColor="#FFFFFF">
+    <BasicInfo />
     <DetailInfo />
     <PriceInfo />
     <Flex justify="center" direction="row" gap="5px" mt={20} mb={10}>
@@ -27,6 +27,7 @@ const EditProduct: React.FC<AddProductProps> = ({ setProductImage }) => (
           borderColor: "#22543D",
         }}
         bgColor="#FFFFFF"
+        onClick={() => setIsEditProductVisible(false)}
       >
         취소하기
       </Button>
