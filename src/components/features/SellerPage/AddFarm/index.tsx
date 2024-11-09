@@ -8,7 +8,7 @@ interface AddFarmProps {
 }
 
 const AddFarm: React.FC<AddFarmProps> = ({ setIsAddFarmVisible }) => (
-  <Box w="1000px" h="1250px" mt={-450} ml={350} bgColor="#FFFFFF">
+  <Box w="1000px" h="1270px" mt={-550} ml={350} bgColor="#FFFFFF">
     <BasicInfo />
     <DetailInfo />
     <PriceInfo />
