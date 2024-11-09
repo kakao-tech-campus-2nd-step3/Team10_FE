@@ -75,6 +75,32 @@ const BasicInfo = () => {
         </Select>
       </Flex>
       <Divider w="600px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
+
+      <Flex direction="row">
+        <Text mt={5} ml={20} color="#000000" fontSize="28px" fontWeight="bold">
+          사업자 번호
+        </Text>
+        <Input
+          w="200px"
+          h="40px"
+          mt={5}
+          ml={500}
+          p="10px"
+          color="#06070c"
+          fontSize="20px"
+          fontWeight="medium"
+          borderWidth="0.7px"
+          borderColor="#000000"
+          borderRadius="12px"
+          _focus={{
+            outline: "none",
+            border: "0.7px solid #22543D",
+          }}
+          _placeholder={{ color: "transparent" }}
+          bgColor="#FFFFFF"
+        />
+      </Flex>
+      <Divider w="610px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
     </Flex>
   );
 };
