@@ -62,6 +62,35 @@ const PriceInfo = () => (
       </Text>
     </Flex>
     <Divider w="640px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
+
+    <Flex direction="row">
+      <Text mt={5} ml={20} color="#000000" fontSize="28px" fontWeight="bold">
+        동시간대 최대 팀
+      </Text>
+      <Input
+        w="100px"
+        h="40px"
+        mt={5}
+        ml={490}
+        p="10px"
+        color="#06070c"
+        fontSize="20px"
+        fontWeight="medium"
+        borderWidth="0.7px"
+        borderColor="#000000"
+        borderRadius="12px"
+        _focus={{
+          outline: "none",
+          border: "0.7px solid #22543D",
+        }}
+        _placeholder={{ color: "transparent" }}
+        bgColor="#FFFFFF"
+      />
+      <Text mt={6} ml={5} color="#000000" fontSize="28px" fontWeight="medium">
+        팀
+      </Text>
+    </Flex>
+    <Divider w="640px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
   </Flex>
 );
 
