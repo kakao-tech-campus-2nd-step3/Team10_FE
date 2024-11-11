@@ -1,0 +1,139 @@
+name: 배포
+
+on:
+  push:
+    branches:
+      - "**"
+
+  create:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Dependencies
+        run: npm i
+
+      - name: Eslint Check
+        run: npm run lint
+
+      - name: Create .env File
+        env:
+          PREFIX: "REACT_APP_"
+          SECRETS: ${{ toJson(secrets) }}
+        run: |
+          touch .env && \
+          jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' <<< "$SECRETS" | grep $PREFIX > .env
+
+      - name: Build
+        run: npm run build
+
+      - name: Compress
+        run: |
+          mkdir tars && \
+          tar -cvzf - build | \
+            split -b 100M - \
+            tars/${GITHUB_SHA::8}.tar.gz.
+
+      - name: Upload to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          port: ${{ secrets.EC2_PORT }}
+          key: ${{ secrets.EC2_KEY }}
+          source: tars
+          target: ~/Team10_FE_DeployHelper/temp/${{ github.sha }}
+
+  deploy_on_subdomain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Get branch name
+        id: branch
+        run: |
+          BRANCH_NAME="${{ github.event.ref }}"
+          echo "branch_name=${BRANCH_NAME}" >> $GITHUB_ENV
+
+      - name: Generate subdomain
+        id: subdomain
+        run: |
+          BRANCH_NAME="${{ steps.branch.outputs.branch_name }}"
+          SUBDOMAIN=""
+
+          # Master branch
+          if [[ "$BRANCH_NAME" == "Master" ]]; then
+            SUBDOMAIN="master"
+
+          # Develop branch
+          elif [[ "$BRANCH_NAME" == "Develop" ]]; then
+            SUBDOMAIN="develop"
+
+          # Weekly branch (Weekly1, Weekly2, etc)
+          elif [[ "$BRANCH_NAME" =~ ^Weekly[0-9]+$ ]]; then
+            SUBDOMAIN="$BRANCH_NAME"
+
+          # Feature branch (Feature/*-#)
+          elif [[ "$BRANCH_NAME" =~ ^Feature/.*-([0-9]+)$ ]]; then
+            ISSUE_NUMBER=$(echo $BRANCH_NAME | sed -E 's/^Feature\/.*-([0-9]+)$/\1/')
+            SUBDOMAIN="feature${ISSUE_NUMBER}"
+
+          # feature branch (feature/*-#)
+          elif [[ "$BRANCH_NAME" =~ ^feature/.*-([0-9]+)$ ]]; then
+            ISSUE_NUMBER=$(echo $BRANCH_NAME | sed -E 's/^feature\/.*-([0-9]+)$/\1/')
+            SUBDOMAIN="feature${ISSUE_NUMBER}"
+
+          # Skip if branch doesn't match any patterns
+          else
+            echo "Branch pattern not recognized. Skipping subdomain creation."
+            exit 0
+          fi
+
+          if [ ! -z "$SUBDOMAIN" ]; then
+            echo "subdomain=${SUBDOMAIN}" >> $GITHUB_ENV
+            echo "Generated subdomain: ${SUBDOMAIN}"
+          fi
+
+      - name: Allocate subdomain
+        run:
+          # if subdomain is not master
+          if [ "${{ steps.subdomain.outputs.subdomain }}" != "master" ]; then
+          echo "Allocate subdomain"
+          fi
+
+      - name: Run Deploy Script
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          port: ${{ secrets.EC2_PORT }}
+          key: ${{ secrets.EC2_KEY }}
+          envs: GITHUB_SHA
+          script: |
+            cd ~/Team10_FE_DeployHelper
+            chmod +x ./deploy.sh
+            sudo ./deploy.sh ${{ steps.subdomain.outputs.subdomain }} ${{ secrets.DOMAIN }} ${{ github.sha }}
