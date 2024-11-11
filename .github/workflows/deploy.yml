@@ -63,7 +63,7 @@ jobs:
           if_key_exists: replace
 
       - name: Set SHA env variable
-        run: echo "SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+        run: echo "SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-8)" >> $GITHUB_ENV
 
       - name: Upload to EC2
         uses: appleboy/scp-action@master
@@ -183,6 +183,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           port: ${{ secrets.EC2_PORT }}
           key: ${{ secrets.EC2_KEY }}
+          envs: GITHUB_SHA
           script: |
             cd ~/Team10_FE_DeployHelper
             sudo chmod +x deploy_branch.sh nginx_template.sh
