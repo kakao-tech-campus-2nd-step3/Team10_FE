@@ -109,13 +109,13 @@ jobs:
             SUBDOMAIN="$BRANCH_NAME"
 
           # Feature branch (Feature/*-#)
-          elif [[ "$BRANCH_NAME" =~ ^Feature/*-([0-9]+)$ ]]; then
-            ISSUE_NUMBER=$(echo $BRANCH_NAME | sed -E 's/^Feature\/*-([0-9]+)$/\1/')
+          elif [[ "$BRANCH_NAME" =~ ^Feature/.*-#([0-9]+)$ ]]; then
+            ISSUE_NUMBER=$(echo $BRANCH_NAME | sed -E 's/^Feature\/.*-#([0-9]+)$/\1/')
             SUBDOMAIN="feature${ISSUE_NUMBER}"
 
           # feature branch (feature/*-#)
-          elif [[ "$BRANCH_NAME" =~ ^feature/*-([0-9]+)$ ]]; then
-            ISSUE_NUMBER=$(echo $BRANCH_NAME | sed -E 's/^feature\/*-([0-9]+)$/\1/')
+          elif [[ "$BRANCH_NAME" =~ ^feature/.*-#([0-9]+)$ ]]; then
+            ISSUE_NUMBER=$(echo $BRANCH_NAME | sed -E 's/^feature\/.*-#([0-9]+)$/\1/')
             SUBDOMAIN="feature${ISSUE_NUMBER}"
 
           # Skip if branch doesn't match any patterns
