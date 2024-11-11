@@ -130,9 +130,45 @@ jobs:
           fi
 
       - name: Allocate subdomain
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          SUBDOMAIN: ${{ steps.subdomain.outputs.subdomain }}
+          DOMAIN: ${{ secrets.DOMAIN }}
+          IP: ${{ secrets.EC2_HOST }}
         run: |
           if [ "${{ steps.subdomain.outputs.subdomain }}" != "master" ]; then
-            echo "Allocate subdomain"
+            RECORD_ID=$(curl -X GET "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/dns_records?type=A&name=$SUBDOMAIN.$DOMAIN" \
+              -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+              -H "Content-Type: application/json" | jq -r '.result[0].id')
+
+            TARGET_IP="$IP"
+
+            if [ "$RECORD_ID" != "null" ]; then
+              # 기존 레코드 업데이트
+              curl -X PUT "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/dns_records/$RECORD_ID" \
+                -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+                -H "Content-Type: application/json" \
+                --data '{
+                  "type": "A",
+                  "name": "'"$SUBDOMAIN"'",
+                  "content": "'"$TARGET_IP"'",
+                  "ttl": 1,
+                  "proxied": true
+                }'
+            else
+              # 새 레코드 생성
+              curl -X POST "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/dns_records" \
+                -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+                -H "Content-Type: application/json" \
+                --data '{
+                  "type": "A",
+                  "name": "'"$SUBDOMAIN"'",
+                  "content": "'"$TARGET_IP"'",
+                  "ttl": 1,
+                  "proxied": true
+                }'
+            fi
           fi
 
       - name: Run Deploy Script
