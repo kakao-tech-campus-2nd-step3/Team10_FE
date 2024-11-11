@@ -54,6 +54,13 @@ jobs:
             split -b 100M - \
             tars/${GITHUB_SHA::8}.tar.gz.
 
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.EC2_KEY }}
+          known_hosts: unnecessary
+          if_key_exists: replace
+
       - name: Upload to EC2
         uses: appleboy/scp-action@master
         with:
@@ -64,6 +71,8 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           source: tars
           target: ~/Team10_FE_DeployHelper/temp/${{ github.sha }}
+          strip_components: 1
+          rm: true
 
   deploy_on_subdomain:
     needs: build
