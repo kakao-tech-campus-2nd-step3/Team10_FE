@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { Text, Flex, Box, Divider, Button, Input } from "@chakra-ui/react";
 
-interface EditInfoProps {
-  setIsEditInfoVisible: (visible: boolean) => void;
-}
-
-const EditInfo: React.FC<EditInfoProps> = ({ setIsEditInfoVisible }) => {
+const EditInfo = () => {
   const [name, setName] = useState("정지민");
   const [newName, setNewName] = useState("");
   const [email, setEmail] = useState("jimin@gmail.com");
@@ -32,7 +28,6 @@ const EditInfo: React.FC<EditInfoProps> = ({ setIsEditInfoVisible }) => {
     setNewNumber("");
     setNewStoreName("");
     setNewStoreAddress("");
-    setIsEditInfoVisible(false);
   };
 
   return (

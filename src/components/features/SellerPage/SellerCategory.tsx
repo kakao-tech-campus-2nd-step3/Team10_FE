@@ -46,10 +46,6 @@ const SellerCategory = () => {
     setActiveComponent("logout");
   };
 
-  const handleClose = () => {
-    setActiveComponent(null);
-  };
-
   return (
     <Box w="230px" h="1280px" border="none" bgColor="#FFFFFF">
       <Flex direction="column">
@@ -209,14 +205,14 @@ const SellerCategory = () => {
         >
           회원 탈퇴
         </Button>
-        {activeComponent === "add-product" && <AddProduct setIsAddProductVisible={handleClose} />}
-        {activeComponent === "add-farm" && <AddFarm setIsAddFarmVisible={handleClose} />}
-        {activeComponent === "edit-product" && <EditProduct setIsEditProductVisible={handleClose} />}
-        {activeComponent === "edit-farm" && <EditFarm setIsEditFarmVisible={handleClose} />}
-        {activeComponent === "edit-info" && <EditInfo setIsEditInfoVisible={handleClose} />}
-        {activeComponent === "logout" && <Logout setIsLogoutVisible={handleClose} />}
-        {activeComponent === "business" && <BusinessRegister setBusinessVisible={handleClose} />}
-        {activeComponent === "tax" && <Tax setTaxVisible={handleClose} />}
+        {activeComponent === "add-product" && <AddProduct />}
+        {activeComponent === "add-farm" && <AddFarm />}
+        {activeComponent === "edit-product" && <EditProduct />}
+        {activeComponent === "edit-farm" && <EditFarm />}
+        {activeComponent === "edit-info" && <EditInfo />}
+        {activeComponent === "logout" && <Logout />}
+        {activeComponent === "business" && <BusinessRegister />}
+        {activeComponent === "tax" && <Tax />}
       </Flex>
     </Box>
   );

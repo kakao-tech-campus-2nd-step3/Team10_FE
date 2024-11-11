@@ -2,11 +2,7 @@ import { useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import { Box, Button, Icon, Input, Text, Divider, Flex } from "@chakra-ui/react";
 
-interface BusinessProps {
-  setBusinessVisible: (visible: boolean) => void;
-}
-
-const BusinessRegister: React.FC<BusinessProps> = ({ setBusinessVisible }) => {
+const BusinessRegister = () => {
   const [businessImageState, setBusinessImageState] = useState<string>("000.jpg");
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,7 +109,6 @@ const BusinessRegister: React.FC<BusinessProps> = ({ setBusinessVisible }) => {
               borderColor: "#22543D",
             }}
             bgColor="#FFFFFF"
-            onClick={() => setBusinessVisible(false)}
           >
             취소하기
           </Button>

@@ -3,11 +3,7 @@ import BasicInfo from "./BasicInfo";
 import DetailInfo from "./DetailInfo";
 import PriceInfo from "./PriceInfo";
 
-interface EditFarmProps {
-  setIsEditFarmVisible: (visible: boolean) => void;
-}
-
-const EditFarm: React.FC<EditFarmProps> = ({ setIsEditFarmVisible }) => (
+const EditFarm = () => (
   <Box w="1000px" h="1200px" mt={-550} ml={350} borderRadius="12px" bgColor="#FFFFFF">
     <Flex direction="column">
       <BasicInfo />
@@ -28,7 +24,6 @@ const EditFarm: React.FC<EditFarmProps> = ({ setIsEditFarmVisible }) => (
             borderColor: "#22543D",
           }}
           bgColor="#FFFFFF"
-          onClick={() => setIsEditFarmVisible(false)}
         >
           취소하기
         </Button>

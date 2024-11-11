@@ -3,11 +3,7 @@ import BasicInfo from "./BasicInfo";
 import DetailInfo from "./DetailInfo";
 import PriceInfo from "./PriceInfo";
 
-interface AddProductProps {
-  setIsAddProductVisible: (visible: boolean) => void;
-}
-
-const AddProduct: React.FC<AddProductProps> = ({ setIsAddProductVisible }) => (
+const AddProduct = () => (
   <Box w="1000px" h="1200px" mt={-550} ml={350} borderRadius="12px" bgColor="#FFFFFF">
     <Flex direction="column">
       <BasicInfo />
@@ -28,7 +24,6 @@ const AddProduct: React.FC<AddProductProps> = ({ setIsAddProductVisible }) => (
             borderColor: "#22543D",
           }}
           bgColor="#FFFFFF"
-          onClick={() => setIsAddProductVisible(false)}
         >
           취소하기
         </Button>
