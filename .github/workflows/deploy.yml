@@ -119,10 +119,9 @@ jobs:
           fi
 
       - name: Allocate subdomain
-        run:
-          # if subdomain is not master
+        run: |
           if [ "${{ steps.subdomain.outputs.subdomain }}" != "master" ]; then
-          echo "Allocate subdomain"
+            echo "Allocate subdomain"
           fi
 
       - name: Run Deploy Script
