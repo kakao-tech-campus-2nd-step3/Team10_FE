@@ -1,27 +1,16 @@
-import { Box, Image, Text, Flex, Divider } from "@chakra-ui/react";
+import { Box, Image, Text, Flex } from "@chakra-ui/react";
 import farm3 from "@assets/Image/Farm/Farm3.png";
 import farm4 from "@assets/Image/Farm/Farm4.png";
 import farm5 from "@assets/Image/Farm/Farm5.png";
 import farm6 from "@assets/Image/Farm/Farm6.png";
 
 const ProductDescription = () => (
-  <Flex direction="column">
-    <Text mt={100} ml={200} color="#1C4532" fontSize="24px" fontWeight="bold">
-      상품 설명
-    </Text>
-    <Divider
-      w="1100px"
-      mt={3}
-      ml={200}
-      borderWidth="0.7px"
-      borderColor="rgba(56, 56, 56, 0.5)"
-      orientation="horizontal"
-    />
-    <Text mt={10} ml={200} color="#000000" fontSize="32px" fontWeight="bold">
+  <Flex direction="column" mt={200} ml={200}>
+    <Text mt={5} color="#000000" fontSize="32px" fontWeight="bold">
       지민이네 복숭아 따기 농장을 소개합니다🥰
     </Text>
     <Flex direction="row">
-      <Image w="500px" h="490px" mt={10} ml={200} borderRadius="12px" alt="farm3" src={farm3} />
+      <Image w="500px" h="490px" mt={10} borderRadius="12px" alt="farm3" src={farm3} />
       <Flex direction="column">
         <Box w="520px" h="150px" mt={10} ml={10} borderRadius="12px" bgColor="#22543D">
           <Flex direction="row">
