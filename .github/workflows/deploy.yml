@@ -66,6 +66,7 @@ jobs:
           target: ~/Team10_FE_DeployHelper/temp/${{ github.sha }}
 
   deploy_on_subdomain:
+    needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
