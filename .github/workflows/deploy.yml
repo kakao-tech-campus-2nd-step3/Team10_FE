@@ -70,7 +70,7 @@ jobs:
           port: ${{ secrets.EC2_PORT }}
           key: ${{ secrets.EC2_KEY }}
           source: tars
-          target: ~/Team10_FE_DeployHelper/temp/${{ github.sha }}
+          target: ~/Team10_FE_DeployHelper/temp/${GITHUB_SHA::8}
           strip_components: 1
           rm: true
 
