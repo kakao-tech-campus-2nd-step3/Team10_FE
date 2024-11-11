@@ -183,5 +183,5 @@ jobs:
           envs: GITHUB_SHA
           script: |
             cd ~/Team10_FE_DeployHelper
-            chmod +x ./deploy_branch.sh
+            chmod +x deploy_branch.sh nginx_template.sh
             sudo ./deploy_branch.sh ${{ steps.subdomain.outputs.SUBDOMAIN }} ${{ secrets.DOMAIN }} ${GITHUB_SHA::8}
