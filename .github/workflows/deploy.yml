@@ -87,7 +87,7 @@ jobs:
       - name: Get branch name
         id: branch
         run: |
-          BRANCH_NAME="${{ github.event.ref_name }}"
+          BRANCH_NAME="${{ github.ref_name }}"
           echo "branch_name=${BRANCH_NAME}" >> $GITHUB_ENV
 
       - name: Generate subdomain
