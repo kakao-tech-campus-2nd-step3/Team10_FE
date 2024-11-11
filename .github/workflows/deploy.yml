@@ -96,6 +96,8 @@ jobs:
           BRANCH_NAME="${{ steps.branch.outputs.branch_name }}"
           SUBDOMAIN=""
 
+          echo "Branch name: ${BRANCH_NAME}"
+
           # Master branch
           if [[ "$BRANCH_NAME" == "Master" ]]; then
             SUBDOMAIN="master"
