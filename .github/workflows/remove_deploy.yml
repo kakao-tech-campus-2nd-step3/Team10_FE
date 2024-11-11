@@ -18,7 +18,7 @@ jobs:
       - name: Get deleted branch name
         id: branch
         run: |
-          BRANCH_NAME="${{ github.event.ref }}"
+          BRANCH_NAME="${{ github.ref_name }}"
           echo "branch_name=${BRANCH_NAME}" >> $GITHUB_OUTPUT
 
       - name: Generate subdomain
@@ -67,8 +67,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           port: ${{ secrets.EC2_PORT }}
           key: ${{ secrets.EC2_KEY }}
-          envs: GITHUB_SHA
           script: |
             cd ~/Team10_FE_DeployHelper
-            chmod +x ./remove_branch.sh
+            sudo chmod +x ./remove_branch.sh
             sudo ./remove_branch.sh ${{ steps.subdomain.outputs.subdomain }}
