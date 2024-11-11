@@ -88,15 +88,13 @@ jobs:
         id: branch
         run: |
           BRANCH_NAME="${{ github.ref_name }}"
-          echo "branch_name=${BRANCH_NAME}" >> $GITHUB_ENV
+          echo "BRANCH_NAME=${BRANCH_NAME}" >> "$GITHUB_OUTPUT"
 
       - name: Generate subdomain
         id: subdomain
         run: |
-          BRANCH_NAME="${{ steps.branch.outputs.branch_name }}"
+          BRANCH_NAME="${{ steps.branch.outputs.BRANCH_NAME }}"
           SUBDOMAIN=""
-
-          echo "Branch name: ${BRANCH_NAME}"
 
           # Master branch
           if [[ "$BRANCH_NAME" == "Master" ]]; then
@@ -127,7 +125,7 @@ jobs:
           fi
 
           if [ ! -z "$SUBDOMAIN" ]; then
-            echo "subdomain=${SUBDOMAIN}" >> $GITHUB_ENV
+            echo "SUBDOMAIN=${SUBDOMAIN}" >> "$GITHUB_OUTPUT"
             echo "Generated subdomain: ${SUBDOMAIN}"
           fi
 
@@ -135,11 +133,11 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-          SUBDOMAIN: ${{ steps.subdomain.outputs.subdomain }}
+          SUBDOMAIN: ${{ steps.subdomain.outputs.SUBDOMAIN }}
           DOMAIN: ${{ secrets.DOMAIN }}
           IP: ${{ secrets.EC2_HOST }}
         run: |
-          if [ "${{ steps.subdomain.outputs.subdomain }}" != "master" ]; then
+          if [ "${SUBDOMAIN}" != "master" ]; then
             echo "Allocating subdomain: $SUBDOMAIN.$DOMAIN"
 
             RECORD_ID=$(curl -X GET "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/dns_records?type=A&name=$SUBDOMAIN.$DOMAIN" \
@@ -186,4 +184,4 @@ jobs:
           script: |
             cd ~/Team10_FE_DeployHelper
             chmod +x ./deploy.sh
-            sudo ./deploy.sh ${{ steps.subdomain.outputs.subdomain }} ${{ secrets.DOMAIN }} ${{ github.sha }}
+            sudo ./deploy.sh ${{ steps.subdomain.outputs.SUBDOMAIN }} ${{ secrets.DOMAIN }} ${{ github.sha }}
