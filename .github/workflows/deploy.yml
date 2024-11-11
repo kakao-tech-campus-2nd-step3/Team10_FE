@@ -61,6 +61,17 @@ jobs:
           known_hosts: unnecessary
           if_key_exists: replace
 
+      - name: Create remote directory
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          port: ${{ secrets.EC2_PORT }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            mkdir -p ~/Team10_FE_DeployHelper/temp/${{ github.sha }}
+            chmod 775 ~/Team10_FE_DeployHelper/temp/${{ github.sha }}
+
       - name: Upload to EC2
         uses: appleboy/scp-action@master
         with:
