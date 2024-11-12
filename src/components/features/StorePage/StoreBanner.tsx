@@ -1,4 +1,4 @@
-import { Flex, Image, Text } from "@chakra-ui/react";
+import { Flex, Image, Link, Text } from "@chakra-ui/react";
 import Card from "@components/common/Card";
 import ImageCard from "@components/common/ImageCard";
 
@@ -33,11 +33,11 @@ const StoreBanner = () => (
         brightness: 0.8,
       }}
     >
-      <Flex justify="center" direction="column" w="full" h="full" px="10">
+      <Flex as={Link} justify="center" direction="column" w="full" h="full" px="8" href="/seller/register">
         <Text color="white" fontSize="sm" fontWeight="bold">
           혹시 팔러 오셨나요?
         </Text>
-        <Text mt="5" color="white" fontSize="lg" fontWeight="bold">
+        <Text mx="auto" mt="5" color="white" fontSize="lg" fontWeight="bold">
           농업인 등록하러 가기
         </Text>
       </Flex>
