@@ -44,8 +44,8 @@ const MyInfo: React.FC<MyInfoProps> = ({ setIsMyInfoVisible }) => {
             mt={10}
             ml={10}
             borderWidth="0.7px"
-            borderColor="#E2E8F0"
-            _placeholder={{ color: "#E2E8F0", fontSize: "18px", fontWeight: "medium" }}
+            borderColor="#000000"
+            _placeholder={{ color: "#D9D9D9", fontSize: "18px", fontWeight: "medium" }}
             onChange={e => setName(e.target.value)}
             placeholder={name}
             value={newName}
@@ -64,8 +64,8 @@ const MyInfo: React.FC<MyInfoProps> = ({ setIsMyInfoVisible }) => {
             mt={10}
             ml={10}
             borderWidth="0.7px"
-            borderColor="#E2E8F0"
-            _placeholder={{ color: "#E2E8F0", fontSize: "18px", fontWeight: "medium" }}
+            borderColor="#000000"
+            _placeholder={{ color: "#D9D9D9", fontSize: "18px", fontWeight: "medium" }}
             onChange={e => setEmail(e.target.value)}
             placeholder={email}
             value={newEmail}
@@ -84,8 +84,8 @@ const MyInfo: React.FC<MyInfoProps> = ({ setIsMyInfoVisible }) => {
             mt={10}
             ml={10}
             borderWidth="0.7px"
-            borderColor="#E2E8F0"
-            _placeholder={{ color: "#E2E8F0", fontSize: "18px", fontWeight: "medium" }}
+            borderColor="#000000"
+            _placeholder={{ color: "#D9D9D9", fontSize: "18px", fontWeight: "medium" }}
             onChange={e => setPassword(e.target.value)}
             placeholder={password}
             value={newPassword}
