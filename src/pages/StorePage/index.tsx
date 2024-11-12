@@ -1,5 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import HeaderBanner from "@components/features/StorePage/HeaderBanner";
+import ProductList from "@components/features/StorePage/ProductList";
 import Review from "@components/features/StorePage/Review";
 import StoreBanner from "@components/features/StorePage/StoreBanner";
 import size from "@constants/size";
@@ -12,6 +13,7 @@ const StorePage = () => (
         <Review />
       </Flex>
       <StoreBanner />
+      <ProductList />
     </Flex>
   </Flex>
 );
