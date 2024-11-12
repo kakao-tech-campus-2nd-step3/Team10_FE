@@ -6,6 +6,6 @@ const size = {
   header: {
     h: "80px",
   },
-};
+} as const;
 
 export default size;
