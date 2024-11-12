@@ -51,8 +51,8 @@ const EditInfo = () => {
             mt={10}
             ml={10}
             borderWidth="0.7px"
-            borderColor="#E2E8F0"
-            _placeholder={{ color: "#E2E8F0", fontSize: "18px", fontWeight: "medium" }}
+            borderColor="#000000"
+            _placeholder={{ color: "#D9D9D9", fontSize: "18px", fontWeight: "medium" }}
             onChange={e => setName(e.target.value)}
             placeholder={name}
             value={newName}
@@ -71,8 +71,8 @@ const EditInfo = () => {
             mt={10}
             ml={10}
             borderWidth="0.7px"
-            borderColor="#E2E8F0"
-            _placeholder={{ color: "#E2E8F0", fontSize: "18px", fontWeight: "medium" }}
+            borderColor="#000000"
+            _placeholder={{ color: "#D9D9D9", fontSize: "18px", fontWeight: "medium" }}
             onChange={e => setEmail(e.target.value)}
             placeholder={email}
             value={newEmail}
@@ -91,8 +91,8 @@ const EditInfo = () => {
             mt={10}
             ml={10}
             borderWidth="0.7px"
-            borderColor="#E2E8F0"
-            _placeholder={{ color: "#E2E8F0", fontSize: "18px", fontWeight: "medium" }}
+            borderColor="#000000"
+            _placeholder={{ color: "#D9D9D9", fontSize: "18px", fontWeight: "medium" }}
             onChange={e => setPassword(e.target.value)}
             placeholder={password}
             value={newPassword}
@@ -111,8 +111,8 @@ const EditInfo = () => {
             mt={10}
             ml={10}
             borderWidth="0.7px"
-            borderColor="#E2E8F0"
-            _placeholder={{ color: "#E2E8F0", fontSize: "18px", fontWeight: "medium" }}
+            borderColor="#000000"
+            _placeholder={{ color: "#D9D9D9", fontSize: "18px", fontWeight: "medium" }}
             onChange={e => setNumber(e.target.value)}
             placeholder={number}
             value={newNumber}
@@ -131,8 +131,8 @@ const EditInfo = () => {
             mt={10}
             ml={10}
             borderWidth="0.7px"
-            borderColor="#E2E8F0"
-            _placeholder={{ color: "#E2E8F0", fontSize: "18px", fontWeight: "medium" }}
+            borderColor="#000000"
+            _placeholder={{ color: "#D9D9D9", fontSize: "18px", fontWeight: "medium" }}
             onChange={e => setStoreName(e.target.value)}
             placeholder={storeName}
             value={newStoreName}
@@ -151,8 +151,8 @@ const EditInfo = () => {
             mt={10}
             ml={10}
             borderWidth="0.7px"
-            borderColor="#E2E8F0"
-            _placeholder={{ color: "#E2E8F0", fontSize: "18px", fontWeight: "medium" }}
+            borderColor="#000000"
+            _placeholder={{ color: "#D9D9D9", fontSize: "18px", fontWeight: "medium" }}
             onChange={e => setStoreAddress(e.target.value)}
             placeholder={storeAddress}
             value={newStoreAddress}
