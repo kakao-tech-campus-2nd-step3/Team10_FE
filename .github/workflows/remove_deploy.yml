@@ -70,4 +70,4 @@ jobs:
           script: |
             cd ~/Team10_FE_DeployHelper
             sudo chmod +x ./remove_branch.sh
-            sudo ./remove_branch.sh ${{ steps.subdomain.outputs.subdomain }}
+            sudo ./remove_branch.sh ${{ steps.subdomain.outputs.subdomain }} ${{ secrets.DOMAIN }}
