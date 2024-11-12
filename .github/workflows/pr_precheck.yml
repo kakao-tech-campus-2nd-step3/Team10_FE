@@ -8,6 +8,7 @@ on:
       - Weekly*
       - Review
       - weekly*
+
   workflow_dispatch:
 
 jobs:
