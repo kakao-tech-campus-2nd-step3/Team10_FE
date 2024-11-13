@@ -8,12 +8,17 @@ on:
       - Weekly*
       - Review
       - weekly*
+
   workflow_dispatch:
 
 jobs:
   precheck:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - name: Checkout
@@ -33,6 +38,14 @@ jobs:
 
       - name: Eslint Check
         run: npm run lint
+
+      - name: Create .env File
+        env:
+          PREFIX: "REACT_APP_"
+          SECRETS: ${{ toJson(secrets) }}
+        run: |
+          touch .env && \
+          jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' <<< "$SECRETS" | grep $PREFIX > .env
 
       - name: Build Test
         run: npm run build

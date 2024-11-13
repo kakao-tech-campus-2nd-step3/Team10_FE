@@ -1,0 +1,190 @@
+name: 배포
+
+on:
+  push:
+    branches:
+      - "**"
+
+  create:
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Dependencies
+        run: npm i
+
+      - name: Eslint Check
+        run: npm run lint
+
+      - name: Create .env File
+        env:
+          PREFIX: "REACT_APP_"
+          SECRETS: ${{ toJson(secrets) }}
+        run: |
+          touch .env && \
+          jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' <<< "$SECRETS" | grep $PREFIX > .env
+
+      - name: Build
+        run: npm run build
+
+      - name: Compress
+        run: |
+          mkdir tars && \
+          tar -cvzf - build | \
+            split -b 100M - \
+            tars/${GITHUB_SHA::8}.tar.gz.
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.EC2_KEY }}
+          known_hosts: unnecessary
+          if_key_exists: replace
+
+      - name: Set SHA env variable
+        run: echo "SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-8)" >> $GITHUB_ENV
+
+      - name: Upload to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          port: ${{ secrets.EC2_PORT }}
+          key: ${{ secrets.EC2_KEY }}
+          source: tars
+          target: ~/Team10_FE_DeployHelper/temp/${{ env.SHORT_SHA }}
+          strip_components: 1
+          rm: true
+
+  deploy_on_subdomain:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Get branch name
+        id: branch
+        run: |
+          BRANCH_NAME="${{ github.ref_name }}"
+          echo "BRANCH_NAME=${BRANCH_NAME}" >> "$GITHUB_OUTPUT"
+
+      - name: Generate subdomain
+        id: subdomain
+        run: |
+          BRANCH_NAME="${{ steps.branch.outputs.BRANCH_NAME }}"
+          SUBDOMAIN=""
+
+          # Master branch
+          if [[ "$BRANCH_NAME" == "Master" ]]; then
+            SUBDOMAIN="master"
+
+          # Develop branch
+          elif [[ "$BRANCH_NAME" == "Develop" ]]; then
+            SUBDOMAIN="develop"
+
+          # Weekly branch (Weekly1, Weekly2, etc)
+          elif [[ "$BRANCH_NAME" =~ ^Weekly[0-9]+$ ]]; then
+            SUBDOMAIN="$BRANCH_NAME"
+
+          # Feature branch (Feature/*-#)
+          elif [[ "$BRANCH_NAME" =~ ^Feature/.*-#([0-9]+)$ ]]; then
+            ISSUE_NUMBER=$(echo $BRANCH_NAME | sed -E 's/^Feature\/.*-#([0-9]+)$/\1/')
+            SUBDOMAIN="feature${ISSUE_NUMBER}"
+
+          # feature branch (feature/*-#)
+          elif [[ "$BRANCH_NAME" =~ ^feature/.*-#([0-9]+)$ ]]; then
+            ISSUE_NUMBER=$(echo $BRANCH_NAME | sed -E 's/^feature\/.*-#([0-9]+)$/\1/')
+            SUBDOMAIN="feature${ISSUE_NUMBER}"
+
+          # Skip if branch doesn't match any patterns
+          else
+            echo "Branch pattern not recognized. Skipping subdomain creation."
+            exit 0
+          fi
+
+          if [ ! -z "$SUBDOMAIN" ]; then
+            echo "SUBDOMAIN=${SUBDOMAIN}" >> "$GITHUB_OUTPUT"
+            echo "Generated subdomain: ${SUBDOMAIN}"
+          fi
+
+      - name: Allocate subdomain
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          SUBDOMAIN: ${{ steps.subdomain.outputs.SUBDOMAIN }}
+          DOMAIN: ${{ secrets.DOMAIN }}
+          IP: ${{ secrets.EC2_HOST }}
+        run: |
+          if [ "${SUBDOMAIN}" != "master" ]; then
+            echo "Allocating subdomain: $SUBDOMAIN.$DOMAIN"
+
+            RECORD_ID=$(curl -X GET "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/dns_records?type=A&name=$SUBDOMAIN.$DOMAIN" \
+              -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+              -H "Content-Type: application/json" | jq -r '.result[0].id')
+
+            TARGET_IP="$IP"
+
+            if [ "$RECORD_ID" != "null" ]; then
+              # 기존 레코드 업데이트
+              curl -X PUT "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/dns_records/$RECORD_ID" \
+                -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+                -H "Content-Type: application/json" \
+                --data '{
+                  "type": "A",
+                  "name": "'"$SUBDOMAIN"'",
+                  "content": "'"$TARGET_IP"'",
+                  "ttl": 1,
+                  "proxied": true
+                }'
+            else
+              # 새 레코드 생성
+              curl -X POST "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/dns_records" \
+                -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+                -H "Content-Type: application/json" \
+                --data '{
+                  "type": "A",
+                  "name": "'"$SUBDOMAIN"'",
+                  "content": "'"$TARGET_IP"'",
+                  "ttl": 1,
+                  "proxied": true
+                }'
+            fi
+          fi
+
+      - name: Run Deploy Script
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          port: ${{ secrets.EC2_PORT }}
+          key: ${{ secrets.EC2_KEY }}
+          envs: GITHUB_SHA
+          script: |
+            cd ~/Team10_FE_DeployHelper
+            sudo chmod +x deploy_branch.sh nginx_template.sh
+            sudo ./deploy_branch.sh ${{ steps.subdomain.outputs.SUBDOMAIN }} ${{ secrets.DOMAIN }} ${GITHUB_SHA::8}

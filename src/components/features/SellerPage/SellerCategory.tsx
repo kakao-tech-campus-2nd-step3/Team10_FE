@@ -1,14 +1,26 @@
 import { useState } from "react";
 import { Text, Flex, Box, Button } from "@chakra-ui/react";
+
 import AddFarm from "./AddFarm";
 import AddProduct from "./AddProduct";
+import BusinessRegister from "./BusinessRegister";
 import EditFarm from "./EditFarm";
 import EditProduct from "./EditProduct";
+
 import EditInfo from "./MyInfo/EditInfo";
 import Logout from "./MyInfo/Logout";
+import Tax from "./Tax.tsx";
 
 const SellerCategory = () => {
   const [activeComponent, setActiveComponent] = useState<string | null>(null);
+
+  const handleTaxClick = () => {
+    setActiveComponent("tax");
+  };
+
+  const handleBusinessClick = () => {
+    setActiveComponent("business");
+  };
 
   const handleAddProductClick = () => {
     setActiveComponent("add-product");
@@ -25,19 +37,17 @@ const SellerCategory = () => {
   const handleEditFarmClick = () => {
     setActiveComponent("edit-farm");
   };
+
   const handleEditInfoClick = () => {
     setActiveComponent("edit-info");
   };
+
   const handleLogoutClick = () => {
     setActiveComponent("logout");
   };
 
-  const handleClose = () => {
-    setActiveComponent(null);
-  };
-
   return (
-    <Box w="230px" h="1350px" border="none" bgColor="#FFFFFF">
+    <Box w="230px" h="1280px" border="none" bgColor="#FFFFFF">
       <Flex direction="column">
         <Text mt={10} ml={5} color="#000000" fontSize="20px" fontWeight="bold">
           할 일
@@ -81,6 +91,7 @@ const SellerCategory = () => {
           fontWeight="medium"
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
+          onClick={handleTaxClick}
         >
           세금 계산기
         </Button>
@@ -94,6 +105,7 @@ const SellerCategory = () => {
           fontWeight="medium"
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
+          onClick={handleBusinessClick}
         >
           사업자 등록
         </Button>
@@ -193,12 +205,14 @@ const SellerCategory = () => {
         >
           회원 탈퇴
         </Button>
-        {activeComponent === "add-product" && <AddProduct setIsAddProductVisible={handleClose} />}
-        {activeComponent === "add-farm" && <AddFarm setIsAddFarmVisible={handleClose} />}
-        {activeComponent === "edit-product" && <EditProduct setIsEditProductVisible={handleClose} />}
-        {activeComponent === "edit-farm" && <EditFarm setIsEditFarmVisible={handleClose} />}
-        {activeComponent === "edit-info" && <EditInfo setIsEditInfoVisible={handleClose} />}
-        {activeComponent === "logout" && <Logout setIsLogoutVisible={handleClose} />}
+        {activeComponent === "add-product" && <AddProduct />}
+        {activeComponent === "add-farm" && <AddFarm />}
+        {activeComponent === "edit-product" && <EditProduct />}
+        {activeComponent === "edit-farm" && <EditFarm />}
+        {activeComponent === "edit-info" && <EditInfo />}
+        {activeComponent === "logout" && <Logout />}
+        {activeComponent === "business" && <BusinessRegister />}
+        {activeComponent === "tax" && <Tax />}
       </Flex>
     </Box>
   );

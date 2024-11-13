@@ -1,0 +1,73 @@
+name: 배포파일 삭제
+
+on:
+  delete:
+
+  workflow_dispatch:
+
+jobs:
+  remove_deploy:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Get deleted branch name
+        id: branch
+        run: |
+          BRANCH_NAME="${{ github.ref_name }}"
+          echo "branch_name=${BRANCH_NAME}" >> $GITHUB_OUTPUT
+
+      - name: Generate subdomain
+        id: subdomain
+        run: |
+          BRANCH_NAME="${{ steps.branch.outputs.branch_name }}"
+          SUBDOMAIN=""
+
+          # Master branch
+          if [[ "$BRANCH_NAME" == "Master" ]]; then
+            SUBDOMAIN="master"
+
+          # Develop branch
+          elif [[ "$BRANCH_NAME" == "Develop" ]]; then
+            SUBDOMAIN="develop"
+
+          # Weekly branch (Weekly1, Weekly2, etc)
+          elif [[ "$BRANCH_NAME" =~ ^Weekly[0-9]+$ ]]; then
+            SUBDOMAIN="$BRANCH_NAME"
+
+          # Feature branch (Feature/*-#)
+          elif [[ "$BRANCH_NAME" =~ ^Feature/.*-([0-9]+)$ ]]; then
+            ISSUE_NUMBER=$(echo $BRANCH_NAME | sed -E 's/^Feature\/.*-([0-9]+)$/\1/')
+            SUBDOMAIN="feature${ISSUE_NUMBER}"
+
+          # feature branch (feature/*-#)
+          elif [[ "$BRANCH_NAME" =~ ^feature/.*-([0-9]+)$ ]]; then
+            ISSUE_NUMBER=$(echo $BRANCH_NAME | sed -E 's/^feature\/.*-([0-9]+)$/\1/')
+            SUBDOMAIN="feature${ISSUE_NUMBER}"
+
+          # Skip if branch doesn't match any patterns
+          else
+            echo "Branch pattern not recognized. Skipping subdomain creation."
+            exit 0
+          fi
+
+          if [ ! -z "$SUBDOMAIN" ]; then
+            echo "subdomain=${SUBDOMAIN}" >> $GITHUB_OUTPUT
+            echo "Generated subdomain: ${SUBDOMAIN}"
+          fi
+
+      - name: Run Remove Branch Script
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          port: ${{ secrets.EC2_PORT }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            cd ~/Team10_FE_DeployHelper
+            sudo chmod +x ./remove_branch.sh
+            sudo ./remove_branch.sh ${{ steps.subdomain.outputs.subdomain }} ${{ secrets.DOMAIN }}
