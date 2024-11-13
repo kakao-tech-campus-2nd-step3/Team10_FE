@@ -24,3 +24,7 @@ export type Schedule = Item & {
   farm: Farm;
   mainImage?: string;
 };
+
+export type Category = Item & {
+  name: string;
+};

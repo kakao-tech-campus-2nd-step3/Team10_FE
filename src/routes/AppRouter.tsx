@@ -13,6 +13,7 @@ import RegisterPage from "@pages/RegisterPage";
 import SellerMyPage from "@pages/SellerMyPage";
 import SellerPage from "@pages/SellerPage";
 import StoreDetailPage from "@pages/StoreDetailPage";
+import StorePage from "@pages/StorePage";
 
 const AppRouter = () => {
   const routers = createBrowserRouter([
@@ -67,6 +68,10 @@ const AppRouter = () => {
         {
           path: "FarmerRegister",
           element: <FarmerRegisterPage />,
+        },
+        {
+        path: "store",
+        element: <StorePage />,
         },
       ],
     },
