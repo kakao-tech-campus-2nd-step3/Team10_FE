@@ -5,9 +5,10 @@ import BasicModal from "@components/common/modal/BasicModal";
 interface OrderProcessModalProps {
   isOpen: boolean;
   onClose: () => void;
+  status: "pending" | "deliver-start" | "delivering" | "delivered";
 }
 
-const OrderProcessModal: React.FC<OrderProcessModalProps> = ({ isOpen, onClose }) => (
+const OrderProcessModal: React.FC<OrderProcessModalProps> = ({ isOpen, onClose, status }) => (
   <BasicModal isOpen={isOpen} onClose={onClose}>
     <ModalCloseButton _hover={{ bg: "#FFFFFF" }} />
     <ModalHeader color="#22543D" fontSize="25px" fontWeight="bold">
@@ -44,25 +45,25 @@ const OrderProcessModal: React.FC<OrderProcessModalProps> = ({ isOpen, onClose }
       </Text>
       <Divider w="430px" mt={1} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
       <Flex direction="row" mt={3}>
-        <Text mr={5} color="#D9D9D9" fontSize="18px" fontWeight="bold">
-          주문 완료
+        <Text mr={5} color={status === "pending" ? "#48BB78" : "#D9D9D9"} fontSize="18px" fontWeight="bold">
+          준비 중
         </Text>
         <Text mr={5} color="#D9D9D9" fontSize="18px" fontWeight="bold">
           {">"}
         </Text>
-        <Text mr={5} color="#D9D9D9" fontSize="18px" fontWeight="bold">
+        <Text mr={5} color={status === "deliver-start" ? "#48BB78" : "#D9D9D9"} fontSize="18px" fontWeight="bold">
           배송 시작
         </Text>
         <Text mr={5} color="#D9D9D9" fontSize="18px" fontWeight="bold">
           {">"}
         </Text>
-        <Text mr={5} color="#48BB78" fontSize="18px" fontWeight="bold">
-          배송중
+        <Text mr={5} color={status === "delivering" ? "#48BB78" : "#D9D9D9"} fontSize="18px" fontWeight="bold">
+          배송 중
         </Text>
         <Text mr={5} color="#D9D9D9" fontSize="18px" fontWeight="bold">
           {">"}
         </Text>
-        <Text mr={5} color="#D9D9D9" fontSize="18px" fontWeight="bold">
+        <Text mr={5} color={status === "delivered" ? "#48BB78" : "#D9D9D9"} fontSize="18px" fontWeight="bold">
           배송 완료
         </Text>
       </Flex>

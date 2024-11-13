@@ -1,12 +1,26 @@
 import { useState } from "react";
 import { Text, Flex, Box, Button } from "@chakra-ui/react";
+
 import AddFarm from "./AddFarm";
 import AddProduct from "./AddProduct";
+import BusinessRegister from "./BusinessRegister";
 import EditFarm from "./EditFarm";
 import EditProduct from "./EditProduct";
 
+import EditInfo from "./MyInfo/EditInfo";
+import Logout from "./MyInfo/Logout";
+import Tax from "./Tax.tsx";
+
 const SellerCategory = () => {
   const [activeComponent, setActiveComponent] = useState<string | null>(null);
+
+  const handleTaxClick = () => {
+    setActiveComponent("tax");
+  };
+
+  const handleBusinessClick = () => {
+    setActiveComponent("business");
+  };
 
   const handleAddProductClick = () => {
     setActiveComponent("add-product");
@@ -24,21 +38,25 @@ const SellerCategory = () => {
     setActiveComponent("edit-farm");
   };
 
-  const handleClose = () => {
-    setActiveComponent(null);
+  const handleEditInfoClick = () => {
+    setActiveComponent("edit-info");
+  };
+
+  const handleLogoutClick = () => {
+    setActiveComponent("logout");
   };
 
   return (
-    <Box w="230px" h="1350px" border="none" bgColor="#FFFFFF">
+    <Box w="230px" h="1280px" border="none" bgColor="#FFFFFF">
       <Flex direction="column">
-        <Text mt={10} ml={3} color="#000000" fontSize="20px" fontWeight="bold">
+        <Text mt={10} ml={5} color="#000000" fontSize="20px" fontWeight="bold">
           할 일
         </Text>
         <Button
           w="100px"
           h="20px"
           mt={3}
-          ml={2}
+          ml={4}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
@@ -51,7 +69,6 @@ const SellerCategory = () => {
           w="115px"
           h="20px"
           mt={1}
-          ml={2}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
@@ -61,19 +78,20 @@ const SellerCategory = () => {
           품절된 상품
         </Button>
 
-        <Text mt={10} ml={3} color="#000000" fontSize="20px" fontWeight="bold">
+        <Text mt={10} ml={5} color="#000000" fontSize="20px" fontWeight="bold">
           판매 분석
         </Text>
         <Button
           w="80px"
           h="20px"
           mt={3}
-          ml={2}
+          ml={4}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
+          onClick={handleTaxClick}
         >
           세금 계산기
         </Button>
@@ -81,24 +99,25 @@ const SellerCategory = () => {
           w="80px"
           h="20px"
           mt={1}
-          ml={2}
+          ml={4}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
+          onClick={handleBusinessClick}
         >
           사업자 등록
         </Button>
 
-        <Text mt={10} ml={3} color="#000000" fontSize="20px" fontWeight="bold">
+        <Text mt={10} ml={5} color="#000000" fontSize="20px" fontWeight="bold">
           농산물 홈
         </Text>
         <Button
           w="80px"
           h="20px"
           mt={3}
-          ml={2}
+          ml={4}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
@@ -112,7 +131,7 @@ const SellerCategory = () => {
           w="80px"
           h="20px"
           mt={1}
-          ml={2}
+          ml={4}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
@@ -123,14 +142,14 @@ const SellerCategory = () => {
           농산물 수정
         </Button>
 
-        <Text mt={10} ml={3} color="#000000" fontSize="20px" fontWeight="bold">
+        <Text mt={10} ml={5} color="#000000" fontSize="20px" fontWeight="bold">
           농장 홈
         </Text>
         <Button
           w="70px"
           h="20px"
           mt={3}
-          ml={2}
+          ml={4}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
@@ -144,7 +163,7 @@ const SellerCategory = () => {
           w="70px"
           h="20px"
           mt={1}
-          ml={2}
+          ml={4}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
@@ -154,10 +173,46 @@ const SellerCategory = () => {
         >
           농장 수정
         </Button>
-        {activeComponent === "add-product" && <AddProduct setIsAddProductVisible={handleClose} />}
-        {activeComponent === "add-farm" && <AddFarm setIsAddFarmVisible={handleClose} />}
-        {activeComponent === "edit-product" && <EditProduct setIsEditProductVisible={handleClose} />}
-        {activeComponent === "edit-farm" && <EditFarm setIsEditFarmVisible={handleClose} />}
+
+        <Text mt={10} ml={5} color="#000000" fontSize="20px" fontWeight="bold">
+          정보 관리
+        </Text>
+        <Button
+          w="70px"
+          h="20px"
+          mt={3}
+          ml={6}
+          color="#5C5C5C"
+          fontSize="16px"
+          fontWeight="medium"
+          _hover={{ bgColor: "#FFFFFF" }}
+          bgColor="#FFFFFF"
+          onClick={handleEditInfoClick}
+        >
+          내 정보 수정
+        </Button>
+        <Button
+          w="70px"
+          h="20px"
+          mt={1}
+          ml={4}
+          color="#5C5C5C"
+          fontSize="16px"
+          fontWeight="medium"
+          _hover={{ bgColor: "#FFFFFF" }}
+          bgColor="#FFFFFF"
+          onClick={handleLogoutClick}
+        >
+          회원 탈퇴
+        </Button>
+        {activeComponent === "add-product" && <AddProduct />}
+        {activeComponent === "add-farm" && <AddFarm />}
+        {activeComponent === "edit-product" && <EditProduct />}
+        {activeComponent === "edit-farm" && <EditFarm />}
+        {activeComponent === "edit-info" && <EditInfo />}
+        {activeComponent === "logout" && <Logout />}
+        {activeComponent === "business" && <BusinessRegister />}
+        {activeComponent === "tax" && <Tax />}
       </Flex>
     </Box>
   );

@@ -2,14 +2,35 @@ import React, { useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import { Flex, Input, Icon, Text, Divider, Select } from "@chakra-ui/react";
 
-const BasicInfo = () => {
+type FormData = {
+  name: string;
+  imageUrl: string;
+  categoryId: number;
+};
+
+type BasicInfoProps = {
+  formData: FormData;
+  onChange: (data: Partial<FormData>) => void;
+};
+
+const BasicInfo: React.FC<BasicInfoProps> = ({ formData, onChange }) => {
   const [farmImageState, setFarmImageState] = useState<string>("000.jpg");
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setFarmImageState(file.name);
+      onChange({ imageUrl: file.name });
     }
+  };
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange({ name: event.target.value });
+  };
+
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = Number(event.target.value);
+    onChange({ categoryId: value });
   };
 
   return (
@@ -39,6 +60,8 @@ const BasicInfo = () => {
           }}
           _placeholder={{ color: "transparent" }}
           bgColor="#FFFFFF"
+          onChange={handleNameChange}
+          value={formData.name}
         />
       </Flex>
       <Divider w="610px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
@@ -67,11 +90,19 @@ const BasicInfo = () => {
         <Text mt={5} ml={20} color="#000000" fontSize="28px" fontWeight="bold">
           재배 품목
         </Text>
-        <Select w="200px" mt={5} ml={520} placeholder="과일">
-          <option value="option1">잎채소</option>
-          <option value="option2">열매채소</option>
-          <option value="option3">곡물</option>
-          <option value="option3">뿌리채소</option>
+        <Select
+          w="200px"
+          mt={5}
+          ml={520}
+          onChange={handleCategoryChange}
+          placeholder="과일"
+          value={formData.categoryId}
+        >
+          <option value={1}>과일</option>
+          <option value={2}>열매채소</option>
+          <option value={3}>잎채소</option>
+          <option value={4}>곡물</option>
+          <option value={5}>뿌리채소</option>
         </Select>
       </Flex>
       <Divider w="600px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />

@@ -1,15 +1,23 @@
-import { Modal, ModalBody, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalBody,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalContentProps,
+} from "@chakra-ui/react";
 
-interface BasicModalProps {
+type BasicModalProps = {
   isOpen: boolean;
   onClose: () => void;
   children?: React.ReactNode;
-}
+} & ModalContentProps;
 
-const BasicModal: React.FC<BasicModalProps> = ({ isOpen, onClose, children }) => (
+const BasicModal: React.FC<BasicModalProps> = ({ isOpen, onClose, children, ...props }) => (
   <Modal isOpen={isOpen} onClose={onClose}>
     <ModalOverlay>
-      <ModalContent maxW="1200px">
+      <ModalContent {...props}>
         <ModalHeader>{/* Modal Title */}</ModalHeader>
         <ModalCloseButton _hover={{ bg: "#FFFFFF" }} />
         <ModalBody>{children}</ModalBody>

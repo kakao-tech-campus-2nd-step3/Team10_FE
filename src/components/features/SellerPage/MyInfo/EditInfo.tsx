@@ -1,30 +1,37 @@
 import { useState } from "react";
 import { Text, Flex, Box, Divider, Button, Input } from "@chakra-ui/react";
 
-interface MyInfoProps {
-  setIsMyInfoVisible: (visible: boolean) => void;
-}
-
-const MyInfo: React.FC<MyInfoProps> = ({ setIsMyInfoVisible }) => {
+const EditInfo = () => {
   const [name, setName] = useState("정지민");
   const [newName, setNewName] = useState("");
   const [email, setEmail] = useState("jimin@gmail.com");
   const [newEmail, setNewEmail] = useState("");
   const [password, setPassword] = useState("jimin1234");
   const [newPassword, setNewPassword] = useState("");
+  const [number, setNumber] = useState("01012341234");
+  const [newNumber, setNewNumber] = useState("");
+  const [storeName, setStoreName] = useState("건호네 포도");
+  const [newStoreName, setNewStoreName] = useState("");
+  const [storeAddress, setStoreAddress] = useState("부산광역시 개금동");
+  const [newStoreAddress, setNewStoreAddress] = useState("");
 
   const handleUpdateInfo = () => {
     if (newName) setName(newName);
     if (newEmail) setEmail(newEmail);
     if (newPassword) setPassword(newPassword);
+    if (newNumber) setNumber(newNumber);
+    if (newStoreName) setStoreName(newStoreName);
+    if (newStoreAddress) setStoreAddress(newStoreAddress);
     setNewName("");
     setNewEmail("");
     setNewPassword("");
-    setIsMyInfoVisible(false);
+    setNewNumber("");
+    setNewStoreName("");
+    setNewStoreAddress("");
   };
 
   return (
-    <Box w="700px" h="520px" mt={-415} ml={350} border="none" borderRadius="12px" bgColor="#FFFFFF">
+    <Box w="700px" h="770px" mt={-550} ml={500} border="none" borderRadius="12px" bgColor="#FFFFFF">
       <Flex direction="column">
         <Text mt={10} ml={10} color="#22543D" fontSize="20px" fontWeight="bold">
           내 정보 수정
@@ -91,12 +98,72 @@ const MyInfo: React.FC<MyInfoProps> = ({ setIsMyInfoVisible }) => {
             value={newPassword}
           />
         </Flex>
+        <Flex direction="row">
+          <Flex direction="column">
+            <Text mt={10} ml={10} color="#06070C" fontSize="20px" fontWeight="medium">
+              전화번호
+            </Text>
+            <Divider w="300px" ml={10} borderWidth="0.7px" borderColor="#CECECE" orientation="horizontal" />
+          </Flex>
+          <Input
+            w="215px"
+            h="35px"
+            mt={10}
+            ml={10}
+            borderWidth="0.7px"
+            borderColor="#000000"
+            _placeholder={{ color: "#D9D9D9", fontSize: "18px", fontWeight: "medium" }}
+            onChange={e => setNumber(e.target.value)}
+            placeholder={number}
+            value={newNumber}
+          />
+        </Flex>
+        <Flex direction="row">
+          <Flex direction="column">
+            <Text mt={10} ml={10} color="#06070C" fontSize="20px" fontWeight="medium">
+              상점 이름
+            </Text>
+            <Divider w="300px" ml={10} borderWidth="0.7px" borderColor="#CECECE" orientation="horizontal" />
+          </Flex>
+          <Input
+            w="215px"
+            h="35px"
+            mt={10}
+            ml={10}
+            borderWidth="0.7px"
+            borderColor="#000000"
+            _placeholder={{ color: "#D9D9D9", fontSize: "18px", fontWeight: "medium" }}
+            onChange={e => setStoreName(e.target.value)}
+            placeholder={storeName}
+            value={newStoreName}
+          />
+        </Flex>
+        <Flex direction="row">
+          <Flex direction="column">
+            <Text mt={10} ml={10} color="#06070C" fontSize="20px" fontWeight="medium">
+              상점 주소
+            </Text>
+            <Divider w="300px" ml={10} borderWidth="0.7px" borderColor="#CECECE" orientation="horizontal" />
+          </Flex>
+          <Input
+            w="215px"
+            h="35px"
+            mt={10}
+            ml={10}
+            borderWidth="0.7px"
+            borderColor="#000000"
+            _placeholder={{ color: "#D9D9D9", fontSize: "18px", fontWeight: "medium" }}
+            onChange={e => setStoreAddress(e.target.value)}
+            placeholder={storeAddress}
+            value={newStoreAddress}
+          />
+        </Flex>
 
         <Flex justify="center">
           <Button
             w="230px"
             h="50px"
-            mt={50}
+            mt={70}
             color="#FFFFFF"
             fontSize="24px"
             fontWeight="bold"
@@ -118,4 +185,4 @@ const MyInfo: React.FC<MyInfoProps> = ({ setIsMyInfoVisible }) => {
   );
 };
 
-export default MyInfo;
+export default EditInfo;
