@@ -35,6 +35,7 @@ module.exports = {
   rules: {
     "no-extra-semi": "error",
     "react/react-in-jsx-scope": "off",
+    "no-alert": "off",
     "react/no-unknown-property": ["error", { ignore: ["css"] }],
     "@typescript-eslint/no-unused-vars": [
       "error",

@@ -76,7 +76,7 @@ const Category = () => {
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
         >
-          상품 주문내역
+          상품 주문 내역
         </Button>
         <Button
           w="95px"
@@ -89,7 +89,7 @@ const Category = () => {
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
         >
-          농장 예약관리
+          농장 체험 관리
         </Button>
         <Button
           w="68px"
