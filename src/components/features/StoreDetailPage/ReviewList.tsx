@@ -44,7 +44,7 @@ const ReviewList = () => {
   };
 
   return (
-    <Flex align="flex-start" direction="column" mb={50} ml={-140}>
+    <Flex align="flex-start" direction="column" mb={50}>
       <Flex mt={5}>
         <Select w="1090px" placeholder="최신순">
           <option value="option1">인기순</option>
@@ -52,21 +52,20 @@ const ReviewList = () => {
           <option value="option2">별점 낮은순</option>
         </Select>
       </Flex>
-      <Flex direction="row">
-        <Text mt={5} color="#000000" fontSize="18px" fontWeight="medium">
+      <Flex align="center" direction="row" pt="5">
+        <Text color="#000000" fontSize="18px" fontWeight="medium">
           사진 후기만 보기
         </Text>
         <Button
-          w="10px"
-          h="40px"
-          mt={3}
-          ml={2}
+          ml="2"
           borderWidth="0.7px"
           borderColor="#999999"
           borderRadius="50%"
           _hover={{ bgColor: isActive ? "#1C4532" : "#FFFFFF" }}
+          aspectRatio="1"
           bgColor={isActive ? "#1C4532" : "#FFFFFF"}
           onClick={handleClick}
+          size="xs"
         />
       </Flex>
       {reviewsData.map((review, index) => (
