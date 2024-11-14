@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Flex, Box, Alert, AlertIcon } from "@chakra-ui/react";
-import { useCreateProducts } from "@api/productApi";
+import { useCreateProducts, useUpdateProducts } from "@api/productApi";
 
 import BasicInfo from "./BasicInfo";
 import DetailInfo from "./DetailInfo";
@@ -30,6 +30,7 @@ const defaultFormData = {
   addressDetail: "",
   shippingFee: "",
   phoneNumber: "",
+  isEdit: false,
 };
 
 const defaultInfo = {
@@ -40,8 +41,13 @@ const defaultInfo = {
   detailImages: ["", "", ""],
 };
 
-const AddProduct = () => {
-  const [formData, setFormData] = useState<FormData>(defaultFormData);
+type AddProduct = {
+  isEdit?: boolean;
+  originProduct?: FormData & { id: number };
+};
+
+const AddProduct = ({ isEdit, originProduct }: AddProduct) => {
+  const [formData, setFormData] = useState<FormData>(originProduct || defaultFormData);
   const [info, setInfo] = useState(defaultInfo);
   const [address, setAddress] = useState<string>("");
 
@@ -51,6 +57,7 @@ const AddProduct = () => {
 
   const [alert, setAlert] = useState<{ message: string; status: "success" | "error" } | null>(null);
   const { mutateAsync: createProduct } = useCreateProducts();
+  const { mutateAsync: updateProduct } = useUpdateProducts(originProduct?.id || 0);
 
   const handleBasicInfoChange = (data: Partial<FormData>) => {
     setFormData(prevData => ({
@@ -74,14 +81,24 @@ const AddProduct = () => {
   };
 
   const handleSubmit = async () => {
-    createProduct(formData)
-      .then(response => {
-        setAlert({ message: `Product registered successfully! ID: ${response}`, status: "success" });
-        setFormData(defaultFormData);
-      })
-      .catch(() => {
-        setAlert({ message: "Error registering product. Please try again.", status: "error" });
-      });
+    if (isEdit) {
+      updateProduct(formData)
+        .then(() => {
+          setAlert({ message: `Product updated successfully!`, status: "success" });
+        })
+        .catch(() => {
+          setAlert({ message: "Error updating product.", status: "error" });
+        });
+    } else {
+      createProduct(formData)
+        .then(() => {
+          setAlert({ message: `Product registered successfully!`, status: "success" });
+          setFormData(defaultFormData);
+        })
+        .catch(() => {
+          setAlert({ message: "Error registering product.", status: "error" });
+        });
+    }
   };
 
   return (
@@ -106,23 +123,6 @@ const AddProduct = () => {
           <Button
             w="230px"
             h="53px"
-            color="#22543D"
-            fontSize="24px"
-            fontWeight="bold"
-            borderWidth="1px"
-            borderColor="#22543D"
-            borderRadius="12px"
-            _hover={{
-              bgColor: "#FFFFFF",
-              borderColor: "#22543D",
-            }}
-            bgColor="#FFFFFF"
-          >
-            취소하기
-          </Button>
-          <Button
-            w="230px"
-            h="53px"
             color="#FFFFFF"
             fontSize="24px"
             fontWeight="bold"
@@ -136,7 +136,7 @@ const AddProduct = () => {
             bgColor="#22543D"
             onClick={handleSubmit}
           >
-            등록하기
+            {isEdit ? "수정하기" : "등록하기"}
           </Button>
         </Flex>
       </Flex>
