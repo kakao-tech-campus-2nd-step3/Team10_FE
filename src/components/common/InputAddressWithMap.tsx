@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Flex, FlexProps, Icon, IconButton, Input } from "@chakra-ui/react";
 import { FaAngleDown } from "react-icons/fa";
 import KaKaoMap from "@components/common/KaKaoMap";
-import { Pin } from "@components/common/KaKaoMap/type";
-import { address2LatLng } from "@utils/mapUtils";
+import { address2LatLng, latLng2RoadAddress } from "@utils/mapUtils";
+import { Pin } from "./KaKaoMap/type";
 
 type InputAddressWithMapProps = {
   address: string;
@@ -11,14 +11,20 @@ type InputAddressWithMapProps = {
   wrapperProps?: FlexProps;
 } & FlexProps;
 
+type PinWithRoadAddress = {
+  roadAddress: string;
+} & Pin;
+
 const InputAddressWithMap = ({ address, onAddressChange, wrapperProps, ...props }: InputAddressWithMapProps) => {
-  const [mapPins, setMapPins] = useState<Pin[]>([]);
+  const [mapPins, setMapPins] = useState<PinWithRoadAddress[]>([]);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (address) {
       address2LatLng(address).then(result => {
-        setMapPins(result?.map(r => ({ key: `${r.lat}_${r.lng}`, lat: r.lat, lng: r.lng })) || []);
+        setMapPins(
+          result?.map(r => ({ key: `${r.lat}_${r.lng}`, lat: r.lat, lng: r.lng, roadAddress: r.road_address })) || [],
+        );
       });
     }
   }, [address]);
@@ -63,7 +69,14 @@ const InputAddressWithMap = ({ address, onAddressChange, wrapperProps, ...props 
           />
         </IconButton>
       </Flex>
-      {open && <KaKaoMap pins={mapPins} aspectRatio="1" w="100%" />}
+      {open && (
+        <KaKaoMap<PinWithRoadAddress>
+          pins={mapPins.filter(async p => (await latLng2RoadAddress(p.lat, p.lng)) !== "")}
+          onClickPin={async pin => onAddressChange(pin.roadAddress)}
+          aspectRatio="1"
+          w="100%"
+        />
+      )}
     </Flex>
   );
 };

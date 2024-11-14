@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import GridView from "@components/ItemView/GridView";
-import BestScheduleCard from "@components/features/SchedulePage/BestScheduleCard";
+import ScheduleCard from "@components/features/SchedulePage/ScheduleCard";
 import mockBestSchedule from "@mocks/mockItem/mockBestSchedule";
 
 const BestScheduleSection = () => (
@@ -8,7 +8,7 @@ const BestScheduleSection = () => (
     <Text py="3" fontSize="2xl" fontWeight="bold">
       이번주 Best
     </Text>
-    <GridView items={mockBestSchedule} columns={2} gap="20px" ItemComponent={BestScheduleCard} />
+    <GridView items={mockBestSchedule} columns={2} gap="20px" ItemComponent={ScheduleCard} />
   </Box>
 );
 

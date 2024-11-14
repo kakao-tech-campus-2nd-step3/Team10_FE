@@ -17,6 +17,8 @@ const ProductGroupView = ({ group, items, filterState }: ProductGroupViewProps) 
 
   if (haveSubGroup) {
     seperatedFilters = group.subGroup.map(sub => seperatedFilters[0].filter(item => item.subGroup === sub));
+  } else {
+    return null;
   }
 
   return (

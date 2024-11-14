@@ -1,8 +1,9 @@
 import React from "react";
-import { ModalHeader, ModalCloseButton, Tabs, TabList, Tab, TabPanel, TabPanels, Button } from "@chakra-ui/react";
+import { ModalHeader, ModalCloseButton, Tabs, TabList, Tab, TabPanel, TabPanels, Button, Flex } from "@chakra-ui/react";
+
+import AddInfo, { AddInfoProps } from "@components/common/AddInfo";
+import AddPreview from "@components/common/AddPreview";
 import BasicModal from "@components/common/modal/BasicModal";
-import ProductDescription from "@components/features/StoreDetailPage/ProductDescription";
-import AddInfo, { AddInfoProps } from "./AddInfo";
 
 interface AddProductModalProps {
   infoProps: AddInfoProps;
@@ -29,13 +30,14 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
         </TabList>
 
         <TabPanels py="10px">
-          <TabPanel>
+          <TabPanel as={Flex} direction="column" overflowX="hidden" overflowY="scroll" h={`calc(${maxH} - 150px)`}>
             <AddInfo {...infoProps} />
             <Button
+              flexShrink="0"
               w="200px"
               h="50px"
-              mt={5}
-              ml={850}
+              mt="10"
+              ml="auto"
               color="#FFFFFF"
               fontSize="24px"
               fontWeight="bold"
@@ -53,7 +55,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
             </Button>
           </TabPanel>
           <TabPanel>
-            <ProductDescription />
+            <AddPreview {...infoProps} />
           </TabPanel>
         </TabPanels>
       </Tabs>

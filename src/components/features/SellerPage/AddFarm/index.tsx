@@ -1,46 +1,93 @@
 import { useState } from "react";
 import { Box, Button, Flex, Alert, AlertIcon } from "@chakra-ui/react";
-import axios from "axios";
+
+import { useCreateFarms, useUpdateFarms } from "@api/farmApi";
+import { Info } from "@components/common/type";
+import { addressSearch } from "@utils/mapUtils";
 import BasicInfo from "./BasicInfo";
 import DetailInfo from "./DetailInfo";
 import PriceInfo from "./PriceInfo";
-import { Info } from "./type";
 
 type FormData = {
   name: string;
   imageUrl: string;
   categoryId: number;
+  businessNumber: string;
   description: string;
   price: string;
   maxPeople: string;
   maxTeam: string;
   growEnv: string;
+  addressDetail: string;
   phoneNumber: string;
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
 };
 
 const defaultFormData = {
   name: "",
-  imageUrl: "000.jpg",
+  imageUrl: "",
   categoryId: 0,
+  businessNumber: "",
   description: "",
   price: "",
   maxPeople: "",
   maxTeam: "",
   growEnv: "",
+  addressDetail: "",
   phoneNumber: "",
+  startDate: "",
+  endDate: "",
+  startTime: "",
+  endTime: "",
 };
 
 const defaultInfo = {
   title: "",
-  productImageState: "",
+  mainImage: "",
   detailTitles: ["", "", ""],
   detailDescriptions: ["", "", ""],
   detailImages: ["", "", ""],
 };
 
-const AddFarm = () => {
-  const [formData, setFormData] = useState<FormData>(defaultFormData);
+type PosInfo = {
+  latitude: number;
+  longitude: number;
+};
+
+const defaultPosInfo = {
+  latitude: 0,
+  longitude: 0,
+};
+
+type AddFarm = {
+  isEdit?: boolean;
+  originFarm?: FormData & { id: number };
+};
+
+const AddFarm = ({ isEdit, originFarm }: AddFarm) => {
+  const [formData, setFormData] = useState<FormData>(originFarm || defaultFormData);
   const [info, setInfo] = useState<Info>(defaultInfo);
+  const [, setPos] = useState<PosInfo>(defaultPosInfo);
+  const [address, setAddress] = useState<string>("");
+  const { mutateAsync: createFarm } = useCreateFarms();
+  const { mutateAsync: updateFarm } = useUpdateFarms(originFarm?.id || 0);
+
+  const handleAddressChange = async (value: string) => {
+    setAddress(value);
+    const result = await addressSearch(value).catch(() => []);
+
+    if (result.length === 1) {
+      setPos({
+        latitude: result[0].lat,
+        longitude: result[0].lng,
+      });
+    } else {
+      setPos(defaultPosInfo);
+    }
+  };
 
   const [alert, setAlert] = useState<{ message: string; status: "success" | "error" } | null>(null);
 
@@ -66,17 +113,28 @@ const AddFarm = () => {
   };
 
   const handleSubmit = async () => {
-    try {
-      const response = await axios.post("/api/products", formData);
-      setAlert({ message: `Product registered successfully! ID: ${response}`, status: "success" });
-      setFormData(defaultFormData);
-    } catch (error) {
-      setAlert({ message: "Error registering product. Please try again.", status: "error" });
+    if (isEdit) {
+      updateFarm(formData)
+        .then(() => {
+          setAlert({ message: `Farm updated successfully!`, status: "success" });
+        })
+        .catch(() => {
+          setAlert({ message: "Error updating farm.", status: "error" });
+        });
+    } else {
+      createFarm(formData)
+        .then(() => {
+          setAlert({ message: `Farm registered successfully!`, status: "success" });
+          setFormData(defaultFormData);
+        })
+        .catch(() => {
+          setAlert({ message: "Error registering farm.", status: "error" });
+        });
     }
   };
 
   return (
-    <Box w="1000px" h="1200px" mt={-550} ml={350} borderRadius="12px" bgColor="#FFFFFF">
+    <Box w="1000px" h="100%" mt={-550} ml={350} borderRadius="12px" bgColor="#FFFFFF">
       <Flex direction="column">
         {alert && (
           <Alert mb={4} status={alert.status}>
@@ -86,6 +144,8 @@ const AddFarm = () => {
         )}
         <BasicInfo formData={formData} onChange={handleBasicInfoChange} />
         <DetailInfo
+          onAddressChange={handleAddressChange}
+          address={address}
           infoProps={{
             info,
             setInfo,
@@ -95,23 +155,6 @@ const AddFarm = () => {
         />
         <PriceInfo formData={formData} onChange={handlePriceInfoChange} />
         <Flex justify="center" direction="row" gap="5px" mt={16} mb={10}>
-          <Button
-            w="230px"
-            h="53px"
-            color="#22543D"
-            fontSize="24px"
-            fontWeight="bold"
-            borderWidth="1px"
-            borderColor="#22543D"
-            borderRadius="12px"
-            _hover={{
-              bgColor: "#FFFFFF",
-              borderColor: "#22543D",
-            }}
-            bgColor="#FFFFFF"
-          >
-            취소하기
-          </Button>
           <Button
             w="230px"
             h="53px"
@@ -128,7 +171,7 @@ const AddFarm = () => {
             bgColor="#22543D"
             onClick={handleSubmit}
           >
-            등록하기
+            {isEdit ? "수정하기" : "등록하기"}
           </Button>
         </Flex>
       </Flex>
