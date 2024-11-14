@@ -25,7 +25,7 @@ const EmailRegister = () => {
     emailRegister(registerData)
       .then(data => {
         if (data) {
-          navigate("email/login");
+          navigate("/email/login");
         }
       })
       .catch(() => {

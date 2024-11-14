@@ -1,22 +1,33 @@
-import { useSetAtom } from "jotai";
+import { useAtom } from "jotai";
+import { defaultApi } from "@api/axiosInstance";
 import { userAtomWithPersistence } from "@atom/userAtom";
 
 const useLogin = () => {
-  const setUser = useSetAtom(userAtomWithPersistence);
+  const [user, setUser] = useAtom(userAtomWithPersistence);
 
   const login = (accessToken: string) => {
-    setUser({
-      userId: "1",
-      name: "John Doe",
-      token: accessToken,
-    });
+    defaultApi
+      .get("/api/member/self", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then(({ data }) => {
+        setUser({
+          userId: data.id,
+          name: data.name,
+          token: accessToken,
+        });
+      });
   };
 
   const logout = () => {
     setUser(null);
   };
 
-  return { login, logout };
+  const loginCheck = () => user !== null;
+
+  return { login, logout, loginCheck };
 };
 
 export default useLogin;

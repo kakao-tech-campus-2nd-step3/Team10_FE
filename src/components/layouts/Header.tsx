@@ -1,24 +1,39 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Input, Box, Flex, Text, Icon } from "@chakra-ui/react";
 import poomasi from "@assets/logo/logo.png";
 import Image from "@components/common/Image";
+import useLogin from "@hooks/useLogin";
 
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState<string>("소개");
+
+  const { loginCheck, logout } = useLogin();
 
   const handleMenuClick = (menu: string) => {
     setActiveMenu(menu);
   };
   return (
     <Flex direction="column" bgColor="#FFFFFF">
-      <Flex justify="flex-end" p="1px 60px">
-        <Text mr="12px" color="#1C4532" fontSize="8px" fontWeight="regular" cursor="pointer">
-          회원가입
-        </Text>
-        <Text color="#1C4532" fontSize="8px" fontWeight="regular" cursor="pointer">
-          로그인
-        </Text>
+      <Flex justify="flex-end" p="1px 60px" color="#1C4532" fontSize="8px" fontWeight="regular">
+        {loginCheck()
+          ? [
+              <Text as={Link} mr="12px" to="/mypage">
+                마이페이지
+              </Text>,
+              <Text cursor="pointer" onClick={logout}>
+                로그아웃
+              </Text>,
+            ]
+          : [
+              <Text as={Link} mr="12px" to="/register">
+                회원가입
+              </Text>,
+              <Text as={Link} to="/login">
+                로그인
+              </Text>,
+            ]}
       </Flex>
 
       <Flex align="center" justify="space-between" p="10px 50px">

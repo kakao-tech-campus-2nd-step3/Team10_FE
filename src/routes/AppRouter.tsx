@@ -56,7 +56,7 @@ const AppRouter = () => {
           element: <MyPage />,
         },
         {
-          path: "Register",
+          path: "login",
           element: <RegisterPage />,
         },
         {

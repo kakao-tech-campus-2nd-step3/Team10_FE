@@ -5,8 +5,8 @@ import KaKaoLoginButton from "@components/common/KaKaoLoginButton";
 const Register = () => {
   const navigate = useNavigate();
 
-  const handleCheckboxChange = () => {
-    navigate("/EmailLogin");
+  const handleEmailLogin = () => {
+    navigate("/email/login");
   };
 
   return (
@@ -37,7 +37,7 @@ const Register = () => {
           borderColor: "#FFFFFF",
         }}
         bgColor="transparent"
-        onClick={handleCheckboxChange}
+        onClick={handleEmailLogin}
       >
         이메일 로그인
       </Button>

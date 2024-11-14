@@ -1,5 +1,7 @@
-import { useMutation } from "@tanstack/react-query";
-import { defaultApi } from "@api/axiosInstance";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useAtomValue } from "jotai";
+import { defaultApi, needAuthDefaultApi } from "@api/axiosInstance";
+import { userAtomWithPersistence } from "@atom/userAtom";
 
 type RegisterData = {
   name: string;
@@ -25,4 +27,14 @@ const useLoginEmail = () => {
   return useMutation({ mutationFn: fetcher });
 };
 
-export { useRegisterEmail, useLoginEmail };
+const useGetMyInfo = () => {
+  const user = useAtomValue(userAtomWithPersistence);
+
+  const fetcher = async () => needAuthDefaultApi.get("/api/members/self").then(({ data }) => data);
+  return useQuery({
+    queryKey: ["myInfo", user.id],
+    queryFn: fetcher,
+  });
+};
+
+export { useRegisterEmail, useLoginEmail, useGetMyInfo };
