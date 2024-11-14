@@ -5,6 +5,7 @@ import Image from "@components/common/Image";
 
 type FormData = {
   name: string;
+  description: string;
   imageUrl: string;
   categoryId: number;
 };
@@ -24,8 +25,13 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ formData, onChange }) => {
       onChange({ imageUrl });
     }
   };
+
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange({ name: event.target.value });
+  };
+
+  const handleDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange({ description: event.target.value });
   };
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -66,6 +72,35 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ formData, onChange }) => {
         />
       </Flex>
       <Divider w="600px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
+
+      <Flex direction="row">
+        <Text mt={5} ml={20} color="#000000" fontSize="28px" fontWeight="bold">
+          한 줄 설명
+        </Text>
+        <Input
+          w="300px"
+          h="40px"
+          mt={5}
+          ml={420}
+          p="10px"
+          color="#06070c"
+          fontSize="20px"
+          fontWeight="medium"
+          borderWidth="0.7px"
+          borderColor="#000000"
+          borderRadius="12px"
+          _focus={{
+            outline: "none",
+            border: "0.7px solid #22543D",
+          }}
+          _placeholder={{ color: "transparent" }}
+          bgColor="#FFFFFF"
+          name="name"
+          onChange={handleDescriptionChange}
+          value={formData.description}
+        />
+      </Flex>
+      <Divider w="500px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
 
       <Flex direction="row">
         <Flex w="550px">
