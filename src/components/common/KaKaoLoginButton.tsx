@@ -4,7 +4,7 @@ import Image from "@components/common/Image";
 type KaKaoLoginButtonProps = ImageProps;
 
 const KaKaoLoginButton = ({ ...props }: KaKaoLoginButtonProps) => {
-  const link = "https://google.com";
+  const link = "https://api.poomasi.shop/oauth2/authentication/kakao";
 
   return (
     <Link href={link} isExternal>
