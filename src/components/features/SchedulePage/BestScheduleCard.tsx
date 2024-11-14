@@ -7,7 +7,7 @@ type BestScheduleCardProps = ImageCardProps & {
 };
 
 const BestScheduleCard = ({ item, ...props }: BestScheduleCardProps) => (
-  <ImageCard {...props}>
+  <ImageCard {...props} bgImg={item.mainImage}>
     <Flex align="center" direction="column" w="full" mt="auto" mb="10">
       <Text px="5" color="green" bg="white" borderRadius="xl">
         {item.farm.address}

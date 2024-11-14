@@ -6,27 +6,22 @@ const dummyCategory: FarmCategory[] = [
   {
     id: 1,
     name: "category1",
-    imageUrl: "https://via.placeholder.com/150",
   },
   {
     id: 2,
     name: "category2",
-    imageUrl: "https://via.placeholder.com/150",
   },
   {
     id: 3,
     name: "category3",
-    imageUrl: "https://via.placeholder.com/150",
   },
   {
     id: 4,
     name: "category4",
-    imageUrl: "https://via.placeholder.com/150",
   },
   {
     id: 5,
     name: "category5",
-    imageUrl: "https://via.placeholder.com/150",
   },
 ];
 

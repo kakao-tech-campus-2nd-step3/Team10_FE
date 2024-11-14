@@ -1,3 +1,5 @@
+import mockImage1 from "@assets/Image/Farm/Best1.png";
+import mockImage2 from "@assets/Image/Farm/Best2.png";
 import mockFarms from "@mocks/mockItem/mockFarms";
 import { Schedule } from "@type/index";
 
@@ -5,11 +7,13 @@ const mockSchedule: Schedule[] = [
   {
     id: 1,
     name: "건호네 포도따기 체험",
+    mainImage: mockImage1,
     farm: mockFarms[0],
   },
   {
     id: 2,
     name: "도균이네 가지따기 체험",
+    mainImage: mockImage2,
     farm: mockFarms[4],
   },
   {
