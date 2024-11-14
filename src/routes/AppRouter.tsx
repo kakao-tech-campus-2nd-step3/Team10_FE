@@ -60,11 +60,11 @@ const AppRouter = () => {
           element: <RegisterPage />,
         },
         {
-          path: "EmailLogin",
+          path: "email/login",
           element: <EmailLoginPage />,
         },
         {
-          path: "EmailRegister",
+          path: "email/register",
           element: <EmailRegisterPage />,
         },
         {
