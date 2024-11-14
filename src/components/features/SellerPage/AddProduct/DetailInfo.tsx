@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Flex, Input, Text, Divider, Button, FlexProps } from "@chakra-ui/react";
+import { Flex, Input, Text, Divider, Button } from "@chakra-ui/react";
 
 import { AddInfoProps } from "@components/common/AddInfo";
 
@@ -16,10 +16,9 @@ type DetailInfoProps = {
   infoProps: AddInfoProps;
   address: string;
   onAddressChange: (value: string) => void;
-
   formData: FormData;
   onChange: (data: Partial<FormData>) => void;
-} & FlexProps;
+};
 
 const DetailInfo: React.FC<DetailInfoProps> = ({ infoProps, formData, onChange, address, onAddressChange }) => {
   const [isModalOpen, setModalOpen] = useState(false);
