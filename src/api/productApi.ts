@@ -1,5 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { defaultApi } from "@api/axiosInstance";
+
+type ProductData = {
+  categoryId: number;
+  name: string;
+  description: string;
+  imageUrl: string;
+  stock: string;
+  price: string;
+  growEnv: string;
+  shippingFee: string;
+  phoneNumber: string;
+};
 
 const useGetProducts = () => {
   const fetcher = () => defaultApi.get(`/product`).then(({ data }) => data);
@@ -12,4 +24,10 @@ const useGetProducts = () => {
 
 const useGetProductDetail = () => null;
 
-export { useGetProducts, useGetProductDetail };
+const useCreateProducts = () => {
+  const fetcher = (productData: ProductData) => defaultApi.post(`/products`, productData).then(({ data }) => data);
+
+  return useMutation({ mutationFn: fetcher });
+};
+
+export { useGetProducts, useGetProductDetail, useCreateProducts };
