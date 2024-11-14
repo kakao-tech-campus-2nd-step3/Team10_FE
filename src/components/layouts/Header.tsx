@@ -22,7 +22,7 @@ const Header = () => {
       </Flex>
 
       <Flex align="center" justify="space-between" p="10px 50px">
-        <Image w="50px" h="30px" alt="poomasi" src={poomasi} />
+        <Image h="30px" objectFit="contain" alt="poomasi" src={poomasi} />
 
         <Flex align="center" mx="20px" ml={-70}>
           {["소개", "상점", "농장"].map(menu => (

@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "@components/layouts/MainLayout";
 import BuyerMyPage from "@pages/BuyerMyPage";
+import CallbackPage from "@pages/CallbackPage";
 import EmailLoginPage from "@pages/EmailLoginPage";
 import EmailRegisterPage from "@pages/EmailRegisterPage";
 import FarmDetailPage from "@pages/FarmDetailPage";
@@ -73,6 +74,10 @@ const AppRouter = () => {
         {
           path: "store",
           element: <StorePage />,
+        },
+        {
+          path: "callback/:provider",
+          element: <CallbackPage />,
         },
         {
           path: "schedule",
