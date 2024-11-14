@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Button, Flex, Box, Alert, AlertIcon } from "@chakra-ui/react";
-import axios from "axios";
+import { useCreateProducts } from "@api/productApi";
+
 import BasicInfo from "./BasicInfo";
 import DetailInfo from "./DetailInfo";
 import PriceInfo from "./PriceInfo";
-import { Info } from "./type";
 
 type FormData = {
   categoryId: number;
@@ -14,6 +14,7 @@ type FormData = {
   stock: string;
   price: string;
   growEnv: string;
+  addressDetail: string;
   shippingFee: string;
   phoneNumber: string;
 };
@@ -26,13 +27,14 @@ const defaultFormData = {
   stock: "",
   price: "",
   growEnv: "",
+  addressDetail: "",
   shippingFee: "",
   phoneNumber: "",
 };
 
 const defaultInfo = {
   title: "",
-  productImageState: "",
+  mainImage: "",
   detailTitles: ["", "", ""],
   detailDescriptions: ["", "", ""],
   detailImages: ["", "", ""],
@@ -40,9 +42,15 @@ const defaultInfo = {
 
 const AddProduct = () => {
   const [formData, setFormData] = useState<FormData>(defaultFormData);
-  const [info, setInfo] = useState<Info>(defaultInfo);
+  const [info, setInfo] = useState(defaultInfo);
+  const [address, setAddress] = useState<string>("");
+
+  const handleAddressChange = (value: string) => {
+    setAddress(value);
+  };
 
   const [alert, setAlert] = useState<{ message: string; status: "success" | "error" } | null>(null);
+  const { mutateAsync: createProduct } = useCreateProducts();
 
   const handleBasicInfoChange = (data: Partial<FormData>) => {
     setFormData(prevData => ({
@@ -66,17 +74,18 @@ const AddProduct = () => {
   };
 
   const handleSubmit = async () => {
-    try {
-      const response = await axios.post("/api/products", formData);
-      setAlert({ message: `Product registered successfully! ID: ${response}`, status: "success" });
-      setFormData(defaultFormData);
-    } catch (error) {
-      setAlert({ message: "Error registering product. Please try again.", status: "error" });
-    }
+    createProduct(formData)
+      .then(response => {
+        setAlert({ message: `Product registered successfully! ID: ${response}`, status: "success" });
+        setFormData(defaultFormData);
+      })
+      .catch(() => {
+        setAlert({ message: "Error registering product. Please try again.", status: "error" });
+      });
   };
 
   return (
-    <Box w="1000px" h="1200px" mt={-550} ml={350} borderRadius="12px" bgColor="#FFFFFF">
+    <Box w="1000px" h="100%" mt={-550} ml={350} borderRadius="12px" bgColor="#FFFFFF">
       <Flex direction="column">
         {alert && (
           <Alert mb={4} status={alert.status}>
@@ -86,10 +95,9 @@ const AddProduct = () => {
         )}
         <BasicInfo formData={formData} onChange={handleBasicInfoChange} />
         <DetailInfo
-          infoProps={{
-            info,
-            setInfo,
-          }}
+          onAddressChange={handleAddressChange}
+          address={address}
+          infoProps={{ info, setInfo }}
           formData={formData}
           onChange={handleDetailInfoChange}
         />
