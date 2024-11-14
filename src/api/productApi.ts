@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { defaultApi } from "@api/axiosInstance";
 
 type ProductData = {
@@ -14,7 +14,7 @@ type ProductData = {
 };
 
 const useGetProducts = () => {
-  const fetcher = () => defaultApi.get(`/product`).then(({ data }) => data);
+  const fetcher = () => defaultApi.get(`/products`).then(({ data }) => data);
 
   return useQuery({
     queryKey: ["products"],
@@ -22,7 +22,14 @@ const useGetProducts = () => {
   });
 };
 
-const useGetProductDetail = () => null;
+const useGetProductDetail = (productId: number) => {
+  const fetcher = () => defaultApi.get(`/products/${productId}`).then(({ data }) => data);
+  return useQuery({
+    queryKey: ["products", productId],
+    queryFn: fetcher,
+    enabled: !!productId,
+  });
+};
 
 const useCreateProducts = () => {
   const fetcher = (productData: ProductData) => defaultApi.post(`/products`, productData).then(({ data }) => data);
@@ -30,4 +37,19 @@ const useCreateProducts = () => {
   return useMutation({ mutationFn: fetcher });
 };
 
-export { useGetProducts, useGetProductDetail, useCreateProducts };
+const useUpdateProducts = (productId: number) => {
+  const queryClient = useQueryClient();
+
+  const fetcher = (productData: ProductData) =>
+    defaultApi.put(`/products/${productId}`, productData).then(({ data }) => data);
+
+  return useMutation({
+    mutationFn: fetcher,
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ["products", productId],
+      }),
+  });
+};
+
+export { useGetProducts, useGetProductDetail, useCreateProducts, useUpdateProducts };
