@@ -1,4 +1,5 @@
 import axios from "axios";
+import { refrechIntercepter } from "@api/intercepters";
 
 const externalApi = axios.create({
   headers: {
@@ -22,5 +23,6 @@ const needAuthDefaultApi = axios.create({
       : undefined,
   },
 });
+needAuthDefaultApi.interceptors.response.use(refrechIntercepter);
 
 export { externalApi, defaultApi, needAuthDefaultApi };
