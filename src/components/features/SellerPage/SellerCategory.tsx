@@ -4,8 +4,6 @@ import { Text, Flex, Box, Button } from "@chakra-ui/react";
 import AddFarm from "./AddFarm";
 import AddProduct from "./AddProduct";
 import BusinessRegister from "./BusinessRegister";
-import EditFarm from "./EditFarm";
-import EditProduct from "./EditProduct";
 
 import EditInfo from "./MyInfo/EditInfo";
 import Logout from "./MyInfo/Logout";
@@ -47,7 +45,7 @@ const SellerCategory = () => {
   };
 
   return (
-    <Box w="230px" h="1280px" border="none" bgColor="#FFFFFF">
+    <Box w="230px" h="1480px" border="none" bgColor="#FFFFFF">
       <Flex direction="column">
         <Text mt={10} ml={5} color="#000000" fontSize="20px" fontWeight="bold">
           할 일
@@ -207,8 +205,47 @@ const SellerCategory = () => {
         </Button>
         {activeComponent === "add-product" && <AddProduct />}
         {activeComponent === "add-farm" && <AddFarm />}
-        {activeComponent === "edit-product" && <EditProduct />}
-        {activeComponent === "edit-farm" && <EditFarm />}
+        {activeComponent === "edit-product" && (
+          <AddProduct
+            isEdit
+            originProduct={{
+              id: 1,
+              name: "Product 1",
+              price: "100",
+              categoryId: 2,
+              imageUrl: "images/",
+              stock: "ste",
+              description: "Product 1 description",
+              growEnv: "production",
+              addressDetail: "sdaffe",
+              shippingFee: "3000",
+              phoneNumber: "23094",
+            }}
+          />
+        )}
+        {activeComponent === "edit-farm" && (
+          <AddFarm
+            isEdit
+            originFarm={{
+              id: 1,
+              name: "Product 1",
+              price: "100",
+              categoryId: 2,
+              imageUrl: "images/",
+              description: "Product 1 description",
+              growEnv: "production",
+              addressDetail: "hi",
+              phoneNumber: "1435",
+              businessNumber: "1341",
+              maxPeople: "5",
+              maxTeam: "3",
+              startDate: "1",
+              endDate: "6",
+              startTime: "2",
+              endTime: "3",
+            }}
+          />
+        )}
         {activeComponent === "edit-info" && <EditInfo />}
         {activeComponent === "logout" && <Logout />}
         {activeComponent === "business" && <BusinessRegister />}

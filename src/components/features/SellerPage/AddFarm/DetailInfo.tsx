@@ -1,20 +1,24 @@
 import { useState } from "react";
 import { Flex, Input, Text, Divider, Button } from "@chakra-ui/react";
+import { AddInfoProps } from "@components/common/AddInfo";
+import InputAddressWithMap from "@components/common/InputAddressWithMap";
 import AddFarmModal from "./AddFarmModal";
-import { AddInfoProps } from "./AddInfo";
 
 type FormData = {
   growEnv: string;
+  addressDetail: string;
   phoneNumber: string;
 };
 
 type DetailInfoProps = {
   infoProps: AddInfoProps;
   formData: FormData;
+  address: string;
+  onAddressChange: (value: string) => void;
   onChange: (data: Partial<FormData>) => void;
 };
 
-const DetailInfo: React.FC<DetailInfoProps> = ({ infoProps, formData, onChange }) => {
+const DetailInfo: React.FC<DetailInfoProps> = ({ infoProps, formData, onChange, address, onAddressChange }) => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -27,6 +31,10 @@ const DetailInfo: React.FC<DetailInfoProps> = ({ infoProps, formData, onChange }
 
   const handleGrowEnvChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange({ growEnv: event.target.value });
+  };
+
+  const handleAddressDetailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange({ addressDetail: event.target.value });
   };
 
   const handleNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,15 +77,22 @@ const DetailInfo: React.FC<DetailInfoProps> = ({ infoProps, formData, onChange }
       </Flex>
       <Divider w="500px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
 
+      <Flex direction="row" mt={3}>
+        <Text mr={400} ml={20} color="#000000" fontSize="28px" fontWeight="bold">
+          도로명 주소
+        </Text>
+        <InputAddressWithMap address={address} onAddressChange={onAddressChange} />
+      </Flex>
+      <Divider w="500px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
       <Flex direction="row">
         <Text mt={5} ml={20} color="#000000" fontSize="28px" fontWeight="bold">
-          위치
+          상세 주소
         </Text>
         <Input
           w="300px"
           h="40px"
           mt={5}
-          ml={475}
+          ml={420}
           p="10px"
           color="#06070c"
           fontSize="20px"
@@ -91,10 +106,11 @@ const DetailInfo: React.FC<DetailInfoProps> = ({ infoProps, formData, onChange }
           }}
           _placeholder={{ color: "transparent" }}
           bgColor="#FFFFFF"
+          onChange={handleAddressDetailChange}
+          value={formData.addressDetail}
         />
       </Flex>
       <Divider w="500px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
-
       <Flex direction="row">
         <Text mt={5} ml={20} color="#000000" fontSize="28px" fontWeight="bold">
           농장 설명

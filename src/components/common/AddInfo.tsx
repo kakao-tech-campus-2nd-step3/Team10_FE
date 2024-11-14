@@ -1,7 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useRef } from "react";
 import { UploadOutlined } from "@ant-design/icons";
-import { Flex, Input, Divider, Text, Icon } from "@chakra-ui/react";
-import { Info } from "./type";
+import { Flex, Input, Divider, Text, Icon, Textarea } from "@chakra-ui/react";
+import Image from "@components/common/Image";
+import { detailImages, Info } from "./type";
 
 export type AddInfoProps = {
   info: Info;
@@ -9,31 +10,40 @@ export type AddInfoProps = {
 };
 
 const AddInfo: React.FC<AddInfoProps> = ({ info, setInfo }: AddInfoProps) => {
+  const mainImageInputRef = useRef<HTMLInputElement>(null);
+  const detailImageInputRef = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
+
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setInfo(prev => ({ ...prev, productImageState: file.name }));
+      const imageUrl = URL.createObjectURL(file);
+      setInfo(prev => ({ ...prev, mainImage: imageUrl }));
     }
   };
 
   const handleDetailTitleChange = (index: number, value: string) =>
     setInfo(prev => ({
       ...prev,
-      detailTitles: [...prev.detailTitles, value],
+      detailTitles: prev.detailTitles.map((title, i) => (i === index ? value : title)),
     }));
 
   const handleDetailDescriptionChange = (index: number, value: string) =>
     setInfo(prev => ({
       ...prev,
-      detailDescriptions: [...prev.detailDescriptions, value],
+      detailDescriptions: prev.detailDescriptions.map((desc, i) => (i === index ? value : desc)),
     }));
 
   const handleDetailImageChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      const imageUrl = URL.createObjectURL(file);
       setInfo(prev => ({
         ...prev,
-        detailImages: [...prev.detailImages, file.name],
+        detailImages: prev.detailImages.map((image, i) => (i === index ? imageUrl : image)),
       }));
     }
   };
@@ -44,13 +54,12 @@ const AddInfo: React.FC<AddInfoProps> = ({ info, setInfo }: AddInfoProps) => {
   return (
     <Flex direction="column">
       <Flex direction="row">
-        <Text color="#000000" fontSize="25px" fontWeight="medium">
+        <Text minW="250px" mr="5" color="#000000" fontSize="25px" fontWeight="medium">
           제목
         </Text>
         <Input
-          w="600px"
           h="40px"
-          ml={160}
+          ml="auto"
           p="10px"
           color="#06070c"
           fontSize="20px"
@@ -70,35 +79,31 @@ const AddInfo: React.FC<AddInfoProps> = ({ info, setInfo }: AddInfoProps) => {
       </Flex>
 
       <Flex direction="row" mt={5}>
-        <Text color="#000000" fontSize="25px" fontWeight="medium">
+        <Text minW="200px" color="#000000" fontSize="25px" fontWeight="medium">
           메인 이미지
         </Text>
         <Icon
           as={UploadOutlined}
+          mx="5"
           mt={1}
-          ml={5}
           color="#000000"
           fontSize="30px"
           cursor="pointer"
-          onClick={() => document.getElementById("file-input")?.click()}
+          onClick={() => mainImageInputRef.current?.click()}
         />
-        <Input display="none" accept="image/*" id="file-input" onChange={handleImageChange} type="file" />
-        <Text ml={500} color="#CECECE" fontSize="28px" fontWeight="bold">
-          {info.productImageState}
-        </Text>
+        <Image objectFit="cover" flexShrink="0" src={info.mainImage} alt="main image" width="200px" height="200px" />
+        <Input ref={mainImageInputRef} display="none" accept="image/*" onChange={handleImageChange} type="file" />
       </Flex>
-      <Divider w="795px" borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
 
-      {Array.from({ length: 3 }).map((_, index) => (
-        <Flex direction="column" mt={5}>
+      {detailImages.map((key, index) => (
+        <Flex key={key} direction="column" mt={5}>
+          <Divider my="5" borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
           <Flex direction="row" mt={5}>
-            <Text color="#000000" fontSize="25px" fontWeight="medium">
+            <Text minW="250px" mr="5" color="#000000" fontSize="25px" fontWeight="medium">
               상세 제목{index + 1}
             </Text>
             <Input
-              w="600px"
               h="40px"
-              ml={100}
               p="10px"
               color="#06070c"
               fontSize="20px"
@@ -114,38 +119,41 @@ const AddInfo: React.FC<AddInfoProps> = ({ info, setInfo }: AddInfoProps) => {
             />
           </Flex>
           <Flex direction="row" mt={5}>
-            <Text color="#000000" fontSize="25px" fontWeight="medium">
+            <Text minW="200px" color="#000000" fontSize="25px" fontWeight="medium">
               상세 이미지{index + 1}
             </Text>
             <Icon
               as={UploadOutlined}
+              mx="5"
               mt={1}
-              ml={5}
               color="#000000"
               fontSize="30px"
               cursor="pointer"
-              onClick={() => document.getElementById(`file-input-${index}`)?.click()}
+              onClick={() => detailImageInputRef[index].current?.click()}
+            />
+            <Image
+              flexShrink="0"
+              src={info.detailImages[index]}
+              objectFit="cover"
+              alt={`detail image ${index}`}
+              width="200px"
+              height="200px"
             />
             <Input
+              ref={detailImageInputRef[index]}
               display="none"
               accept="image/*"
               id={`file-input-${index}`}
               onChange={e => handleDetailImageChange(index, e)}
               type="file"
             />
-            <Text ml={500} color="#CECECE" fontSize="28px" fontWeight="bold">
-              {info.detailImages[index]}
-            </Text>
           </Flex>
-          <Divider w="795px" borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
           <Flex direction="row" mt={5}>
-            <Text color="#000000" fontSize="25px" fontWeight="medium">
+            <Text minW="250px" mr="5" color="#000000" fontSize="25px" fontWeight="medium">
               상세 설명{index + 1}
             </Text>
-            <Input
-              w="600px"
+            <Textarea
               h="40px"
-              ml={100}
               p="10px"
               color="#06070c"
               fontSize="20px"
@@ -155,6 +163,7 @@ const AddInfo: React.FC<AddInfoProps> = ({ info, setInfo }: AddInfoProps) => {
               borderRadius="12px"
               _focus={{ outline: "none", border: "0.7px solid #22543D" }}
               _placeholder={{ color: "transparent" }}
+              resize="none"
               bgColor="#FFFFFF"
               onChange={e => handleDetailDescriptionChange(index, e.target.value)}
               value={info.detailDescriptions[index]}
