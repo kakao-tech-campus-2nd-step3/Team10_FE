@@ -5,6 +5,7 @@ import EmailLoginPage from "@pages/EmailLoginPage";
 import EmailRegisterPage from "@pages/EmailRegisterPage";
 import FarmDetailPage from "@pages/FarmDetailPage";
 
+import FarmPage from "@pages/FarmPage";
 import FarmerRegisterPage from "@pages/FarmerRegisterPage";
 import Home from "@pages/Home";
 import IntroductionPage from "@pages/Introduction";
@@ -70,8 +71,12 @@ const AppRouter = () => {
           element: <FarmerRegisterPage />,
         },
         {
-        path: "store",
-        element: <StorePage />,
+          path: "store",
+          element: <StorePage />,
+        },
+        {
+          path: "farm",
+          element: <FarmPage />,
         },
       ],
     },

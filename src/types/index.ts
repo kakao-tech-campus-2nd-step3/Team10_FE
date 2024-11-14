@@ -9,7 +9,6 @@ export type Farm = Item & {
 };
 
 export type Product = Item & {
-  id: number;
   name: string;
   unit: string;
   pricePerGram: string;
