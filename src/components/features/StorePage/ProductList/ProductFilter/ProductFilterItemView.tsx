@@ -11,7 +11,12 @@ type ProductFilterItemViewProps = {
 
 const ProductFilterItemView = ({ item, filterState }: ProductFilterItemViewProps) => (
   <Flex direction="column" w="300px" h="100%">
-    <Checkbox isChecked={filterState.findFilter(item)} onChange={() => filterState.toggleFilter(item)}>
+    <Checkbox
+      isChecked={filterState.findFilter(item)}
+      onChange={() => {
+        filterState.toggleFilter(item);
+      }}
+    >
       {item.label}
     </Checkbox>
   </Flex>

@@ -30,13 +30,18 @@ const useFilters = (props?: UseFiltersProps) => {
     setFilters(filters.filter(f => f !== filter.value));
   };
 
+  const setFilter = (filter: FilterItem) => {
+    setFilters([filter.value]);
+  };
+
   const findFilter = (filter: FilterItem) => filters.includes(filter.value);
 
   const toggleFilter = (filter: FilterItem) => {
     if (findFilter(filter)) {
       removeFilter(filter);
     } else {
-      addFilter(filter);
+      // addFilter(filter);
+      setFilter(filter);
     }
   };
 
