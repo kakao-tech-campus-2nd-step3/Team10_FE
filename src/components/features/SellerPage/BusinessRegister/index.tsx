@@ -1,20 +1,81 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { UploadOutlined } from "@ant-design/icons";
-import { Box, Button, Icon, Input, Text, Divider, Flex } from "@chakra-ui/react";
+import { Box, Button, Icon, Input, Text, Divider, Flex, Alert, AlertIcon } from "@chakra-ui/react";
+import { useCreateBusiness } from "@api/businessApi";
+import Image from "@components/common/Image";
+
+type FormData = {
+  number: string;
+  imageUrl: string;
+};
+
+const defaultFormData: FormData = {
+  number: "",
+  imageUrl: "",
+};
 
 const BusinessRegister = () => {
-  const [businessImageState, setBusinessImageState] = useState<string>("000.jpg");
+  const mainImageInputRef = useRef<HTMLInputElement>(null);
+  const [formData, setFormData] = useState<FormData>(defaultFormData);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setBusinessImageState(file.name);
+      const imageUrl = URL.createObjectURL(file);
+      setFormData(prevData => ({ ...prevData, imageUrl }));
     }
   };
 
+  const handleNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    if (/^\d*$/.test(value)) {
+      setFormData(prevData => ({ ...prevData, number: value }));
+    }
+  };
+
+  const [alert, setAlert] = useState<{ message: string; status: "success" | "error" } | null>(null);
+  const { mutateAsync: createBusiness } = useCreateBusiness();
+
+  const validateFormData = () => {
+    const { number, imageUrl } = formData;
+
+    if (!number) {
+      setAlert({ message: "사업자 번호를 입력하세요.", status: "error" });
+      return false;
+    }
+
+    if (!imageUrl) {
+      setAlert({ message: "사업자 등록증 이미지를 업로드하세요.", status: "error" });
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async () => {
+    if (!validateFormData()) {
+      return;
+    }
+
+    createBusiness(formData)
+      .then(response => {
+        setAlert({ message: `Business registered successfully! ID: ${response}`, status: "success" });
+        setFormData(defaultFormData);
+      })
+      .catch(() => {
+        setAlert({ message: "Error registering business. Please try again.", status: "error" });
+      });
+  };
+
   return (
-    <Box w="900px" h="800px" mt={-550} ml={400} border="none" borderRadius="12px" bgColor="#FFFFFF">
+    <Box w="900px" h="100%" mt={-550} ml={400} border="none" borderRadius="12px" bgColor="#FFFFFF">
       <Flex direction="column">
+        {alert && (
+          <Alert mb={4} status={alert.status}>
+            <AlertIcon />
+            {alert.message}
+          </Alert>
+        )}
         <Text mt={10} ml={10} color="#22543D" fontSize="20px" fontWeight="bold">
           사업자 등록
         </Text>
@@ -70,29 +131,33 @@ const BusinessRegister = () => {
             }}
             _placeholder={{ color: "transparent" }}
             bgColor="#FFFFFF"
+            onChange={handleNumberChange}
+            value={formData.number}
           />
         </Flex>
         <Divider w="530px" ml={10} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
 
         <Flex direction="row">
-          <Text mt={5} ml={10} color="#000000" fontSize="20px" fontWeight="bold">
-            사업자 등록증 업로드
-          </Text>
+          <Flex w="550px">
+            <Text mt={5} ml={10} color="#000000" fontSize="20px" fontWeight="bold">
+              사업자 등록증 업로드
+            </Text>
+          </Flex>
           <Icon
             as={UploadOutlined}
+            mx="5"
             mt={5}
-            ml={5}
+            ml={-100}
             color="#000000"
             fontSize="25px"
             cursor="pointer"
-            onClick={() => document.getElementById("file-input")?.click()}
+            onClick={() => mainImageInputRef.current?.click()}
           />
-          <Input display="none" accept="image/*" id="file-input" onChange={handleImageChange} type="file" />
-          <Text mt={5} ml={430} color="#CECECE" fontSize="28px" fontWeight="bold">
-            {businessImageState}
-          </Text>
+          <Flex pos="relative" align="flex-end" justify="flex-end" w="100%" h="200px" mt="5" mr={110}>
+            <Image flexShrink="0" w="200px" h="200px" objectFit="cover" alt="main image" src={formData.imageUrl} />
+            <Input ref={mainImageInputRef} display="none" accept="image/*" onChange={handleImageChange} type="file" />
+          </Flex>
         </Flex>
-        <Divider w="750px" ml={10} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
 
         <Flex justify="center" direction="row" gap="5px" mt={20} mb={10}>
           <Button
@@ -126,6 +191,7 @@ const BusinessRegister = () => {
               borderColor: "#22543D",
             }}
             bgColor="#22543D"
+            onClick={handleSubmit}
           >
             등록하기
           </Button>
