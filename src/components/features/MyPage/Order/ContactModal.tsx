@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { Flex, ModalBody, ModalHeader, ModalCloseButton, Button, Divider } from "@chakra-ui/react";
 import BasicModal from "@components/common/modal/BasicModal";
+import CancelOrderModal from "./CancelOrderModal";
 import ContactNumberModal from "./ContactNumberModal";
-import RefundModal from "./RefundModal";
 
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
   maxW?: string;
   maxH?: string;
+  productId: number;
 }
 
-const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, maxW = "600px", maxH = "400px" }) => {
+const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, maxW = "600px", maxH = "400px", productId }) => {
   const [isContactNumberModalOpen, setContactNumberModalOpen] = useState(false);
   const [isRefundModalOpen, setRefundModalOpen] = useState(false);
 
@@ -82,11 +83,11 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, maxW = "60
             bgColor="#22543D"
             onClick={handleOpenRefundModal}
           >
-            환불
+            주문 취소
           </Button>
         </Flex>
         <ContactNumberModal isOpen={isContactNumberModalOpen} onClose={handleCloseContactNumberModal} />
-        <RefundModal isOpen={isRefundModalOpen} onClose={handleCloseRefundModal} />
+        <CancelOrderModal isOpen={isRefundModalOpen} onClose={handleCloseRefundModal} productId={productId} />
       </ModalBody>
     </BasicModal>
   );
