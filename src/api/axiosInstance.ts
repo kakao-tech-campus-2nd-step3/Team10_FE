@@ -12,6 +12,7 @@ const defaultApi = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
 const needAuthDefaultApi = axios.create({
@@ -22,6 +23,7 @@ const needAuthDefaultApi = axios.create({
       ? `Bearer ${JSON.parse(localStorage.getItem("poomasi_user") || "{}").token}`
       : undefined,
   },
+  withCredentials: true,
 });
 needAuthDefaultApi.interceptors.response.use(refrechIntercepter);
 

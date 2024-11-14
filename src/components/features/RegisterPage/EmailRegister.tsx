@@ -1,11 +1,40 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Text, Flex, Input } from "@chakra-ui/react";
+import { useRegisterEmail } from "@api/authApi";
+
+type RegisterData = {
+  email: string;
+  password: string;
+  name: string;
+};
+
+const defaultRegisterData: RegisterData = {
+  email: "",
+  password: "",
+  name: "",
+};
 
 const EmailRegister = () => {
   const navigate = useNavigate();
+  const [registerData, setRegisterData] = useState<RegisterData>(defaultRegisterData);
+
+  const { mutateAsync: emailRegister } = useRegisterEmail();
+
+  const handleRegister = () => {
+    emailRegister(registerData)
+      .then(data => {
+        if (data) {
+          navigate("/email/login");
+        }
+      })
+      .catch(() => {
+        alert("회원가입에 실패했습니다.");
+      });
+  };
 
   const handleCheckboxChange1 = () => {
-    navigate("/EmailLogin");
+    navigate("/email/login");
   };
 
   return (
@@ -40,6 +69,7 @@ const EmailRegister = () => {
           h="80px"
           ml={5}
           p="10px"
+          color="#FFFFFF"
           fontSize="24px"
           fontWeight="light"
           borderWidth="1px"
@@ -50,6 +80,8 @@ const EmailRegister = () => {
             border: "0.7px solid #22543D",
           }}
           bgColor="transparent"
+          onChange={e => setRegisterData(prev => ({ ...prev, name: e.target.value }))}
+          value={registerData.name}
         />
       </Flex>
 
@@ -75,6 +107,7 @@ const EmailRegister = () => {
           h="80px"
           ml={5}
           p="10px"
+          color="#FFFFFF"
           fontSize="24px"
           fontWeight="light"
           borderWidth="1px"
@@ -85,6 +118,8 @@ const EmailRegister = () => {
             border: "0.7px solid #22543D",
           }}
           bgColor="transparent"
+          onChange={e => setRegisterData(prev => ({ ...prev, email: e.target.value }))}
+          value={registerData.email}
         />
       </Flex>
 
@@ -110,6 +145,7 @@ const EmailRegister = () => {
           h="80px"
           ml={5}
           p="10px"
+          color="#FFFFFF"
           fontSize="24px"
           fontWeight="light"
           borderWidth="1px"
@@ -120,6 +156,9 @@ const EmailRegister = () => {
             border: "0.7px solid #22543D",
           }}
           bgColor="transparent"
+          onChange={e => setRegisterData(prev => ({ ...prev, password: e.target.value }))}
+          type="password"
+          value={registerData.password}
         />
       </Flex>
 
@@ -157,6 +196,7 @@ const EmailRegister = () => {
             borderColor: "#FFFFFF",
           }}
           bgColor="#FFFFFF"
+          onClick={handleRegister}
         >
           회원가입 하기
         </Button>

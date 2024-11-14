@@ -56,15 +56,15 @@ const AppRouter = () => {
           element: <MyPage />,
         },
         {
-          path: "Register",
+          path: "login",
           element: <RegisterPage />,
         },
         {
-          path: "EmailLogin",
+          path: "email/login",
           element: <EmailLoginPage />,
         },
         {
-          path: "EmailRegister",
+          path: "email/register",
           element: <EmailRegisterPage />,
         },
         {
