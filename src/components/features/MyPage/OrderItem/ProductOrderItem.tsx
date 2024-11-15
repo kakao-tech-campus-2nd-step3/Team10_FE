@@ -5,6 +5,7 @@ import Image from "@components/common/Image";
 import ContactModal from "@components/features/MyPage/Order/ContactModal";
 import OrderProcessModal from "@components/features/MyPage/Order/OrderProcessModal";
 import { ProductOrderStatus, ProductOrder } from "@type/index";
+import ReviewModal from "../Order/ReviewModal";
 
 type ProductOrderItemProps = {
   item: ProductOrder;
@@ -34,6 +35,7 @@ const contactStatus = (status: ProductOrderStatus) => {
 const ProductOrderItem = ({ item, ...props }: ProductOrderItemProps) => {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isOrderProcessOpen, setIsOrderProcessOpen] = useState(false);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 
   return (
     <Card {...props} h="100px" w="100%" px="5" align="start" direction="row">
@@ -67,7 +69,7 @@ const ProductOrderItem = ({ item, ...props }: ProductOrderItemProps) => {
         >
           📞 문의
         </Button>
-        {canReview(item.status) && (
+        {canReview(item.status) && [
           <Button
             h="100%"
             color="white"
@@ -76,10 +78,12 @@ const ProductOrderItem = ({ item, ...props }: ProductOrderItemProps) => {
               bg: "green.800",
               transform: "scale(1.1)",
             }}
+            onClick={() => setIsReviewModalOpen(true)}
           >
             ✍️ 리뷰 작성
-          </Button>
-        )}
+          </Button>,
+          <ReviewModal isOpen={isReviewModalOpen} onClose={() => setIsReviewModalOpen(false)} />,
+        ]}
         {nonButton(item.status) && (
           <Button
             h="100%"
