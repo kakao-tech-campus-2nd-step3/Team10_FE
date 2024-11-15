@@ -7,21 +7,18 @@ import Intro6 from "@assets/Image/Intro/Intro6.png";
 import Intro7 from "@assets/Image/Intro/Intro7.png";
 import Intro8 from "@assets/Image/Intro/Intro8.png";
 import Image from "@components/common/Image";
+import ImageCard from "@components/common/ImageCard";
 
 const Introduction = () => (
-  <Box overflowY="auto" w="1512px" h="100vh">
-    <Flex direction="column" w="full" h="100vh">
-      <Box pos="relative" w="full" h="463px">
-        <Flex pos="absolute" top="160px" left="400px">
-          <Text color="#FFFFFF" fontSize="32px" fontWeight="bold" textAlign="center">
-            우리가 꿈꾸는 내일, 농민과 고객이 함께 만드는 새로운 유통
-          </Text>
-        </Flex>
-        <Image w="full" h="463px" alt="Intro1" src={Intro1} />
-      </Box>
+  <Box overflowY="auto" w="100vw" h="100vh">
+    <Flex direction="column" w="full" h="fit-content">
+      <ImageCard bgImg={Intro1}>
+        <Text m="auto" color="#FFFFFF" fontSize="32px" fontWeight="bold" textAlign="center">
+          우리가 꿈꾸는 내일, 농민과 고객이 함께 만드는 새로운 유통
+        </Text>
+      </ImageCard>
     </Flex>
-
-    <Flex direction="column" w="full" h="100vh" mt={-100}>
+    <Flex direction="column" w="full" h="100vh" mt="20">
       <Text mb={1} color="#000000" fontSize="20px" fontWeight="bold" textAlign="center">
         품앗이 이야기
       </Text>
