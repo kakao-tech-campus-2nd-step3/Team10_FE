@@ -19,7 +19,7 @@ const Header = () => {
       <Flex justify="flex-end" p="1px 60px" color="#1C4532" fontSize="8px" fontWeight="regular">
         {loginCheck()
           ? [
-              <Text as={Link} mr="12px" to="/mypage">
+              <Text as={Link} mr="12px" to="/me">
                 마이페이지
               </Text>,
               <Text cursor="pointer" onClick={logout}>
