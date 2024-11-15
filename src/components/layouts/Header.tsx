@@ -7,7 +7,7 @@ import Image from "@components/common/Image";
 import useLogin from "@hooks/useLogin";
 
 const Header = () => {
-  const [activeMenu, setActiveMenu] = useState<string>("소개");
+  const [activeMenu, setActiveMenu] = useState<string>("");
 
   const { loginCheck, logout } = useLogin();
 
@@ -37,22 +37,47 @@ const Header = () => {
       </Flex>
 
       <Flex align="center" justify="space-between" p="10px 50px">
-        <Image h="30px" objectFit="contain" alt="poomasi" src={poomasi} />
+        <Link to="/">
+          <Image h="30px" objectFit="contain" alt="poomasi" src={poomasi} />
+        </Link>
 
         <Flex align="center" mx="20px" ml={-70}>
-          {["소개", "상점", "농장"].map(menu => (
+          <Link to="/introduction">
             <Text
-              key={menu}
               mx="30px"
-              color={activeMenu === menu ? "#1C4532" : "#999999"}
+              color={activeMenu === "소개" ? "#1C4532" : "#999999"}
               fontSize="20px"
               fontWeight="regular"
               cursor="pointer"
-              onClick={() => handleMenuClick(menu)}
+              onClick={() => handleMenuClick("소개")}
             >
-              {menu}
+              소개
             </Text>
-          ))}
+          </Link>
+          <Link to="/store">
+            <Text
+              mx="30px"
+              color={activeMenu === "상점" ? "#1C4532" : "#999999"}
+              fontSize="20px"
+              fontWeight="regular"
+              cursor="pointer"
+              onClick={() => handleMenuClick("상점")}
+            >
+              상점
+            </Text>
+          </Link>
+          <Link to="/schedule">
+            <Text
+              mx="30px"
+              color={activeMenu === "농장" ? "#1C4532" : "#999999"}
+              fontSize="20px"
+              fontWeight="regular"
+              cursor="pointer"
+              onClick={() => handleMenuClick("농장")}
+            >
+              농장
+            </Text>
+          </Link>
         </Flex>
 
         <Input
