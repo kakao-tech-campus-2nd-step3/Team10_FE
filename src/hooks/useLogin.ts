@@ -7,7 +7,7 @@ const useLogin = () => {
 
   const login = (accessToken: string) => {
     defaultApi
-      .get("/api/member/self", {
+      .get("/api/members/self", {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
