@@ -33,7 +33,7 @@ const StoreBanner = () => (
         brightness: 0.8,
       }}
     >
-      <Flex as={Link} justify="center" direction="column" w="full" h="full" px="8" href="/seller/register">
+      <Flex as={Link} justify="center" direction="column" w="full" h="full" px="8" href="/farmer/register">
         <Text color="white" fontSize="sm" fontWeight="bold">
           혹시 팔러 오셨나요?
         </Text>
