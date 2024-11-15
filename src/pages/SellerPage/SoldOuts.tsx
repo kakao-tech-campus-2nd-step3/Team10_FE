@@ -1,0 +1,15 @@
+import { Box } from "@chakra-ui/react";
+import GridView from "@components/ItemView/GridView";
+import Card from "@components/common/Card";
+import ProductCard from "@components/features/StorePage/ProductCard";
+import mockProducts from "@mocks/mockItem/mockProducts";
+
+const SoldOuts = () => (
+  <Card mx="auto" bg="white" w="1000px" p="10" h="100%" title="품절된 상품">
+    <Box overflowY="scroll" w="100%" h="100%" p="5">
+      <GridView items={mockProducts} ItemComponent={ProductCard} columns={3} gap="10" />
+    </Box>
+  </Card>
+);
+
+export default SoldOuts;

@@ -68,7 +68,7 @@ const BusinessRegister = () => {
   };
 
   return (
-    <Box w="900px" h="100%" mt={-550} ml={400} border="none" borderRadius="12px" bgColor="#FFFFFF">
+    <Box w="900px" h="100%" mx="auto" border="none" borderRadius="12px" bgColor="#FFFFFF">
       <Flex direction="column">
         {alert && (
           <Alert mb={4} status={alert.status}>
@@ -159,7 +159,7 @@ const BusinessRegister = () => {
           </Flex>
         </Flex>
 
-        <Flex justify="center" direction="row" gap="5px" mt={20} mb={10}>
+        <Flex justify="center" direction="row" gap="5px" my="10">
           <Button
             w="230px"
             h="53px"

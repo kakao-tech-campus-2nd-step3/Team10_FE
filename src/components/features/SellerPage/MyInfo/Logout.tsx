@@ -1,7 +1,7 @@
 import { Text, Flex, Box, Divider, Button } from "@chakra-ui/react";
 
 const Logout = () => (
-  <Box w="700px" h="300px" mt={-550} ml={500} border="none" borderRadius="12px" bgColor="#FFFFFF">
+  <Box w="700px" h="300px" mx="auto" border="none" borderRadius="12px" bgColor="#FFFFFF">
     <Flex direction="column">
       <Text mt={10} ml={10} color="#22543D" fontSize="20px" fontWeight="bold">
         회원 탈퇴
