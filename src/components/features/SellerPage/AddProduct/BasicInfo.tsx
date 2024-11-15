@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import { Flex, Input, Icon, Text, Divider, Select } from "@chakra-ui/react";
+import { useGetProductCategories } from "@api/categoryApi";
 import Image from "@components/common/Image";
 
 type FormData = {
@@ -15,8 +16,14 @@ type BasicInfoProps = {
   onChange: (data: Partial<FormData>) => void;
 };
 
+type Category = {
+  id: number;
+  name: string;
+};
+
 const BasicInfo: React.FC<BasicInfoProps> = ({ formData, onChange }) => {
   const mainImageInputRef = useRef<HTMLInputElement>(null);
+  const { data: categories, isLoading, isError } = useGetProductCategories();
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -133,16 +140,17 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ formData, onChange }) => {
           mt={5}
           ml={520}
           onChange={handleCategoryChange}
-          placeholder="열매채소"
+          placeholder="카테고리 선택"
           value={formData.categoryId}
         >
-          <option value={1}>열매채소</option>
-          <option value={2}>뿌리채소</option>
-          <option value={3}>잎채소</option>
-          <option value={4}>기타채소</option>
-          <option value={5}>열매과일</option>
-          <option value={6}>통과일</option>
-          <option value={7}>세척과일</option>
+          {isLoading && <option>로딩 중...</option>}
+          {isError && <option>카테고리 불러오기 실패</option>}
+          {categories &&
+            categories.map((category: Category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
         </Select>
       </Flex>
       <Divider w="600px" ml={20} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
