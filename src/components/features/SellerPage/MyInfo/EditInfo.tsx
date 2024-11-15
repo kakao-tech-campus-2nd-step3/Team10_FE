@@ -31,7 +31,7 @@ const EditInfo = () => {
   };
 
   return (
-    <Box w="700px" h="770px" mt={-550} ml={500} border="none" borderRadius="12px" bgColor="#FFFFFF">
+    <Box w="700px" h="770px" mx="auto" border="none" borderRadius="12px" bgColor="#FFFFFF">
       <Flex direction="column">
         <Text mt={10} ml={10} color="#22543D" fontSize="20px" fontWeight="bold">
           내 정보 수정

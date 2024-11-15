@@ -14,6 +14,8 @@ export type Product = Item & {
   pricePerGram: string;
   description: string;
   mainImage?: string;
+  price: number;
+  deliveryFee: number;
   tag?: string;
   farm: Farm;
 };

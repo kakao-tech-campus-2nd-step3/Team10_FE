@@ -4,7 +4,7 @@ import Card, { CardProps } from "@components/common/Card";
 import Image from "@components/common/Image";
 import { Product } from "@type/index";
 
-type ProductCardProps = {
+export type ProductCardProps = {
   item: Product;
 } & CardProps;
 

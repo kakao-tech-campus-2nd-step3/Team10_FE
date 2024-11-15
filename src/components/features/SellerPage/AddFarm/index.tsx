@@ -136,7 +136,7 @@ const AddFarm = ({ isEdit, originFarm }: AddFarm) => {
   };
 
   return (
-    <Box w="1000px" h="100%" mt={-550} ml={350} borderRadius="12px" bgColor="#FFFFFF">
+    <Box w="1000px" h="fit-content" mx="auto" borderRadius="12px" bgColor="#FFFFFF">
       <Flex direction="column">
         {alert && (
           <Alert mb={4} status={alert.status}>

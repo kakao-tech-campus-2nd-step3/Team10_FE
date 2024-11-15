@@ -24,7 +24,7 @@ const Tax = () => {
   };
 
   return (
-    <Box w="900px" h="770px" mt={-550} ml={400} border="none" borderRadius="12px" bgColor="#FFFFFF">
+    <Box w="900px" h="770px" mx="auto" border="none" borderRadius="12px" bgColor="#FFFFFF">
       <Flex direction="column">
         <Text mt={10} ml={10} color="#22543D" fontSize="20px" fontWeight="bold">
           세금 계산기
