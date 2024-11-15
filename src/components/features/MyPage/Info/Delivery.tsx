@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Text, Flex, Button, Input, Box } from "@chakra-ui/react";
+import { useUpdateAddress } from "@api/emailApi";
 import InputAddressWithMap from "@components/common/InputAddressWithMap";
 import { addressSearch } from "@utils/mapUtils";
 
@@ -14,15 +15,28 @@ const defaultPosInfo = {
 };
 
 const Delivery = () => {
-  const [currentAddress, setCurrentAddress] = useState("부산광역시 금정구 개금동 78-1번지");
-  const [, setPos] = useState<PosInfo>(defaultPosInfo);
+  const [currentAddress, setCurrentAddress] = useState("");
+  const [pos, setPos] = useState<PosInfo>(defaultPosInfo);
   const [newAddress, setNewAddress] = useState("");
   const [newDetailAddress, setNewDetailAddress] = useState("");
 
+  const { mutate: updateAddress } = useUpdateAddress();
+
   const handleUpdateAddress = () => {
-    setCurrentAddress(newAddress);
-    setNewAddress("");
-    setNewDetailAddress("");
+    const updateData = {
+      defaultAddress: newAddress,
+      addressDetail: newDetailAddress,
+      coordinateX: pos.latitude,
+      coordinateY: pos.longitude,
+    };
+
+    updateAddress(updateData, {
+      onSuccess: () => {
+        setCurrentAddress(newAddress);
+        setNewAddress("");
+        setNewDetailAddress("");
+      },
+    });
   };
 
   const handleAddressChange = async (value: string) => {
