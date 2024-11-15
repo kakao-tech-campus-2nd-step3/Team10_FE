@@ -1,9 +1,43 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Text, Flex, Input, Image } from "@chakra-ui/react";
+import { useCreateFarmer } from "@api/emailApi";
 import call from "@assets/logo/Call.png";
+
+type FarmerData = {
+  name: string;
+  address: string;
+  phone: string;
+};
+
+const defaultFarmerData: FarmerData = {
+  name: "",
+  address: "",
+  phone: "",
+};
 
 const Farmer = () => {
   const handleImageClick = () => {
     alert("010-1234-1234로 연락 바랍니다.");
+  };
+
+  const [farmerData, setFarmerData] = useState<FarmerData>(defaultFarmerData);
+
+  const { mutateAsync: createFarmer } = useCreateFarmer();
+  const navigate = useNavigate();
+
+  const handleRegister = () => {
+    createFarmer(farmerData)
+      .then(() => {
+        navigate("/");
+      })
+      .catch(() => {
+        alert("농부 등록에 실패했습니다.");
+      });
+  };
+
+  const handleCancelRegister = () => {
+    navigate("/");
   };
 
   return (
@@ -38,6 +72,7 @@ const Farmer = () => {
           h="80px"
           ml={5}
           p="10px"
+          color="#FFFFFF"
           fontSize="24px"
           fontWeight="light"
           borderWidth="1px"
@@ -48,6 +83,8 @@ const Farmer = () => {
             border: "0.7px solid #22543D",
           }}
           bgColor="transparent"
+          onChange={e => setFarmerData(prev => ({ ...prev, phone: e.target.value }))}
+          value={farmerData.phone}
         />
       </Flex>
 
@@ -73,6 +110,7 @@ const Farmer = () => {
           h="80px"
           ml={5}
           p="10px"
+          color="#FFFFFF"
           fontSize="24px"
           fontWeight="light"
           borderWidth="1px"
@@ -83,6 +121,8 @@ const Farmer = () => {
             border: "0.7px solid #22543D",
           }}
           bgColor="transparent"
+          onChange={e => setFarmerData(prev => ({ ...prev, name: e.target.value }))}
+          value={farmerData.name}
         />
       </Flex>
 
@@ -108,6 +148,7 @@ const Farmer = () => {
           h="80px"
           ml={5}
           p="10px"
+          color="#FFFFFF"
           fontSize="24px"
           fontWeight="light"
           borderWidth="1px"
@@ -118,6 +159,8 @@ const Farmer = () => {
             border: "0.7px solid #22543D",
           }}
           bgColor="transparent"
+          onChange={e => setFarmerData(prev => ({ ...prev, address: e.target.value }))}
+          value={farmerData.address}
         />
       </Flex>
 
@@ -136,6 +179,7 @@ const Farmer = () => {
             borderColor: "#000000",
           }}
           bgColor="#000000"
+          onClick={handleCancelRegister}
         >
           등록 취소하기
         </Button>
@@ -154,6 +198,7 @@ const Farmer = () => {
             borderColor: "#FFFFFF",
           }}
           bgColor="#FFFFFF"
+          onClick={handleRegister}
         >
           등록하기
         </Button>

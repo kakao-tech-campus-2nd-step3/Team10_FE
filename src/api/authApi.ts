@@ -16,7 +16,7 @@ type LoginData = {
 
 const useRegisterEmail = () => {
   const fetcher = (registerData: RegisterData) =>
-    defaultApi.post(`/api/member/sign-up`, registerData).then(({ data }) => data);
+    defaultApi.post(`/api/members/sign-up`, registerData).then(({ data }) => data);
 
   return useMutation({ mutationFn: fetcher });
 };
