@@ -30,10 +30,10 @@ const Introduction = () => (
         <br />
         농민들을 지켜주세요
       </Text>
-      <Flex align="center" justify="center" direction="row" gap="10px">
-        <Image w="600px" h="408px" alt="Intro2" src={Intro2} />
-        <Flex direction="column" w="370px" h="408px" textAlign="left">
-          <Text mt={1} mb={5} color="#1C4532" fontSize="20px" fontWeight="medium">
+      <Flex align="center" justify="center" direction="row" gap="20px" mt={20}>
+        <Image w="600px" h="470px" alt="Intro2" src={Intro2} />
+        <Flex direction="column" w="370px" h="408px" mt={-5} textAlign="left">
+          <Text color="#1C4532" fontSize="20px" fontWeight="medium">
             농산물이 우리에게 오기까지 도매법인과 중도매인을 거치면서 유통비용이 너무 많이 올라가고 있어요.
           </Text>
           <Text mb={5} color="#1C4532" fontSize="20px" fontWeight="medium">
@@ -56,7 +56,7 @@ const Introduction = () => (
     </Flex>
 
     <Flex direction="column" mt={100}>
-      <Text color="#1C4532" fontSize="32px" fontWeight="bold" textAlign="center">
+      <Text mb={20} color="#1C4532" fontSize="32px" fontWeight="bold" textAlign="center">
         하지만 품앗이가 있다면 어떨까요?
       </Text>
       <Text color="#000000" fontSize="20px" fontWeight="medium" textAlign="center">
@@ -78,20 +78,20 @@ const Introduction = () => (
 
     <Flex align="center" justify="center" direction="row" gap="20px">
       <Flex direction="column">
-        <Text mt={160} color="#22543D" fontSize="30px" fontWeight="bold" textAlign="center">
+        <Text mt={10} color="#22543D" fontSize="30px" fontWeight="bold" textAlign="center">
           더 올바른 유통 과정
           <br />
           농민은, 합당한 대가를
           <br />
           고객은 합당한 금액을 보장받는 내일
         </Text>
-        <Image w="571px" h="400px" mt={100} alt="Intro5" src={Intro5} />
+        <Image w="571px" h="530px" mt={100} alt="Intro5" src={Intro5} />
       </Flex>
       <Image w="500px" h="800px" alt="Intro6" src={Intro6} />
     </Flex>
 
     <Flex align="center" justify="center" direction="column" mt={200}>
-      <Text color="#1C4532" fontSize="32px" fontWeight="bold" textAlign="center">
+      <Text mb={20} color="#1C4532" fontSize="32px" fontWeight="bold" textAlign="center">
         농업인의 땀과 소비자의 마음을 직접 이어,
         <br />
         모두가 행복한 길을 열어갑니다.
@@ -103,7 +103,7 @@ const Introduction = () => (
               1
             </Text>
           </Flex>
-          <Text mt={40} color="#000000" fontSize="30px" fontWeight="bold" textAlign="center">
+          <Text mt={4} color="#000000" fontSize="30px" fontWeight="bold" textAlign="center">
             노인분들의 온라인 판매를 지원해요.
           </Text>
           <Flex w="480px" h="400px">
@@ -124,7 +124,7 @@ const Introduction = () => (
               2
             </Text>
           </Flex>
-          <Text mt={40} color="#000000" fontSize="30px" fontWeight="bold" textAlign="center">
+          <Text mt={4} color="#000000" fontSize="30px" fontWeight="bold" textAlign="center">
             명확한 생산자 정보로 신뢰 구축해요.
           </Text>
           <Flex w="480px" h="400px">

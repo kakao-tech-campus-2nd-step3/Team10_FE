@@ -9,7 +9,10 @@ const refreshTokenFetch = async (): Promise<string> =>
 
 const refrechIntercepter = async (response: AxiosResponse): Promise<AxiosResponse> => {
   if (response.status === 401) {
-    const result = await refreshTokenFetch();
+    const result = await refreshTokenFetch().catch(() => {
+      alert("로그아웃 되었습니다. 다시 로그인해주세요.");
+      window.location.href = "/";
+    });
     const user = JSON.parse(localStorage.getItem("poomasi_user") || "{}");
 
     localStorage.setItem(
@@ -19,9 +22,6 @@ const refrechIntercepter = async (response: AxiosResponse): Promise<AxiosRespons
         token: result,
       }),
     );
-  } else {
-    alert("로그아웃 되었습니다. 다시 로그인해주세요.");
-    window.location.href = "/";
   }
   return response;
 };

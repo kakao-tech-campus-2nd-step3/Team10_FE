@@ -9,6 +9,7 @@ import DetailInfo from "./DetailInfo";
 import PriceInfo from "./PriceInfo";
 
 type FormData = {
+  userId: number;
   name: string;
   imageUrl: string;
   categoryId: number;
@@ -27,6 +28,7 @@ type FormData = {
 };
 
 const defaultFormData = {
+  userId: 0,
   name: "",
   imageUrl: "",
   categoryId: 0,
