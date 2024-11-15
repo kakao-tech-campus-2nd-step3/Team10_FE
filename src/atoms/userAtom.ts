@@ -4,6 +4,7 @@ type UserAtomValue = {
   name: string;
   token: string;
   userId: string;
+  role: string;
 };
 
 const userAtom = atom(localStorage.getItem("poomasi_user") ?? "");
