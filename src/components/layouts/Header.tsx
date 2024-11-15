@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Input, Box, Flex, Text, Icon } from "@chakra-ui/react";
+import { Box, Flex, Text, Icon } from "@chakra-ui/react";
 import poomasi from "@assets/logo/logo.png";
 import Image from "@components/common/Image";
 import useLogin from "@hooks/useLogin";
@@ -27,7 +27,7 @@ const Header = () => {
               </Text>,
             ]
           : [
-              <Text as={Link} mr="12px" to="/register">
+              <Text as={Link} mr="12px" to="/email/register">
                 회원가입
               </Text>,
               <Text as={Link} to="/login">
@@ -85,7 +85,7 @@ const Header = () => {
           </Link>
         </Flex>
 
-        <Input
+        {/* <Input
           w="400px"
           h="40px"
           ml={10}
@@ -95,7 +95,7 @@ const Header = () => {
           borderRadius="12px"
           _placeholder={{ color: "#B3B3B3" }}
           placeholder="검색어를 입력해주세요."
-        />
+        /> */}
 
         <Flex ml={250}>
           <Box mx="10px" color="#1C4532" cursor="pointer">
