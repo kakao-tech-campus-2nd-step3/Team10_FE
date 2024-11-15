@@ -17,6 +17,7 @@ const useLogin = () => {
           userId: data.id,
           name: data.name,
           token: accessToken,
+          role: data.role,
         });
       });
   };
@@ -27,7 +28,9 @@ const useLogin = () => {
 
   const loginCheck = () => user !== null;
 
-  return { login, logout, loginCheck };
+  const sellerCheck = () => user?.role === "ROLE_FARMER";
+
+  return { login, logout, loginCheck, sellerCheck };
 };
 
 export default useLogin;

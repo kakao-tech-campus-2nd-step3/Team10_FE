@@ -9,7 +9,7 @@ import useLogin from "@hooks/useLogin";
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState<string>("");
 
-  const { loginCheck, logout } = useLogin();
+  const { loginCheck, logout, sellerCheck } = useLogin();
 
   const handleMenuClick = (menu: string) => {
     setActiveMenu(menu);
@@ -34,6 +34,11 @@ const Header = () => {
                 로그인
               </Text>,
             ]}
+        {sellerCheck() && (
+          <Text as={Link} ml="12px" to="/seller">
+            판매자 페이지
+          </Text>
+        )}
       </Flex>
 
       <Flex align="center" justify="space-between" p="10px 50px">
