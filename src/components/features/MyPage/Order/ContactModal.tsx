@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Flex, ModalBody, ModalHeader, ModalCloseButton, Button, Divider } from "@chakra-ui/react";
 import BasicModal from "@components/common/modal/BasicModal";
+import RefundModal from "@components/features/MyPage/Order/RefundModal";
 import CancelOrderModal from "./CancelOrderModal";
 import ContactNumberModal from "./ContactNumberModal";
 
 interface ContactModalProps {
+  status: "CANCANCLE" | "CANREFUND" | "OTHER";
   isOpen: boolean;
   onClose: () => void;
   maxW?: string;
@@ -12,7 +14,14 @@ interface ContactModalProps {
   productId: number;
 }
 
-const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, maxW = "600px", maxH = "400px", productId }) => {
+const ContactModal: React.FC<ContactModalProps> = ({
+  status,
+  isOpen,
+  onClose,
+  maxW = "600px",
+  maxH = "400px",
+  productId,
+}) => {
   const [isContactNumberModalOpen, setContactNumberModalOpen] = useState(false);
   const [isRefundModalOpen, setRefundModalOpen] = useState(false);
 
@@ -67,27 +76,34 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, maxW = "60
           >
             전화 문의
           </Button>
-          <Button
-            w="230px"
-            h="53px"
-            color="#FFFFFF"
-            fontSize="24px"
-            fontWeight="bold"
-            borderWidth="1px"
-            borderColor="#22543D"
-            borderRadius="12px"
-            _hover={{
-              bgColor: "#22543D",
-              borderColor: "#22543D",
-            }}
-            bgColor="#22543D"
-            onClick={handleOpenRefundModal}
-          >
-            주문 취소
-          </Button>
+          {status !== "OTHER" && (
+            <Button
+              w="230px"
+              h="53px"
+              color="#FFFFFF"
+              fontSize="24px"
+              fontWeight="bold"
+              borderWidth="1px"
+              borderColor="#22543D"
+              borderRadius="12px"
+              _hover={{
+                bgColor: "#22543D",
+                borderColor: "#22543D",
+              }}
+              bgColor="#22543D"
+              onClick={handleOpenRefundModal}
+            >
+              {status === "CANREFUND" ? "환불 신청" : "주문 취소"}
+            </Button>
+          )}
         </Flex>
         <ContactNumberModal isOpen={isContactNumberModalOpen} onClose={handleCloseContactNumberModal} />
-        <CancelOrderModal isOpen={isRefundModalOpen} onClose={handleCloseRefundModal} productId={productId} />
+        {status === "CANREFUND" && (
+          <RefundModal isOpen={isRefundModalOpen} onClose={handleCloseRefundModal} productId={productId} />
+        )}
+        {status === "CANCANCLE" && (
+          <CancelOrderModal isOpen={isRefundModalOpen} onClose={handleCloseRefundModal} productId={productId} />
+        )}
       </ModalBody>
     </BasicModal>
   );

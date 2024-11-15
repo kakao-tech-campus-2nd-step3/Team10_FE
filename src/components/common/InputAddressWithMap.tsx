@@ -9,13 +9,20 @@ type InputAddressWithMapProps = {
   address: string;
   onAddressChange: (value: string) => void;
   wrapperProps?: FlexProps;
+  alwaysOpen?: boolean;
 } & FlexProps;
 
 type PinWithRoadAddress = {
   roadAddress: string;
 } & Pin;
 
-const InputAddressWithMap = ({ address, onAddressChange, wrapperProps, ...props }: InputAddressWithMapProps) => {
+const InputAddressWithMap = ({
+  address,
+  onAddressChange,
+  wrapperProps,
+  alwaysOpen,
+  ...props
+}: InputAddressWithMapProps) => {
   const [mapPins, setMapPins] = useState<PinWithRoadAddress[]>([]);
   const [open, setOpen] = useState(false);
 
@@ -29,11 +36,15 @@ const InputAddressWithMap = ({ address, onAddressChange, wrapperProps, ...props 
     }
   }, [address]);
 
+  const mapOpen = alwaysOpen || open;
+
   return (
     <Flex direction="column" w="fit-content" {...wrapperProps}>
       <Flex
         overflow="hidden"
         borderWidth="2px"
+        borderTopRadius="md"
+        borderBottomRadius={mapOpen ? "none" : "md"}
         _focusWithin={{
           borderColor: "blue.500",
         }}
@@ -53,27 +64,30 @@ const InputAddressWithMap = ({ address, onAddressChange, wrapperProps, ...props 
           placeholder="주소를 입력해주세요"
           value={address}
         />
-        <IconButton
-          flexShrink="1"
-          h="100%"
-          borderRadius="0"
-          aria-label="search"
-          aspectRatio="1"
-          onClick={() => setOpen(!open)}
-        >
-          <Icon
-            as={FaAngleDown}
-            transform={`rotate(${open ? "180deg" : "0deg"})`}
-            transition="transform 0.3s"
-            size="100%"
-          />
-        </IconButton>
+        {!alwaysOpen && (
+          <IconButton
+            flexShrink="1"
+            h="100%"
+            borderRadius="0"
+            aria-label="search"
+            aspectRatio="1"
+            onClick={() => setOpen(!open)}
+          >
+            <Icon
+              as={FaAngleDown}
+              transform={`rotate(${open ? "180deg" : "0deg"})`}
+              transition="transform 0.3s"
+              size="100%"
+            />
+          </IconButton>
+        )}
       </Flex>
-      {open && (
+      {mapOpen && (
         <KaKaoMap<PinWithRoadAddress>
           pins={mapPins.filter(async p => (await latLng2RoadAddress(p.lat, p.lng)) !== "")}
           onClickPin={async pin => onAddressChange(pin.roadAddress)}
           aspectRatio="1"
+          borderBottomRadius="md"
           w="100%"
         />
       )}

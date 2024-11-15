@@ -1,15 +1,16 @@
 import React from "react";
 import { Flex, ModalBody, ModalHeader, ModalCloseButton, Text, Divider } from "@chakra-ui/react";
 import BasicModal from "@components/common/modal/BasicModal";
+import { ProductOrder } from "@type/index";
 
 interface OrderProcessModalProps {
   isOpen: boolean;
   onClose: () => void;
-  status: "pending" | "deliver-start" | "delivering" | "delivered";
+  productOrder: ProductOrder;
 }
 
-const OrderProcessModal: React.FC<OrderProcessModalProps> = ({ isOpen, onClose, status }) => (
-  <BasicModal isOpen={isOpen} onClose={onClose}>
+const OrderProcessModal: React.FC<OrderProcessModalProps> = ({ isOpen, onClose, productOrder }) => (
+  <BasicModal maxW="530px" isOpen={isOpen} onClose={onClose}>
     <ModalCloseButton _hover={{ bg: "#FFFFFF" }} />
     <ModalHeader color="#22543D" fontSize="25px" fontWeight="bold">
       기본 정보
@@ -27,7 +28,7 @@ const OrderProcessModal: React.FC<OrderProcessModalProps> = ({ isOpen, onClose, 
         품목
       </Text>
       <Text color="#000000" fontSize="18px" fontWeight="medium">
-        건호네 미나리
+        {productOrder.product.name}
       </Text>
     </Flex>
     <Flex direction="row" mt={1} ml={6}>
@@ -35,7 +36,7 @@ const OrderProcessModal: React.FC<OrderProcessModalProps> = ({ isOpen, onClose, 
         수량
       </Text>
       <Text color="#000000" fontSize="18px" fontWeight="medium">
-        3
+        {productOrder.amount}개
       </Text>
     </Flex>
 
@@ -45,25 +46,45 @@ const OrderProcessModal: React.FC<OrderProcessModalProps> = ({ isOpen, onClose, 
       </Text>
       <Divider w="430px" mt={1} borderWidth="0.5px" borderColor="rgba(56, 56, 56, 0.5)" orientation="horizontal" />
       <Flex direction="row" mt={3}>
-        <Text mr={5} color={status === "pending" ? "#48BB78" : "#D9D9D9"} fontSize="18px" fontWeight="bold">
+        <Text
+          mr={5}
+          color={productOrder.status === "ORDERED" ? "#48BB78" : "#D9D9D9"}
+          fontSize="18px"
+          fontWeight="bold"
+        >
+          주문 완료
+        </Text>
+        <Text mr={5} color="#D9D9D9" fontSize="18px" fontWeight="bold">
+          {">"}
+        </Text>
+        <Text
+          mr={5}
+          color={productOrder.status === "PREPARING" ? "#48BB78" : "#D9D9D9"}
+          fontSize="18px"
+          fontWeight="bold"
+        >
           준비 중
         </Text>
         <Text mr={5} color="#D9D9D9" fontSize="18px" fontWeight="bold">
           {">"}
         </Text>
-        <Text mr={5} color={status === "deliver-start" ? "#48BB78" : "#D9D9D9"} fontSize="18px" fontWeight="bold">
-          배송 시작
-        </Text>
-        <Text mr={5} color="#D9D9D9" fontSize="18px" fontWeight="bold">
-          {">"}
-        </Text>
-        <Text mr={5} color={status === "delivering" ? "#48BB78" : "#D9D9D9"} fontSize="18px" fontWeight="bold">
+        <Text
+          mr={5}
+          color={productOrder.status === "DELIVERING" ? "#48BB78" : "#D9D9D9"}
+          fontSize="18px"
+          fontWeight="bold"
+        >
           배송 중
         </Text>
         <Text mr={5} color="#D9D9D9" fontSize="18px" fontWeight="bold">
           {">"}
         </Text>
-        <Text mr={5} color={status === "delivered" ? "#48BB78" : "#D9D9D9"} fontSize="18px" fontWeight="bold">
+        <Text
+          mr={5}
+          color={productOrder.status === "DELIVERED" ? "#48BB78" : "#D9D9D9"}
+          fontSize="18px"
+          fontWeight="bold"
+        >
           배송 완료
         </Text>
       </Flex>
