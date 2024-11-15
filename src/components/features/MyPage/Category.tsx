@@ -36,10 +36,30 @@ const Category = () => (
       >
         상품 주문 내역
       </ChakraLink>
-      <ChakraLink as={Link} w="95px" h="20px" mt={1} ml={5} color="#5C5C5C" fontSize="16px" fontWeight="medium">
-        농장 체험 관리
+      <ChakraLink
+        as={Link}
+        w="95px"
+        h="20px"
+        mt={1}
+        ml={5}
+        color="#5C5C5C"
+        fontSize="16px"
+        fontWeight="medium"
+        to="/me/farm-list"
+      >
+        농장 체험 내역
       </ChakraLink>
-      <ChakraLink as={Link} w="68px" h="20px" mt={1} ml={5} color="#5C5C5C" fontSize="16px" fontWeight="medium">
+      <ChakraLink
+        as={Link}
+        w="68px"
+        h="20px"
+        mt={1}
+        ml={5}
+        color="#5C5C5C"
+        fontSize="16px"
+        fontWeight="medium"
+        to="/me/review-list"
+      >
         리뷰 관리
       </ChakraLink>
       <Flex direction="row" mt={10} ml={5}>

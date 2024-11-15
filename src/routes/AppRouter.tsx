@@ -12,8 +12,10 @@ import Home from "@pages/Home";
 import IntroductionPage from "@pages/Introduction";
 import MyPage from "@pages/MyPage";
 import DeliveryPage from "@pages/MyPage/DeliveryPage";
+import FarmListPage from "@pages/MyPage/FarmListPage";
 import MyInfoPage from "@pages/MyPage/MyInfoPage";
 import MyOrdersPage from "@pages/MyPage/OrdersPage";
+import ReviewListPage from "@pages/MyPage/ReviewListPage";
 import WithdrawPage from "@pages/MyPage/WithdrawPage";
 import RegisterPage from "@pages/RegisterPage";
 import SchedulePage from "@pages/SchedulePage";
@@ -71,6 +73,14 @@ const AppRouter = () => {
             {
               path: "delivery",
               element: <DeliveryPage />,
+            },
+            {
+              path: "review-list",
+              element: <ReviewListPage />,
+            },
+            {
+              path: "farm-list",
+              element: <FarmListPage />,
             },
             {
               path: "my-info",
