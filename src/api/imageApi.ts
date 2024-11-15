@@ -14,6 +14,6 @@ const usePostImage = () => {
   });
 };
 
-const usePostImages = () => {};
+const usePostImages = () => null;
 
 export { usePostImage, usePostImages };
