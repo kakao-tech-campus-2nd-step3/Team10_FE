@@ -31,3 +31,24 @@ export type Category = Item & {
 export type FarmCategory = Category & {
   imageUrl?: string;
 };
+
+export type ProductOrderStatus =
+  | "ORDERED"
+  | "PREPARING"
+  | "DELIVERING"
+  | "DELIVERED"
+  | "REFUNDING"
+  | "REFUNDED"
+  | "CANCELED";
+
+export type ProductOrder = {
+  product: Product;
+  amount: number;
+  deliveryFee: number;
+  status: ProductOrderStatus;
+};
+
+export type Order = Item & {
+  products: ProductOrder[];
+  orderDate: string;
+};

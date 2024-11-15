@@ -15,7 +15,7 @@ const Header = () => {
     setActiveMenu(menu);
   };
   return (
-    <Flex direction="column" bgColor="#FFFFFF">
+    <Flex pos="relative" direction="column" shadow="lg" bgColor="#FFFFFF">
       <Flex justify="flex-end" p="1px 60px" color="#1C4532" fontSize="8px" fontWeight="regular">
         {loginCheck()
           ? [

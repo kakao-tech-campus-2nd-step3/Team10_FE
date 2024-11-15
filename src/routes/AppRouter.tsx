@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "@components/layouts/MainLayout";
+import MyPageLayout from "@components/layouts/MyPageLayout";
 import BuyerMyPage from "@pages/BuyerMyPage";
 import CallbackPage from "@pages/CallbackPage";
 import EmailLoginPage from "@pages/EmailLoginPage";
@@ -10,6 +11,10 @@ import FarmerRegisterPage from "@pages/FarmerRegisterPage";
 import Home from "@pages/Home";
 import IntroductionPage from "@pages/Introduction";
 import MyPage from "@pages/MyPage";
+import DeliveryPage from "@pages/MyPage/DeliveryPage";
+import MyInfoPage from "@pages/MyPage/MyInfoPage";
+import MyOrdersPage from "@pages/MyPage/OrdersPage";
+import WithdrawPage from "@pages/MyPage/WithdrawPage";
 import RegisterPage from "@pages/RegisterPage";
 import SchedulePage from "@pages/SchedulePage";
 import SellerMyPage from "@pages/SellerMyPage";
@@ -52,8 +57,30 @@ const AppRouter = () => {
           element: <SellerPage />,
         },
         {
-          path: "MyPage",
-          element: <MyPage />,
+          path: "me",
+          element: <MyPageLayout />,
+          children: [
+            {
+              index: true,
+              element: <MyPage />,
+            },
+            {
+              path: "orders",
+              element: <MyOrdersPage />,
+            },
+            {
+              path: "delivery",
+              element: <DeliveryPage />,
+            },
+            {
+              path: "my-info",
+              element: <MyInfoPage />,
+            },
+            {
+              path: "withdraw",
+              element: <WithdrawPage />,
+            },
+          ],
         },
         {
           path: "login",
