@@ -2,12 +2,10 @@ import { Tab, Tabs, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
 import Product from "@components/features/StoreDetailPage/Product";
 import ProductDescription from "@components/features/StoreDetailPage/ProductDescription";
 import ReviewList from "@components/features/StoreDetailPage/ReviewList";
-import Reviews from "@components/features/StoreDetailPage/Reviews";
 
 const StoreDetailPage = () => (
   <>
     <Product />
-    <Reviews />
     <Tabs mt={100} ml={200}>
       <TabList w="1100px">
         <Tab _selected={{ color: "#1C4532", fontSize: "24px", fontWeight: "bold", bg: "none" }}>상품 설명</Tab>
