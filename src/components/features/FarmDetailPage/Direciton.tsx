@@ -1,6 +1,13 @@
 import { Text, Flex, Divider } from "@chakra-ui/react";
+import KaKaoMap from "@components/common/KaKaoMap";
 
-const Direction = () => (
+type DirecitonProps = {
+  key: string;
+  lat: number;
+  lng: number;
+};
+
+const Direction = ({ key, lat, lng }: DirecitonProps) => (
   <Flex direction="column">
     <Text mt={100} ml={200} color="#1C4532" fontSize="24px" fontWeight="bold">
       오시는 길
@@ -13,6 +20,19 @@ const Direction = () => (
       borderColor="rgba(56, 56, 56, 0.5)"
       orientation="horizontal"
     />
+    <Flex direction="column" w="1100px" mt={10} mb={20} ml={200}>
+      <KaKaoMap
+        pins={[
+          {
+            key,
+            lat,
+            lng,
+          },
+        ]}
+        w="100%"
+        aspectRatio="2"
+      />
+    </Flex>
   </Flex>
 );
 

@@ -11,6 +11,7 @@ module.exports = {
     "plugin:import/errors",
     "plugin:import/recommended",
     "plugin:import/typescript",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
   ],
   overrides: [
     {
@@ -30,10 +31,11 @@ module.exports = {
     project: "./tsconfig.json",
   },
   ignorePatterns: ["node_modules/", "craco.config.js"],
-  plugins: ["@typescript-eslint", "react", "import", "chakra-ui"],
+  plugins: ["@typescript-eslint", "react", "import", "chakra-ui", "@tanstack/query"],
   rules: {
     "no-extra-semi": "error",
     "react/react-in-jsx-scope": "off",
+    "no-alert": "off",
     "react/no-unknown-property": ["error", { ignore: ["css"] }],
     "@typescript-eslint/no-unused-vars": [
       "error",

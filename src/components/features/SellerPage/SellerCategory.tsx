@@ -1,166 +1,160 @@
-import { useState } from "react";
-import { Text, Flex, Box, Button } from "@chakra-ui/react";
-import AddFarm from "./AddFarm";
-import AddProduct from "./AddProduct";
-import EditFarm from "./EditFarm";
-import EditProduct from "./EditProduct";
+import { Link } from "react-router-dom";
+import { Text, Flex, Box, Link as ChakraLink } from "@chakra-ui/react";
 
-const SellerCategory = () => {
-  const [activeComponent, setActiveComponent] = useState<string | null>(null);
-
-  const handleAddProductClick = () => {
-    setActiveComponent("add-product");
-  };
-
-  const handleAddFarmClick = () => {
-    setActiveComponent("add-farm");
-  };
-
-  const handleEditProductClick = () => {
-    setActiveComponent("edit-product");
-  };
-
-  const handleEditFarmClick = () => {
-    setActiveComponent("edit-farm");
-  };
-
-  const handleClose = () => {
-    setActiveComponent(null);
-  };
-
-  return (
-    <Box w="230px" h="1350px" border="none" bgColor="#FFFFFF">
-      <Flex direction="column">
-        <Text mt={10} ml={3} color="#000000" fontSize="20px" fontWeight="bold">
+const SellerCategory = () => (
+  <Box w="230px" h="100%" border="none" bgColor="#FFFFFF">
+    <Flex direction="column" gap="10" p="5">
+      <Flex direction="column" gap="2">
+        <Text color="#000000" fontSize="20px" fontWeight="bold">
           할 일
         </Text>
-        <Button
-          w="100px"
+        <ChakraLink
+          as={Link}
           h="20px"
-          mt={3}
-          ml={2}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
+          to="/seller/recent-orders"
         >
           최근 주문 관리
-        </Button>
-        <Button
-          w="115px"
+        </ChakraLink>
+        <ChakraLink
+          as={Link}
           h="20px"
-          mt={1}
-          ml={2}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
+          to="/seller/sold-outs"
         >
           품절된 상품
-        </Button>
+        </ChakraLink>
+      </Flex>
 
-        <Text mt={10} ml={3} color="#000000" fontSize="20px" fontWeight="bold">
+      <Flex direction="column" gap="2">
+        <Text color="#000000" fontSize="20px" fontWeight="bold">
           판매 분석
         </Text>
-        <Button
-          w="80px"
+        <ChakraLink
+          as={Link}
           h="20px"
-          mt={3}
-          ml={2}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
+          to="/seller/tax-calculator"
         >
           세금 계산기
-        </Button>
-        <Button
-          w="80px"
+        </ChakraLink>
+        <ChakraLink
+          as={Link}
           h="20px"
-          mt={1}
-          ml={2}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
+          to="/seller/biz-reg"
         >
           사업자 등록
-        </Button>
+        </ChakraLink>
+      </Flex>
 
-        <Text mt={10} ml={3} color="#000000" fontSize="20px" fontWeight="bold">
+      <Flex direction="column" gap="2">
+        <Text color="#000000" fontSize="20px" fontWeight="bold">
           농산물 홈
         </Text>
-        <Button
-          w="80px"
+        <ChakraLink
+          as={Link}
           h="20px"
-          mt={3}
-          ml={2}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
-          onClick={handleAddProductClick}
+          to="/seller/product-reg"
         >
           농산물 등록
-        </Button>
-        <Button
-          w="80px"
+        </ChakraLink>
+        <ChakraLink
+          as={Link}
           h="20px"
-          mt={1}
-          ml={2}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
-          onClick={handleEditProductClick}
+          to="/seller/product-edit"
         >
           농산물 수정
-        </Button>
+        </ChakraLink>
+      </Flex>
 
-        <Text mt={10} ml={3} color="#000000" fontSize="20px" fontWeight="bold">
+      <Flex direction="column" gap="2">
+        <Text color="#000000" fontSize="20px" fontWeight="bold">
           농장 홈
         </Text>
-        <Button
-          w="70px"
+        <ChakraLink
+          as={Link}
           h="20px"
-          mt={3}
-          ml={2}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
-          onClick={handleAddFarmClick}
+          to="/seller/farm-reg"
         >
           농장 등록
-        </Button>
-        <Button
-          w="70px"
+        </ChakraLink>
+        <ChakraLink
+          as={Link}
           h="20px"
-          mt={1}
-          ml={2}
           color="#5C5C5C"
           fontSize="16px"
           fontWeight="medium"
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
-          onClick={handleEditFarmClick}
+          to="/seller/farm-edit"
         >
           농장 수정
-        </Button>
-        {activeComponent === "add-product" && <AddProduct setIsAddProductVisible={handleClose} />}
-        {activeComponent === "add-farm" && <AddFarm setIsAddFarmVisible={handleClose} />}
-        {activeComponent === "edit-product" && <EditProduct setIsEditProductVisible={handleClose} />}
-        {activeComponent === "edit-farm" && <EditFarm setIsEditFarmVisible={handleClose} />}
+        </ChakraLink>
       </Flex>
-    </Box>
-  );
-};
+
+      <Flex direction="column" gap="2">
+        <Text color="#000000" fontSize="20px" fontWeight="bold">
+          정보 관리
+        </Text>
+        <ChakraLink
+          as={Link}
+          h="20px"
+          color="#5C5C5C"
+          fontSize="16px"
+          fontWeight="medium"
+          _hover={{ bgColor: "#FFFFFF" }}
+          bgColor="#FFFFFF"
+          to="/seller/my-info"
+        >
+          내 정보 수정
+        </ChakraLink>
+        <ChakraLink
+          as={Link}
+          h="20px"
+          color="#5C5C5C"
+          fontSize="16px"
+          fontWeight="medium"
+          _hover={{ bgColor: "#FFFFFF" }}
+          bgColor="#FFFFFF"
+          to="/seller/withdraw"
+        >
+          회원 탈퇴
+        </ChakraLink>
+      </Flex>
+    </Flex>
+  </Box>
+);
 
 export default SellerCategory;

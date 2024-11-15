@@ -1,16 +1,26 @@
 import React from "react";
-import { ModalHeader, ModalCloseButton, Tabs, TabList, Tab, TabPanel, TabPanels } from "@chakra-ui/react";
+import { ModalHeader, ModalCloseButton, Tabs, TabList, Tab, TabPanel, TabPanels, Button, Flex } from "@chakra-ui/react";
+
+import AddInfo, { AddInfoProps } from "@components/common/AddInfo";
+import AddPreview from "@components/common/AddPreview";
 import BasicModal from "@components/common/modal/BasicModal";
-import ProductDescription from "@components/features/StoreDetailPage/ProductDescription";
-import AddInfo from "./AddInfo";
 
 interface AddProductModalProps {
+  infoProps: AddInfoProps;
   isOpen: boolean;
   onClose: () => void;
+  maxW?: string;
+  maxH?: string;
 }
 
-const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onClose }) => (
-  <BasicModal isOpen={isOpen} onClose={onClose}>
+const AddProductModal: React.FC<AddProductModalProps> = ({
+  infoProps,
+  isOpen,
+  onClose,
+  maxW = "1200px",
+  maxH = "950px",
+}) => (
+  <BasicModal isOpen={isOpen} onClose={onClose} maxW={maxW} maxH={maxH}>
     <ModalCloseButton _hover={{ bg: "#FFFFFF" }} />
     <ModalHeader>
       <Tabs ml={5}>
@@ -20,11 +30,32 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onClose }) =>
         </TabList>
 
         <TabPanels py="10px">
-          <TabPanel>
-            <AddInfo />
+          <TabPanel as={Flex} direction="column" overflowX="hidden" overflowY="scroll" h={`calc(${maxH} - 150px)`}>
+            <AddInfo {...infoProps} />
+            <Button
+              flexShrink="0"
+              w="200px"
+              h="50px"
+              mt="10"
+              ml="auto"
+              color="#FFFFFF"
+              fontSize="24px"
+              fontWeight="bold"
+              borderWidth="1px"
+              borderColor="#22543D"
+              borderRadius="12px"
+              _hover={{
+                bgColor: "#22543D",
+                borderColor: "#22543D",
+              }}
+              bgColor="#22543D"
+              onClick={onClose}
+            >
+              돌아가기
+            </Button>
           </TabPanel>
           <TabPanel>
-            <ProductDescription />
+            <AddPreview {...infoProps} />
           </TabPanel>
         </TabPanels>
       </Tabs>
