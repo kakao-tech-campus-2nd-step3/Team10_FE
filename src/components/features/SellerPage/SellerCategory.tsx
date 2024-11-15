@@ -9,11 +9,8 @@ import EditInfo from "./MyInfo/EditInfo";
 import Logout from "./MyInfo/Logout";
 import Tax from "./Tax.tsx";
 
-import ContactModal from "../MyPage/Order/ContactModal";
-
 const SellerCategory = () => {
   const [activeComponent, setActiveComponent] = useState<string | null>(null);
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   const handleTaxClick = () => {
     setActiveComponent("tax");
@@ -47,14 +44,6 @@ const SellerCategory = () => {
     setActiveComponent("logout");
   };
 
-  const handleOpenContactModal = () => {
-    setIsContactModalOpen(true);
-  };
-
-  const handleCloseContactModal = () => {
-    setIsContactModalOpen(false);
-  };
-
   return (
     <Box w="230px" h="1480px" border="none" bgColor="#FFFFFF">
       <Flex direction="column">
@@ -71,17 +60,9 @@ const SellerCategory = () => {
           fontWeight="medium"
           _hover={{ bgColor: "#FFFFFF" }}
           bgColor="#FFFFFF"
-          onClick={handleOpenContactModal}
         >
           최근 주문 관리
         </Button>
-        {isContactModalOpen && (
-          <ContactModal
-            isOpen={isContactModalOpen}
-            onClose={handleCloseContactModal}
-            productId={1} // Pass the appropriate productId here
-          />
-        )}
         <Button
           w="115px"
           h="20px"
