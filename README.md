@@ -41,6 +41,15 @@
     
 ![품앗이 목표](https://github.com/user-attachments/assets/58ad5dfc-481c-4bab-b9d8-0bbe8cec2ccc)
 
+### **배포 URL**
+
+| **서비스** | **URL**                                              |
+|---------|------------------------------------------------------|
+| 백엔드     | [https://api.poomasi.shop](https://api.poomasi.shop) |
+| 프론트엔드   | [https://poomasi.shop](https://poomasi.shop)         |
+
+더 자세한 이야기는 [품앗이 소개 페이지](https://poomasi.shop/introduction)에서 확인하세요.
+
 ## 👥 Collaborators
 
 <h3 align="center"> Backend</h3>
