@@ -10,7 +10,7 @@ import {
   Divider,
   Icon,
   Input,
-  Box,
+  Textarea,
 } from "@chakra-ui/react";
 import Image from "@components/common/Image";
 import StarRating from "@components/common/StarRating";
@@ -39,7 +39,7 @@ const ReviewModal: React.FC<ReviewModalProps> = ({ isOpen, onClose, productId })
     setRating(newRating);
   };
 
-  const handleReviewTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleReviewTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setReviewText(event.target.value);
   };
 
@@ -54,7 +54,7 @@ const ReviewModal: React.FC<ReviewModalProps> = ({ isOpen, onClose, productId })
   };
 
   return (
-    <BasicModal isOpen={isOpen} onClose={onClose} maxW="800px" maxH="1000px">
+    <BasicModal isOpen={isOpen} onClose={onClose} maxW="800px" maxH="1100px">
       <ModalCloseButton _hover={{ bg: "#FFFFFF" }} />
       <ModalHeader color="#22543D" fontSize="25px" fontWeight="bold">
         후기 쓰기
@@ -80,32 +80,34 @@ const ReviewModal: React.FC<ReviewModalProps> = ({ isOpen, onClose, productId })
               as={UploadOutlined}
               mx="5"
               mt={12}
-              ml={-200}
+              ml={-230}
               color="#000000"
               fontSize="30px"
               cursor="pointer"
               onClick={() => mainImageInputRef.current?.click()}
             />
-            <Flex pos="relative" align="flex-end" justify="flex-end" w="100%" h="200px" mt="5" mr={95}>
+            <Flex pos="relative" align="flex-end" justify="flex-end" w="100%" h="200px" mt="5" mr={100}>
               <Image flexShrink="0" w="200px" h="200px" objectFit="cover" alt="main image" src={imageUrl} />
               <Input ref={mainImageInputRef} display="none" accept="image/*" onChange={handleImageChange} type="file" />
             </Flex>
           </Flex>
 
-          <Box w="600px" h="150px" mt={10} borderWidth="0.4px" borderColor="#000000" bgColor="#FFFFFF">
-            <Input
-              w="500px"
-              mt={2}
-              ml={2}
-              border="none"
-              _focus={{ borderColor: "transparent", boxShadow: "none" }}
-              _placeholder={{ color: "#D9D9D9", fontWeight: "bold", fontSize: "16px" }}
-              onChange={handleReviewTextChange}
-              placeholder="구매하신 상품의 후기를 남겨주시면 다른 구매자들에게도 도움이 됩니다."
-              value={reviewText}
-            />
-          </Box>
-          <Flex justify="center" direction="row" gap="5px" mt={10}>
+          <Textarea
+            w="600px"
+            h="150px"
+            mt={10}
+            p="10px"
+            borderWidth="0.4px"
+            borderColor="#000000"
+            _focus={{ borderColor: "#000000", boxShadow: "none" }}
+            _placeholder={{ color: "#D9D9D9", fontWeight: "bold", fontSize: "16px" }}
+            bgColor="#FFFFFF"
+            onChange={handleReviewTextChange}
+            placeholder="구매하신 상품의 후기를 남겨주시면 다른 구매자들에게도 도움이 됩니다."
+            value={reviewText}
+          />
+
+          <Flex justify="center" direction="row" gap="5px" mt={10} mb={10}>
             <Button
               w="230px"
               h="50px"
