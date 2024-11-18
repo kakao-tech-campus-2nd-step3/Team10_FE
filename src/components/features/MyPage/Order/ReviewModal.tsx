@@ -53,6 +53,10 @@ const ReviewModal: React.FC<ReviewModalProps> = ({ isOpen, onClose, productId })
     postMessage(reviewData);
   };
 
+  const handleCancel = () => {
+    onClose();
+  };
+
   return (
     <BasicModal isOpen={isOpen} onClose={onClose} maxW="800px" maxH="1100px">
       <ModalCloseButton _hover={{ bg: "#FFFFFF" }} />
@@ -119,6 +123,7 @@ const ReviewModal: React.FC<ReviewModalProps> = ({ isOpen, onClose, productId })
               borderRadius="12px"
               _hover={{ bgColor: "#FFFFFF" }}
               bgColor="#FFFFFF"
+              onClick={handleCancel}
             >
               작성 취소
             </Button>
