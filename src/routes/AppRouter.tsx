@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "@components/layouts/MainLayout";
 import MyPageLayout from "@components/layouts/MyPageLayout";
 import SellerLayout from "@components/layouts/SellerLayout";
-import BuyerMyPage from "@pages/BuyerMyPage";
 import CallbackPage from "@pages/CallbackPage";
 import EmailLoginPage from "@pages/EmailLoginPage";
 import EmailRegisterPage from "@pages/EmailRegisterPage";
@@ -21,7 +20,6 @@ import WithdrawPage from "@pages/MyPage/WithdrawPage";
 import ProductCartPage from "@pages/ProductCartPage";
 import RegisterPage from "@pages/RegisterPage";
 import SchedulePage from "@pages/SchedulePage";
-import SellerMyPage from "@pages/SellerMyPage";
 import SellerPage from "@pages/SellerPage";
 import BizRegister from "@pages/SellerPage/BizRegister";
 import FarmEdit from "@pages/SellerPage/FarmEdit";
@@ -50,14 +48,6 @@ const AppRouter = () => {
         {
           path: "introduction",
           element: <IntroductionPage />,
-        },
-        {
-          path: "BuyerMyPage",
-          element: <BuyerMyPage />,
-        },
-        {
-          path: "SellerMyPage",
-          element: <SellerMyPage />,
         },
         {
           path: "StoreDetail",
