@@ -30,7 +30,7 @@ const useLogin = () => {
 
   const sellerCheck = () => user?.role === "ROLE_FARMER";
 
-  return { login, logout, loginCheck, sellerCheck };
+  return { user, login, logout, loginCheck, sellerCheck };
 };
 
 export default useLogin;
