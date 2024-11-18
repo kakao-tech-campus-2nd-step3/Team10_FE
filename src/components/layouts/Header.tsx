@@ -1,109 +1,91 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Input, Box, Flex, Text, Icon } from "@chakra-ui/react";
+import { Link, useLocation } from "react-router-dom";
+import { HeartOutlined, ShoppingCartOutlined, LogoutOutlined } from "@ant-design/icons";
+import { Flex, Text, Icon } from "@chakra-ui/react";
 import poomasi from "@assets/logo/logo.png";
+import Avatar from "@components/common/Avatar";
 import Image from "@components/common/Image";
 import useLogin from "@hooks/useLogin";
 
+const menuLinks = [
+  {
+    name: "소개",
+    link: "/introduction",
+  },
+  {
+    name: "상점",
+    link: "/store",
+  },
+  {
+    name: "농장",
+    link: "/schedule",
+  },
+];
+
 const Header = () => {
-  const [activeMenu, setActiveMenu] = useState<string>("");
+  const location = useLocation();
 
-  const { loginCheck, logout, sellerCheck } = useLogin();
-
-  const handleMenuClick = (menu: string) => {
-    setActiveMenu(menu);
-  };
+  const { user, loginCheck, logout, sellerCheck } = useLogin();
   return (
     <Flex pos="relative" direction="column" shadow="lg" bgColor="#FFFFFF">
-      <Flex justify="flex-end" p="1px 60px" color="#1C4532" fontSize="8px" fontWeight="regular">
-        {loginCheck()
-          ? [
-              <Text as={Link} mr="12px" to="/mypage">
-                마이페이지
-              </Text>,
-              <Text cursor="pointer" onClick={logout}>
-                로그아웃
-              </Text>,
-            ]
-          : [
-              <Text as={Link} mr="12px" to="/register">
-                회원가입
-              </Text>,
-              <Text as={Link} to="/login">
-                로그인
-              </Text>,
-            ]}
-        {sellerCheck() && (
-          <Text as={Link} ml="12px" to="/seller">
-            판매자 페이지
-          </Text>
-        )}
-      </Flex>
-
-      <Flex align="center" justify="space-between" p="10px 50px">
-        <Link to="/">
-          <Image h="30px" objectFit="contain" alt="poomasi" src={poomasi} />
-        </Link>
-
-        <Flex align="center" mx="20px" ml={-70}>
-          <Link to="/introduction">
+      <Flex align="center" justify="space-between" p="5">
+        <Flex>
+          <Link to="/">
+            <Image h="30px" objectFit="contain" alt="poomasi" src={poomasi} />
+          </Link>
+          {sellerCheck() && (
             <Text
-              mx="30px"
-              color={activeMenu === "소개" ? "#1C4532" : "#999999"}
+              as={Link}
+              align="center"
+              ml="3"
+              p="2"
+              color="white"
+              fontSize="12px"
+              fontWeight="regular"
+              bg="#1C4532"
+              borderRadius="xl"
+              cursor="pointer"
+              to="/seller"
+            >
+              farmer
+            </Text>
+          )}
+          {menuLinks.map(menuLink => (
+            <Text
+              as={Link}
+              mx="5"
+              color={menuLink.link === location.pathname ? "#1C4532" : "#999999"}
               fontSize="20px"
               fontWeight="regular"
               cursor="pointer"
-              onClick={() => handleMenuClick("소개")}
+              to={menuLink.link}
             >
-              소개
+              {menuLink.name}
             </Text>
-          </Link>
-          <Link to="/store">
-            <Text
-              mx="30px"
-              color={activeMenu === "상점" ? "#1C4532" : "#999999"}
-              fontSize="20px"
-              fontWeight="regular"
-              cursor="pointer"
-              onClick={() => handleMenuClick("상점")}
-            >
-              상점
-            </Text>
-          </Link>
-          <Link to="/schedule">
-            <Text
-              mx="30px"
-              color={activeMenu === "농장" ? "#1C4532" : "#999999"}
-              fontSize="20px"
-              fontWeight="regular"
-              cursor="pointer"
-              onClick={() => handleMenuClick("농장")}
-            >
-              농장
-            </Text>
-          </Link>
+          ))}
         </Flex>
 
-        <Input
-          w="400px"
-          h="40px"
-          ml={10}
-          px="20px"
-          border="2px solid #1C4532"
-          borderColor="#1C4532"
-          borderRadius="12px"
-          _placeholder={{ color: "#B3B3B3" }}
-          placeholder="검색어를 입력해주세요."
-        />
-
-        <Flex ml={250}>
-          <Box mx="10px" color="#1C4532" cursor="pointer">
-            <Icon as={HeartOutlined} fontSize="25px" />
-          </Box>
-          <Box mx="10px" color="#1C4532" cursor="pointer">
-            <Icon as={ShoppingCartOutlined} fontSize="25px" />
-          </Box>
+        <Flex align="center" gap="5">
+          {loginCheck() ? (
+            [
+              <Link to="/me/wish">
+                <Icon as={HeartOutlined} color="#1C4532" fontSize="25px" />
+              </Link>,
+              <Link to="/cart">
+                <Icon as={ShoppingCartOutlined} color="#1C4532" fontSize="25px" />
+              </Link>,
+              <Flex as={Link} gap="1" to="/me">
+                <Avatar size="sm" src={user.profile} />
+                <Text color="#1C4532" fontSize="20px" fontWeight="regular" cursor="pointer">
+                  {user.name}님
+                </Text>
+              </Flex>,
+              <Icon as={LogoutOutlined} color="#1C4532" fontSize="25px" cursor="pointer" onClick={() => logout()} />,
+            ]
+          ) : (
+            <Text as={Link} color="#1C4532" fontSize="20px" fontWeight="regular" cursor="pointer" to="/login">
+              로그인
+            </Text>
+          )}
         </Flex>
       </Flex>
     </Flex>
