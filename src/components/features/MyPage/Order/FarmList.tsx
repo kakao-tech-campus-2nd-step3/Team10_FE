@@ -2,17 +2,27 @@ import { useState } from "react";
 import { Flex, Button, Text } from "@chakra-ui/react";
 import farm1 from "@assets/Image/Farm/Farm1.png";
 import Image from "@components/common/Image";
+import ContactNumberModal from "./ContactNumberModal";
 import ReviewModal from "./ReviewModal";
 
 const FarmList = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
-  const handleOpenModal = () => {
-    setModalOpen(true);
+  const handleOpenReviewModal = () => {
+    setIsReviewModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
+  const handleCloseReviewModal = () => {
+    setIsReviewModalOpen(false);
+  };
+
+  const handleOpenContactModal = () => {
+    setIsContactModalOpen(true);
+  };
+
+  const handleCloseContactModal = () => {
+    setIsContactModalOpen(false);
   };
 
   return (
@@ -54,9 +64,11 @@ const FarmList = () => {
             borderRadius="12px"
             _hover={{ bgColor: "#FFFFFF" }}
             bgColor="#FFFFFF"
+            onClick={handleOpenContactModal}
           >
             📞 문의
           </Button>
+          {isContactModalOpen && <ContactNumberModal isOpen={isContactModalOpen} onClose={handleCloseContactModal} />}
           <Button
             w="200px"
             h="45px"
@@ -68,11 +80,11 @@ const FarmList = () => {
             borderRadius="12px"
             _hover={{ bgColor: "#22543D" }}
             bgColor="#22543D"
-            onClick={handleOpenModal}
+            onClick={handleOpenReviewModal}
           >
             ✍️ 후기 쓰기
           </Button>
-          {isModalOpen && <ReviewModal isOpen={isModalOpen} onClose={handleCloseModal} />}
+          {isReviewModalOpen && <ReviewModal isOpen={isReviewModalOpen} onClose={handleCloseReviewModal} />}
         </Flex>
       </Flex>
     </Flex>
