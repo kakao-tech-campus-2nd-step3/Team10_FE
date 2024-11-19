@@ -20,6 +20,14 @@ export type Product = Item & {
   farm: Farm;
 };
 
+export type Review = Item & {
+  name: string;
+  description: string;
+  rating: number;
+  image?: string;
+  date: string;
+};
+
 export type Schedule = Item & {
   name: string;
   farm: Farm;
