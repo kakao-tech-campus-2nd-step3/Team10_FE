@@ -13,11 +13,21 @@ type LoginData = {
   password: string;
 };
 
-type FarmerData = {
+type FarmerRegisterData = {
   name: string;
   address: string;
   phone: string;
 };
+
+type FarmerData = {
+  name: string;
+  email: string;
+  password: string;
+  phoneNumber: string;
+  storeName: string;
+  storeAddress: string;
+};
+
 type AddressData = {
   defaultAddress: string;
   addressDetail: string;
@@ -39,7 +49,7 @@ const useLoginEmail = () => {
 };
 
 const useCreateFarmer = () => {
-  const fetcher = (farmerData: FarmerData) =>
+  const fetcher = (farmerData: FarmerRegisterData) =>
     needAuthDefaultApi.put(`/api/members/to-farmer`, farmerData).then(({ data }) => data);
   return useMutation({ mutationFn: fetcher });
 };
@@ -54,6 +64,20 @@ const useUpdateEmail = () => {
     onSuccess: () =>
       queryClient.invalidateQueries({
         queryKey: ["email"],
+      }),
+  });
+};
+
+const useUpdateFarmer = () => {
+  const queryClient = useQueryClient();
+  const fetcher = (updateData: FarmerData) =>
+    needAuthDefaultApi.put(`/api/members/update/farmer`, updateData).then(({ data }) => data);
+
+  return useMutation({
+    mutationFn: fetcher,
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ["farmer"],
       }),
   });
 };
@@ -82,4 +106,12 @@ const useDeleteAccount = () => {
   });
 };
 
-export { useCreateEmail, useLoginEmail, useUpdateEmail, useUpdateAddress, useCreateFarmer, useDeleteAccount };
+export {
+  useCreateEmail,
+  useLoginEmail,
+  useUpdateEmail,
+  useUpdateAddress,
+  useCreateFarmer,
+  useUpdateFarmer,
+  useDeleteAccount,
+};
