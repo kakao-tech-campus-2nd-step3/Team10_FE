@@ -6,6 +6,8 @@ export type Farm = Item & {
   name: string;
   address: string;
   profile?: string;
+  description: string;
+  date: string;
 };
 
 export type Product = Item & {
