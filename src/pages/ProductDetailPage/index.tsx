@@ -1,12 +1,12 @@
-import { Tab, Tabs, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
+import { Tab, Tabs, TabList, TabPanels, TabPanel, Flex } from "@chakra-ui/react";
+import AddPreview from "@components/common/AddPreview";
 import Product from "@components/features/StoreDetailPage/Product";
-import ProductDescription from "@components/features/StoreDetailPage/ProductDescription";
 import ReviewList from "@components/features/StoreDetailPage/ReviewList";
 
 const StoreDetailPage = () => (
-  <>
-    <Product />
-    <Tabs mt={100} ml={200}>
+  <Flex align="center" direction="column" w="100vw">
+    <Product productId={1} />
+    <Tabs mt={100}>
       <TabList w="1100px">
         <Tab _selected={{ color: "#1C4532", fontSize: "24px", fontWeight: "bold", bg: "none" }}>상품 설명</Tab>
         <Tab _selected={{ color: "#1C4532", fontSize: "24px", fontWeight: "bold", bg: "none" }}>후기</Tab>
@@ -14,14 +14,22 @@ const StoreDetailPage = () => (
 
       <TabPanels py="10px">
         <TabPanel>
-          <ProductDescription />
+          <AddPreview
+            info={{
+              title: "",
+              mainImage: "",
+              detailTitles: ["", "", ""],
+              detailDescriptions: ["", "", ""],
+              detailImages: ["", "", ""],
+            }}
+          />
         </TabPanel>
         <TabPanel>
           <ReviewList />
         </TabPanel>
       </TabPanels>
     </Tabs>
-  </>
+  </Flex>
 );
 
 export default StoreDetailPage;

@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-
-import { HeartOutlined } from "@ant-design/icons";
-import { Box, Button, Text, Flex, Icon, Divider, Select } from "@chakra-ui/react";
+import { Box, Button, Text, Flex, Divider, Select } from "@chakra-ui/react";
 import { useGetFarmDetail } from "@api/farmApi";
 import Image from "@components/common/Image";
 
@@ -19,7 +17,7 @@ const defaultFormData = {
   endTime: "",
 };
 
-const Product = ({ scheduleId }: { scheduleId: number }) => {
+const Schedule = ({ scheduleId }: { scheduleId: number }) => {
   const { data: farmDetail = defaultFormData } = useGetFarmDetail(scheduleId);
 
   const [dateOptions, setDateOptions] = useState<string[]>([]);
@@ -40,7 +38,7 @@ const Product = ({ scheduleId }: { scheduleId: number }) => {
 
   return (
     <Flex direction="row">
-      <Box mt={100} ml={200}>
+      <Box mt={100}>
         <Image w="500px" h="530px" borderRadius="12px" alt="farmImage" src={farmDetail.imageUrl} />
       </Box>
       <Flex direction="column" maxW="600px">
@@ -52,20 +50,6 @@ const Product = ({ scheduleId }: { scheduleId: number }) => {
             <Text mt={1} color="#000000" fontSize="30px" fontWeight="bold">
               {farmDetail.price}원 / {farmDetail.maxTeam}팀(최대인원: {farmDetail.maxPeople}명)
             </Text>
-          </Flex>
-          <Flex
-            align="center"
-            justify="center"
-            w="50px"
-            h="50px"
-            mt={100}
-            ml={10}
-            color="#FFFFFF"
-            borderRadius="12px"
-            cursor="pointer"
-            bgColor="#FC8181"
-          >
-            <Icon as={HeartOutlined} fontSize="30px" />
           </Flex>
         </Flex>
         <Divider
@@ -160,4 +144,4 @@ const Product = ({ scheduleId }: { scheduleId: number }) => {
   );
 };
 
-export default Product;
+export default Schedule;

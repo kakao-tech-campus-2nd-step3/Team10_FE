@@ -8,17 +8,18 @@ import Intro7 from "@assets/Image/Intro/Intro7.png";
 import Intro8 from "@assets/Image/Intro/Intro8.png";
 import Image from "@components/common/Image";
 import ImageCard from "@components/common/ImageCard";
+import size from "@constants/size";
 
 const Introduction = () => (
-  <Box overflowY="auto" w="100vw" h="100vh">
+  <Flex align="center" direction="column" w="full" h="full" minH={`calc(100vh - ${size.footer.h} - ${size.header.h})`}>
     <Flex direction="column" w="full" h="fit-content">
-      <ImageCard bgImg={Intro1}>
+      <ImageCard borderRadius="none" bgImg={Intro1}>
         <Text m="auto" color="#FFFFFF" fontSize="32px" fontWeight="bold" textAlign="center">
           우리가 꿈꾸는 내일, 농민과 고객이 함께 만드는 새로운 유통
         </Text>
       </ImageCard>
     </Flex>
-    <Flex direction="column" w="full" h="100vh" mt="20">
+    <Flex direction="column" w="full" mt="20">
       <Text mb={1} color="#000000" fontSize="20px" fontWeight="bold" textAlign="center">
         품앗이 이야기
       </Text>
@@ -87,7 +88,7 @@ const Introduction = () => (
       <Image w="500px" h="800px" alt="Intro6" src={Intro6} />
     </Flex>
 
-    <Flex align="center" justify="center" direction="column" mt={200}>
+    <Flex align="center" justify="center" direction="column" my={200}>
       <Text mb={20} color="#1C4532" fontSize="32px" fontWeight="bold" textAlign="center">
         농업인의 땀과 소비자의 마음을 직접 이어,
         <br />
@@ -132,7 +133,7 @@ const Introduction = () => (
         </Box>
       </Flex>
     </Flex>
-  </Box>
+  </Flex>
 );
 
 export default Introduction;

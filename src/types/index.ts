@@ -6,6 +6,8 @@ export type Farm = Item & {
   name: string;
   address: string;
   profile?: string;
+  description: string;
+  date: string;
 };
 
 export type Product = Item & {
@@ -18,6 +20,14 @@ export type Product = Item & {
   deliveryFee: number;
   tag?: string;
   farm: Farm;
+};
+
+export type Review = Item & {
+  name: string;
+  description: string;
+  rating: number;
+  image?: string;
+  date: string;
 };
 
 export type Schedule = Item & {
