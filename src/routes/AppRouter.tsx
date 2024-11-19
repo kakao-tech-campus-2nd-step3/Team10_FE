@@ -4,7 +4,6 @@ import MainLayout from "@components/layouts/MainLayout";
 import MyPageLayout from "@components/layouts/MyPageLayout";
 import SellerLayout from "@components/layouts/SellerLayout";
 import useScrollSaver from "@hooks/useScrollSaver";
-import BuyerMyPage from "@pages/BuyerMyPage";
 import CallbackPage from "@pages/CallbackPage";
 import EmailLoginPage from "@pages/EmailLoginPage";
 import EmailRegisterPage from "@pages/EmailRegisterPage";
@@ -18,13 +17,13 @@ import DeliveryPage from "@pages/MyPage/DeliveryPage";
 import FarmListPage from "@pages/MyPage/FarmListPage";
 import MyInfoPage from "@pages/MyPage/MyInfoPage";
 import MyOrdersPage from "@pages/MyPage/OrdersPage";
+import ProductWishlistPage from "@pages/MyPage/ProductWishlistPage";
 import ReviewListPage from "@pages/MyPage/ReviewListPage";
 import WithdrawPage from "@pages/MyPage/WithdrawPage";
 import ProductCartPage from "@pages/ProductCartPage";
 import ProductDetailPage from "@pages/ProductDetailPage";
 import RegisterPage from "@pages/RegisterPage";
 import SchedulePage from "@pages/SchedulePage";
-import SellerMyPage from "@pages/SellerMyPage";
 import SellerPage from "@pages/SellerPage";
 import BizRegister from "@pages/SellerPage/BizRegister";
 import FarmEdit from "@pages/SellerPage/FarmEdit";
@@ -38,6 +37,7 @@ import SellerWithdraw from "@pages/SellerPage/SellerWithdraw";
 import SoldOuts from "@pages/SellerPage/SoldOuts";
 import TaxCalculator from "@pages/SellerPage/TaxCalculator";
 import StorePage from "@pages/StorePage";
+import WishPage from "@pages/WishPage";
 
 const AppRouter = () => {
   const { initScroll } = useScrollSaver();
@@ -60,12 +60,8 @@ const AppRouter = () => {
           element: <IntroductionPage />,
         },
         {
-          path: "BuyerMyPage",
-          element: <BuyerMyPage />,
-        },
-        {
-          path: "SellerMyPage",
-          element: <SellerMyPage />,
+          path: "wish",
+          element: <WishPage />,
         },
         {
           path: "seller",
@@ -133,6 +129,10 @@ const AppRouter = () => {
             {
               index: true,
               element: <MyPage />,
+            },
+            {
+              path: "product-wish",
+              element: <ProductWishlistPage />,
             },
             {
               path: "orders",

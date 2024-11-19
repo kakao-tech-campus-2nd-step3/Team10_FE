@@ -68,7 +68,7 @@ const Header = () => {
         <Flex align="center" gap="5">
           {loginCheck() ? (
             [
-              <Link to="/me/wish">
+              <Link to="/wish">
                 <Icon as={HeartOutlined} color="#1C4532" fontSize="25px" />
               </Link>,
               <Link to="/cart/product">

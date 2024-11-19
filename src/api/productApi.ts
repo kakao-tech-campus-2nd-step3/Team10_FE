@@ -5,16 +5,22 @@ type ProductData = {
   categoryId: number;
   name: string;
   description: string;
-  imageUrl: string;
   stock: string;
   price: string;
   growEnv: string;
   shippingFee: string;
   phoneNumber: string;
+  mainTitle: string;
+  subTitle1: string;
+  subDesc1: string;
+  subTitle2: string;
+  subDesc2: string;
+  subTitle3: string;
+  subDesc3: string;
 };
 
 const useGetProducts = () => {
-  const fetcher = () => defaultApi.get(`/api/products`).then(({ data }) => data);
+  const fetcher = () => defaultApi.get(`/products`).then(({ data }) => data);
 
   return useQuery({
     queryKey: ["products"],
@@ -23,7 +29,7 @@ const useGetProducts = () => {
 };
 
 const useGetProductDetail = (productId: number) => {
-  const fetcher = () => defaultApi.get(`/api/products/${productId}`).then(({ data }) => data);
+  const fetcher = () => defaultApi.get(`/products/${productId}`).then(({ data }) => data);
   return useQuery({
     queryKey: ["products", productId],
     queryFn: fetcher,
@@ -32,7 +38,7 @@ const useGetProductDetail = (productId: number) => {
 };
 
 const useCreateProducts = () => {
-  const fetcher = (productData: ProductData) => defaultApi.post(`/api/products`, productData).then(({ data }) => data);
+  const fetcher = (productData: ProductData) => defaultApi.post(`/products`, productData).then(({ data }) => data);
 
   return useMutation({ mutationFn: fetcher });
 };
@@ -41,7 +47,7 @@ const useUpdateProducts = (productId: number) => {
   const queryClient = useQueryClient();
 
   const fetcher = (productData: ProductData) =>
-    defaultApi.put(`/api/products/${productId}`, productData).then(({ data }) => data);
+    defaultApi.put(`/products/${productId}`, productData).then(({ data }) => data);
 
   return useMutation({
     mutationFn: fetcher,

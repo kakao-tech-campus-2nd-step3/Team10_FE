@@ -5,7 +5,7 @@ import ReviewList from "@components/features/StoreDetailPage/ReviewList";
 
 const ProductDetailPage = () => (
   <>
-    <Product />
+    <Product productId={1} />
     <Tabs mt={100} ml={200}>
       <TabList w="1100px">
         <Tab _selected={{ color: "#1C4532", fontSize: "24px", fontWeight: "bold", bg: "none" }}>상품 설명</Tab>

@@ -18,6 +18,22 @@ type FarmData = {
   endTime: string;
 };
 
+type ReservationData = {
+  farmId: number;
+  startTime: string;
+  endTime: string;
+  date: ["startDate", "endDate"];
+};
+
+const useGetFarm = () => {
+  const fetcher = () => defaultApi.get(`/api/farms/{farmId}/detail`).then(({ data }) => data);
+
+  return useQuery({
+    queryKey: ["farms"],
+    queryFn: fetcher,
+  });
+};
+
 const useGetFarms = () => {
   const fetcher = () => defaultApi.get(`/api/farms`).then(({ data }) => data);
 
@@ -37,7 +53,7 @@ const useGetFarmDetail = (farmId: number) => {
 };
 
 const useCreateFarms = () => {
-  const fetcher = (farmData: FarmData) => defaultApi.post(`/api/farms`, farmData).then(({ data }) => data);
+  const fetcher = (farmData: FarmData) => defaultApi.post(`/api/farmer/farms`, farmData).then(({ data }) => data);
 
   return useMutation({ mutationFn: fetcher });
 };
@@ -57,4 +73,42 @@ const useUpdateFarms = (farmId: number) => {
   });
 };
 
-export { useGetFarms, useGetFarmDetail, useCreateFarms, useUpdateFarms };
+const useDeleteFarms = (farmId: number) => {
+  const queryClient = useQueryClient();
+
+  const fetcher = () => defaultApi.delete(`/api/farmer/farms/${farmId}`).then(({ data }) => data);
+
+  return useMutation({
+    mutationFn: fetcher,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["farms"] });
+    },
+  });
+};
+
+const useCreateReservations = () => {
+  const fetcher = (reservationData: ReservationData) =>
+    defaultApi.post(`/api/farms/schedule`, reservationData).then(({ data }) => data);
+
+  return useMutation({ mutationFn: fetcher });
+};
+
+const useGetReservations = (farmId: number) => {
+  const fetcher = () => defaultApi.get(`/api/farms/schedule?farmId=17&year=2024&month=10`).then(({ data }) => data);
+
+  return useQuery({
+    queryKey: ["reservations", farmId],
+    queryFn: fetcher,
+  });
+};
+
+export {
+  useGetFarm,
+  useGetFarms,
+  useGetFarmDetail,
+  useCreateFarms,
+  useUpdateFarms,
+  useDeleteFarms,
+  useCreateReservations,
+  useGetReservations,
+};
