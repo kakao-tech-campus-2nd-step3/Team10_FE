@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-
-import { HeartOutlined } from "@ant-design/icons";
-import { Box, Button, Text, Flex, Icon, Divider, Select } from "@chakra-ui/react";
+import { Box, Button, Text, Flex, Divider, Select } from "@chakra-ui/react";
 import { useGetFarmDetail } from "@api/farmApi";
 import Image from "@components/common/Image";
 
@@ -52,20 +50,6 @@ const Product = ({ scheduleId }: { scheduleId: number }) => {
             <Text mt={1} color="#000000" fontSize="30px" fontWeight="bold">
               {farmDetail.price}원 / {farmDetail.maxTeam}팀(최대인원: {farmDetail.maxPeople}명)
             </Text>
-          </Flex>
-          <Flex
-            align="center"
-            justify="center"
-            w="50px"
-            h="50px"
-            mt={100}
-            ml={10}
-            color="#FFFFFF"
-            borderRadius="12px"
-            cursor="pointer"
-            bgColor="#FC8181"
-          >
-            <Icon as={HeartOutlined} fontSize="30px" />
           </Flex>
         </Flex>
         <Divider

@@ -6,6 +6,7 @@ import { useCreateProducts, useUpdateProducts } from "@api/productApi";
 import BasicInfo from "./BasicInfo";
 import DetailInfo from "./DetailInfo";
 import PriceInfo from "./PriceInfo";
+import { Info } from "./type";
 
 type FormData = {
   categoryId: number;
@@ -18,6 +19,7 @@ type FormData = {
   addressDetail: string;
   shippingFee: string;
   phoneNumber: string;
+  isEdit: boolean;
 };
 
 const defaultFormData = {
@@ -49,7 +51,8 @@ type AddProduct = {
 
 const AddProduct = ({ isEdit, originProduct }: AddProduct) => {
   const [formData, setFormData] = useState<FormData>(originProduct || defaultFormData);
-  const [info, setInfo] = useState(defaultInfo);
+  const [info, setInfo] = useState<Info>(defaultInfo);
+
   const [address, setAddress] = useState<string>("");
   const navigate = useNavigate();
 
@@ -84,7 +87,16 @@ const AddProduct = ({ isEdit, originProduct }: AddProduct) => {
 
   const handleSubmit = async () => {
     if (isEdit) {
-      updateProduct(formData)
+      updateProduct({
+        ...formData,
+        mainTitle: info.title,
+        subTitle1: info.detailTitles[0],
+        subTitle2: info.detailTitles[1],
+        subTitle3: info.detailTitles[2],
+        subDesc1: info.detailDescriptions[0],
+        subDesc2: info.detailDescriptions[1],
+        subDesc3: info.detailDescriptions[2],
+      })
         .then(() => {
           setAlert({ message: `Product updated successfully!`, status: "success" });
         })
@@ -92,7 +104,16 @@ const AddProduct = ({ isEdit, originProduct }: AddProduct) => {
           setAlert({ message: "Error updating product.", status: "error" });
         });
     } else {
-      createProduct(formData)
+      createProduct({
+        ...formData,
+        mainTitle: info.title,
+        subTitle1: info.detailTitles[0],
+        subTitle2: info.detailTitles[1],
+        subTitle3: info.detailTitles[2],
+        subDesc1: info.detailDescriptions[0],
+        subDesc2: info.detailDescriptions[1],
+        subDesc3: info.detailDescriptions[2],
+      })
         .then(() => {
           setAlert({ message: `Product registered successfully!`, status: "success" });
           setFormData(defaultFormData);
@@ -116,9 +137,12 @@ const AddProduct = ({ isEdit, originProduct }: AddProduct) => {
         )}
         <BasicInfo formData={formData} onChange={handleBasicInfoChange} />
         <DetailInfo
+          infoProps={{
+            info,
+            setInfo,
+          }}
           onAddressChange={handleAddressChange}
           address={address}
-          infoProps={{ info, setInfo }}
           formData={formData}
           onChange={handleDetailInfoChange}
         />
