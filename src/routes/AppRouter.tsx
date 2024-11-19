@@ -15,6 +15,7 @@ import DeliveryPage from "@pages/MyPage/DeliveryPage";
 import FarmListPage from "@pages/MyPage/FarmListPage";
 import MyInfoPage from "@pages/MyPage/MyInfoPage";
 import MyOrdersPage from "@pages/MyPage/OrdersPage";
+import ProductWishlistPage from "@pages/MyPage/ProductWishlistPage";
 import ReviewListPage from "@pages/MyPage/ReviewListPage";
 import WithdrawPage from "@pages/MyPage/WithdrawPage";
 import ProductCartPage from "@pages/ProductCartPage";
@@ -34,6 +35,7 @@ import SoldOuts from "@pages/SellerPage/SoldOuts";
 import TaxCalculator from "@pages/SellerPage/TaxCalculator";
 import StoreDetailPage from "@pages/StoreDetailPage";
 import StorePage from "@pages/StorePage";
+import WishPage from "@pages/WishPage";
 
 const AppRouter = () => {
   const routers = createBrowserRouter([
@@ -48,6 +50,10 @@ const AppRouter = () => {
         {
           path: "introduction",
           element: <IntroductionPage />,
+        },
+        {
+          path: "wish",
+          element: <WishPage />,
         },
         {
           path: "StoreDetail",
@@ -123,6 +129,10 @@ const AppRouter = () => {
             {
               index: true,
               element: <MyPage />,
+            },
+            {
+              path: "product-wish",
+              element: <ProductWishlistPage />,
             },
             {
               path: "orders",
