@@ -36,7 +36,7 @@ const Product: React.FC<ProductProps> = ({ productId }) => {
 
   return (
     <Flex direction="row">
-      <Box mt={100} ml={200}>
+      <Box mt={100}>
         <Image w="500px" h="460px" borderRadius="12px" alt="product" src={store1} />
       </Box>
       <Flex direction="column" maxW="600px">
