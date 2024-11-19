@@ -13,7 +13,7 @@ const Category = () => (
       </Flex>
       <ChakraLink
         as={Link}
-        w="50px"
+        w="100px"
         h="20px"
         mt={3}
         ml={5}
