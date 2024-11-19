@@ -51,6 +51,7 @@ const Header = () => {
           )}
           {menuLinks.map(menuLink => (
             <Text
+              key={menuLink.link}
               as={Link}
               mx="5"
               color={menuLink.link === location.pathname ? "#1C4532" : "#999999"}
@@ -70,7 +71,7 @@ const Header = () => {
               <Link to="/wish">
                 <Icon as={HeartOutlined} color="#1C4532" fontSize="25px" />
               </Link>,
-              <Link to="/cart">
+              <Link to="/cart/product">
                 <Icon as={ShoppingCartOutlined} color="#1C4532" fontSize="25px" />
               </Link>,
               <Flex as={Link} gap="1" to="/me">

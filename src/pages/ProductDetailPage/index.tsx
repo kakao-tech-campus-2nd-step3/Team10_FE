@@ -3,7 +3,7 @@ import Product from "@components/features/StoreDetailPage/Product";
 import ProductDescription from "@components/features/StoreDetailPage/ProductDescription";
 import ReviewList from "@components/features/StoreDetailPage/ReviewList";
 
-const StoreDetailPage = () => (
+const ProductDetailPage = () => (
   <>
     <Product productId={1} />
     <Tabs mt={100} ml={200}>
@@ -24,4 +24,4 @@ const StoreDetailPage = () => (
   </>
 );
 
-export default StoreDetailPage;
+export default ProductDetailPage;
