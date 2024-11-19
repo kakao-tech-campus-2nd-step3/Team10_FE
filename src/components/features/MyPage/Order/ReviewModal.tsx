@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import {
   Flex,
@@ -11,7 +11,9 @@ import {
   Icon,
   Input,
   Textarea,
+  Alert,
 } from "@chakra-ui/react";
+import { useCreateFarmReviews, useCreateProductReviews, useUpdateReviews } from "@api/reviewApi";
 import Image from "@components/common/Image";
 import StarRating from "@components/common/StarRating";
 import BasicModal from "@components/common/modal/BasicModal";
@@ -20,13 +22,38 @@ type ReviewModalProps = {
   isOpen: boolean;
   onClose: () => void;
   productId?: number;
+  farmId?: number;
+  isEditing?: boolean;
+  initialData?: {
+    rating: number;
+    content: string;
+    id: number;
+  };
 };
 
-const ReviewModal: React.FC<ReviewModalProps> = ({ isOpen, onClose, productId }) => {
+const ReviewModal: React.FC<ReviewModalProps> = ({
+  isOpen,
+  onClose,
+  productId,
+  farmId,
+  isEditing = false,
+  initialData,
+}) => {
   const mainImageInputRef = useRef<HTMLInputElement>(null);
   const [imageUrl, setImageUrl] = useState<string>();
   const [rating, setRating] = useState<number>(0);
   const [reviewText, setReviewText] = useState<string>("");
+
+  const { mutate: createProductReview } = useCreateProductReviews();
+  const { mutate: createFarmReview } = useCreateFarmReviews();
+  const { mutate: updateReview } = useUpdateReviews(initialData?.id || 0);
+
+  useEffect(() => {
+    if (isEditing && initialData) {
+      setRating(initialData.rating);
+      setReviewText(initialData.content);
+    }
+  }, [isEditing, initialData]);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -45,12 +72,53 @@ const ReviewModal: React.FC<ReviewModalProps> = ({ isOpen, onClose, productId })
 
   const handleReviewSubmit = () => {
     const reviewData = {
-      productId,
       rating,
-      reviewText,
-      imageUrl,
+      content: reviewText,
     };
-    postMessage(reviewData);
+    if (isEditing && initialData) {
+      updateReview(
+        { ...reviewData, farm_id: initialData.id },
+        {
+          onSuccess: () => {
+            <Alert title="리뷰가 성공적으로 수정되었습니다." />;
+            setTimeout(onClose, 2000);
+          },
+          onError: () => {
+            <Alert title="리뷰 수정 중 오류가 발생했습니다." />;
+          },
+        },
+      );
+    } else {
+      if (productId) {
+        createProductReview(
+          { ...reviewData, product_id: productId },
+          {
+            onSuccess: () => {
+              <Alert title="상품 리뷰가 성공적으로 등록되었습니다." />;
+              setTimeout(onClose, 2000);
+            },
+            onError: () => {
+              <Alert title="상품 리뷰 등록 중 오류가 발생했습니다." />;
+            },
+          },
+        );
+      }
+
+      if (farmId) {
+        createFarmReview(
+          { ...reviewData, farm_id: farmId },
+          {
+            onSuccess: () => {
+              <Alert title="농장 리뷰가 성공적으로 등록되었습니다." />;
+              setTimeout(onClose, 2000);
+            },
+            onError: () => {
+              <Alert title="농장 리뷰 등록 중 오류가 발생했습니다." />;
+            },
+          },
+        );
+      }
+    }
   };
 
   const handleCancel = () => {
