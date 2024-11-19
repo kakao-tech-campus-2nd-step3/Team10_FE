@@ -68,10 +68,6 @@ const AppRouter = () => {
           element: <SellerMyPage />,
         },
         {
-          path: "schedule/:scheduleId",
-          element: <FarmDetailPage />,
-        },
-        {
           path: "seller",
           element: <SellerLayout />,
           children: [
@@ -199,7 +195,16 @@ const AppRouter = () => {
         },
         {
           path: "schedule",
-          element: <SchedulePage />,
+          children: [
+            {
+              index: true,
+              element: <SchedulePage />,
+            },
+            {
+              path: ":scheduleId",
+              element: <FarmDetailPage />,
+            },
+          ],
         },
         {
           path: "cart/product",
