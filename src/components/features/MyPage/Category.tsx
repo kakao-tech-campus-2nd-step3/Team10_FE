@@ -3,7 +3,7 @@ import { HeartOutlined, ProfileOutlined, UserOutlined } from "@ant-design/icons"
 import { Text, Flex, Box, Icon, Link as ChakraLink } from "@chakra-ui/react";
 
 const Category = () => (
-  <Box flexShrink="1" w="330px" h="800px" border="none" borderRadius="20px" bgColor="#FFFFFF">
+  <Box pos="sticky" top="10" flexShrink="1" w="330px" h="800px" border="none" borderRadius="20px" bgColor="#FFFFFF">
     <Flex direction="column">
       <Flex direction="row" mt={10} ml={5}>
         <Icon as={HeartOutlined} color="#22543D" fontSize="25px" />

@@ -17,7 +17,7 @@ const defaultFormData = {
   endTime: "",
 };
 
-const Product = ({ scheduleId }: { scheduleId: number }) => {
+const Schedule = ({ scheduleId }: { scheduleId: number }) => {
   const { data: farmDetail = defaultFormData } = useGetFarmDetail(scheduleId);
 
   const [dateOptions, setDateOptions] = useState<string[]>([]);
@@ -38,7 +38,7 @@ const Product = ({ scheduleId }: { scheduleId: number }) => {
 
   return (
     <Flex direction="row">
-      <Box mt={100} ml={200}>
+      <Box mt={100}>
         <Image w="500px" h="530px" borderRadius="12px" alt="farmImage" src={farmDetail.imageUrl} />
       </Box>
       <Flex direction="column" maxW="600px">
@@ -144,4 +144,4 @@ const Product = ({ scheduleId }: { scheduleId: number }) => {
   );
 };
 
-export default Product;
+export default Schedule;

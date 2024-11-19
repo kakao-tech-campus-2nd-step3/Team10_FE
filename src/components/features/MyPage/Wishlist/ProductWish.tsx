@@ -12,7 +12,7 @@ type Product = {
 };
 
 const ProductWish = () => {
-  const { data: wishlists, isLoading, refetch } = useGetWishlists();
+  const { data: wishlists, isLoading, refetch } = useGetWishlists("product");
   const { mutate: deleteWishlist } = useDeleteWishlists();
 
   const handleDelete = (wishlistId: number) => {

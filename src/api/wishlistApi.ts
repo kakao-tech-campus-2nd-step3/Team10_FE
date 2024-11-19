@@ -7,13 +7,13 @@ type WishlistData = {
 
 const useCreateWishlists = () => {
   const fetcher = (wishlistData: WishlistData) =>
-    defaultApi.post(`/api/wishlist/{product_id}`, wishlistData).then(({ data }) => data);
+    defaultApi.post(`/api/v1/wishlist/{product_id}`, wishlistData).then(({ data }) => data);
 
   return useMutation({ mutationFn: fetcher });
 };
 
-const useGetWishlists = () => {
-  const fetcher = () => needAuthDefaultApi.get(`/api/wishlist`).then(({ data }) => data);
+const useGetWishlists = (type: "product" | "farm") => {
+  const fetcher = () => needAuthDefaultApi.get(`/api/v1/wishlist`, { params: { type } }).then(({ data }) => data);
 
   return useQuery({
     queryKey: ["wishlists"],
@@ -22,7 +22,7 @@ const useGetWishlists = () => {
 };
 
 const useDeleteWishlists = () => {
-  const fetcher = (wishlistId: number) => defaultApi.delete(`/api/wishlist/${wishlistId}`).then(({ data }) => data);
+  const fetcher = (wishlistId: number) => defaultApi.delete(`/api/v1/wishlist/${wishlistId}`).then(({ data }) => data);
 
   return useMutation({ mutationFn: fetcher });
 };
