@@ -11,11 +11,18 @@ const Category = () => (
           위시리스트
         </Text>
       </Flex>
-      <ChakraLink as={Link} w="50px" h="20px" mt={3} ml={5} color="#5C5C5C" fontSize="16px" fontWeight="medium">
-        농산품
-      </ChakraLink>
-      <ChakraLink as={Link} w="68px" h="20px" mt={1} ml={5} color="#5C5C5C" fontSize="16px" fontWeight="medium">
-        농장 체험
+      <ChakraLink
+        as={Link}
+        w="50px"
+        h="20px"
+        mt={3}
+        ml={5}
+        color="#5C5C5C"
+        fontSize="16px"
+        fontWeight="medium"
+        to="/me/product-wish"
+      >
+        위시리스트
       </ChakraLink>
       <Flex direction="row" mt={10} ml={5}>
         <Icon as={ProfileOutlined} color="#22543D" fontSize="25px" />
