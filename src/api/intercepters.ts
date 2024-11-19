@@ -13,10 +13,10 @@ const refrechIntercepter = async (response: AxiosResponse): Promise<AxiosRespons
       alert("로그아웃 되었습니다. 다시 로그인해주세요.");
       window.location.href = "/";
     });
-    const user = JSON.parse(localStorage.getItem("poomasi-user") || "{}");
+    const user = JSON.parse(localStorage.getItem("poomasi_user") || "{}");
 
     localStorage.setItem(
-      "poomasi-user",
+      "poomasi_user",
       JSON.stringify({
         ...user,
         token: result,

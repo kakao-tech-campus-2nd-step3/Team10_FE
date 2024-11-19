@@ -1,13 +1,8 @@
 import { HeartOutlined } from "@ant-design/icons";
-import { Box, Button, Image, Text, Flex, Icon, Divider, Alert, HStack, Input, useNumberInput } from "@chakra-ui/react";
-import { useCreateWishlists } from "@api/wishlistApi";
+import { Box, Button, Image, Text, Flex, Icon, Divider, HStack, Input, useNumberInput } from "@chakra-ui/react";
 import store1 from "@assets/Image/Store/Store1.png";
 
-type ProductProps = {
-  productId: number;
-};
-
-const Product: React.FC<ProductProps> = ({ productId }) => {
+const Product = () => {
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } = useNumberInput({
     step: 1,
     defaultValue: 1,
@@ -19,24 +14,9 @@ const Product: React.FC<ProductProps> = ({ productId }) => {
   const dec = getDecrementButtonProps();
   const input = getInputProps();
 
-  const createWishlistMutation = useCreateWishlists();
-
-  const handleAddToWishlist = () => {
-    const wishlistData = { product_id: productId };
-
-    createWishlistMutation.mutate(wishlistData, {
-      onSuccess: () => {
-        <Alert title="위시리스트에 추가되었습니다!" />;
-      },
-      onError: () => {
-        <Alert title="위시리스트 추가 중 문제가 발생했습니다." />;
-      },
-    });
-  };
-
   return (
     <Flex direction="row">
-      <Box mt={100}>
+      <Box mt={100} ml={200}>
         <Image w="500px" h="460px" borderRadius="12px" alt="product" src={store1} />
       </Box>
       <Flex direction="column" maxW="600px">
@@ -76,7 +56,6 @@ const Product: React.FC<ProductProps> = ({ productId }) => {
             borderRadius="12px"
             cursor="pointer"
             bgColor="#FC8181"
-            onClick={handleAddToWishlist}
           >
             <Icon as={HeartOutlined} fontSize="30px" />
           </Flex>

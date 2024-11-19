@@ -1,9 +1,8 @@
-import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "@components/layouts/MainLayout";
 import MyPageLayout from "@components/layouts/MyPageLayout";
 import SellerLayout from "@components/layouts/SellerLayout";
-import useScrollSaver from "@hooks/useScrollSaver";
+import BuyerMyPage from "@pages/BuyerMyPage";
 import CallbackPage from "@pages/CallbackPage";
 import EmailLoginPage from "@pages/EmailLoginPage";
 import EmailRegisterPage from "@pages/EmailRegisterPage";
@@ -17,13 +16,12 @@ import DeliveryPage from "@pages/MyPage/DeliveryPage";
 import FarmListPage from "@pages/MyPage/FarmListPage";
 import MyInfoPage from "@pages/MyPage/MyInfoPage";
 import MyOrdersPage from "@pages/MyPage/OrdersPage";
-import ProductWishlistPage from "@pages/MyPage/ProductWishlistPage";
 import ReviewListPage from "@pages/MyPage/ReviewListPage";
 import WithdrawPage from "@pages/MyPage/WithdrawPage";
 import ProductCartPage from "@pages/ProductCartPage";
-import ProductDetailPage from "@pages/ProductDetailPage";
 import RegisterPage from "@pages/RegisterPage";
 import SchedulePage from "@pages/SchedulePage";
+import SellerMyPage from "@pages/SellerMyPage";
 import SellerPage from "@pages/SellerPage";
 import BizRegister from "@pages/SellerPage/BizRegister";
 import FarmEdit from "@pages/SellerPage/FarmEdit";
@@ -36,16 +34,10 @@ import SellerProductListPage from "@pages/SellerPage/SellerProductList";
 import SellerWithdraw from "@pages/SellerPage/SellerWithdraw";
 import SoldOuts from "@pages/SellerPage/SoldOuts";
 import TaxCalculator from "@pages/SellerPage/TaxCalculator";
+import StoreDetailPage from "@pages/StoreDetailPage";
 import StorePage from "@pages/StorePage";
-import WishPage from "@pages/WishPage";
 
 const AppRouter = () => {
-  const { initScroll } = useScrollSaver();
-
-  useEffect(() => {
-    initScroll();
-  }, []);
-
   const routers = createBrowserRouter([
     {
       path: "/",
@@ -60,8 +52,20 @@ const AppRouter = () => {
           element: <IntroductionPage />,
         },
         {
-          path: "wish",
-          element: <WishPage />,
+          path: "BuyerMyPage",
+          element: <BuyerMyPage />,
+        },
+        {
+          path: "SellerMyPage",
+          element: <SellerMyPage />,
+        },
+        {
+          path: "StoreDetail",
+          element: <StoreDetailPage />,
+        },
+        {
+          path: "schedule/:scheduleId",
+          element: <FarmDetailPage />,
         },
         {
           path: "seller",
@@ -131,10 +135,6 @@ const AppRouter = () => {
               element: <MyPage />,
             },
             {
-              path: "product-wish",
-              element: <ProductWishlistPage />,
-            },
-            {
               path: "orders",
               element: <MyOrdersPage />,
             },
@@ -178,16 +178,7 @@ const AppRouter = () => {
         },
         {
           path: "store",
-          children: [
-            {
-              index: true,
-              element: <StorePage />,
-            },
-            {
-              path: ":productId",
-              element: <ProductDetailPage />,
-            },
-          ],
+          element: <StorePage />,
         },
         {
           path: "callback/:provider",
@@ -195,16 +186,7 @@ const AppRouter = () => {
         },
         {
           path: "schedule",
-          children: [
-            {
-              index: true,
-              element: <SchedulePage />,
-            },
-            {
-              path: ":scheduleId",
-              element: <FarmDetailPage />,
-            },
-          ],
+          element: <SchedulePage />,
         },
         {
           path: "cart/product",

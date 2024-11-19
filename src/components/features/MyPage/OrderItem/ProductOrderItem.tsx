@@ -27,7 +27,7 @@ const nonButton = (status: ProductOrderStatus) =>
 const other = (status: ProductOrderStatus) => !canReview(status) && !nonButton(status);
 
 const contactStatus = (status: ProductOrderStatus) => {
-  if (other(status)) return "CANCANCEL";
+  if (other(status)) return "CANCANCLE";
   if (status === "DELIVERED") return "CANREFUND";
   return "OTHER";
 };

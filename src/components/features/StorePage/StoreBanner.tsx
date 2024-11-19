@@ -8,7 +8,7 @@ const StoreBanner = () => (
       <Image h="full" src="/assets/image/vegetables.png" />
       <Flex align="center" justify="center" direction="column" w="470px" h="full" color="white">
         <Text fontSize="xl" fontWeight="bold">
-          믿고 먹는 건강한 먹거리,{" "}
+          믿고 먹는 건간한 먹거리,{" "}
           <Text as="span" color="#48BB78">
             품앗이
           </Text>{" "}

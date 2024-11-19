@@ -18,7 +18,7 @@ const splitedOrders = sortedOrders.reduce<Order[][]>((acc, cur) => {
 }, []);
 
 const MyOrdersPage = () => (
-  <Card title="상품 주문 내역" w="100%" p="10">
+  <Card title="상품 주문 내역" w="100%" h="800px" overflowY="scroll" overflowX="hidden" p="10">
     {splitedOrders.map(orders => (
       <Flex key={orders[0].orderDate} direction="column">
         <Text py="2">{orders[0].orderDate}</Text>

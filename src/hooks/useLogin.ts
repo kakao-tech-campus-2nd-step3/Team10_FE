@@ -5,7 +5,7 @@ import { userAtomWithPersistence } from "@atom/userAtom";
 const useLogin = () => {
   const [user, setUser] = useAtom(userAtomWithPersistence);
 
-  const login = async (accessToken: string) =>
+  const login = (accessToken: string) => {
     defaultApi
       .get("/api/members/self", {
         headers: {
@@ -20,8 +20,7 @@ const useLogin = () => {
           role: data.role,
         });
       });
-
-  const refreshLogin = async () => login(user?.token || "");
+  };
 
   const logout = () => {
     setUser(null);
@@ -31,7 +30,7 @@ const useLogin = () => {
 
   const sellerCheck = () => user?.role === "ROLE_FARMER";
 
-  return { user, login, logout, refreshLogin, loginCheck, sellerCheck };
+  return { login, logout, loginCheck, sellerCheck };
 };
 
 export default useLogin;

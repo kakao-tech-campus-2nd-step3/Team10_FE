@@ -13,6 +13,6 @@ const useCreateBusiness = () => {
   return useMutation({ mutationFn: fetcher });
 };
 
-const useGetBusiness = () => null;
+const useGetBusinessDetail = () => null;
 
-export { useCreateBusiness, useGetBusiness };
+export { useCreateBusiness, useGetBusinessDetail };

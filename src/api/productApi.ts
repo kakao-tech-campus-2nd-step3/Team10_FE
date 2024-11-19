@@ -5,18 +5,12 @@ type ProductData = {
   categoryId: number;
   name: string;
   description: string;
+  imageUrl: string;
   stock: string;
   price: string;
   growEnv: string;
   shippingFee: string;
   phoneNumber: string;
-  mainTitle: string;
-  subTitle1: string;
-  subDesc1: string;
-  subTitle2: string;
-  subDesc2: string;
-  subTitle3: string;
-  subDesc3: string;
 };
 
 const useGetProducts = () => {

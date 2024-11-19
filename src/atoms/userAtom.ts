@@ -7,7 +7,7 @@ type UserAtomValue = {
   role: string;
 };
 
-const userAtom = atom(localStorage.getItem("poomasi-user") ?? "");
+const userAtom = atom(localStorage.getItem("poomasi_user") ?? "");
 
 const userAtomWithPersistence = atom(
   get => {
@@ -16,7 +16,7 @@ const userAtomWithPersistence = atom(
   },
   (_, set, data: UserAtomValue | null) => {
     set(userAtom, JSON.stringify(data));
-    localStorage.setItem("poomasi-user", JSON.stringify(data));
+    localStorage.setItem("poomasi_user", JSON.stringify(data));
   },
 );
 

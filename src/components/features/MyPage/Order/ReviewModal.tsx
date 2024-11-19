@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import {
   Flex,
@@ -10,10 +10,8 @@ import {
   Divider,
   Icon,
   Input,
-  Textarea,
-  Alert,
+  Box,
 } from "@chakra-ui/react";
-import { useCreateFarmReviews, useCreateProductReviews, useUpdateReviews } from "@api/reviewApi";
 import Image from "@components/common/Image";
 import StarRating from "@components/common/StarRating";
 import BasicModal from "@components/common/modal/BasicModal";
@@ -22,38 +20,13 @@ type ReviewModalProps = {
   isOpen: boolean;
   onClose: () => void;
   productId?: number;
-  farmId?: number;
-  isEditing?: boolean;
-  initialData?: {
-    rating: number;
-    content: string;
-    id: number;
-  };
 };
 
-const ReviewModal: React.FC<ReviewModalProps> = ({
-  isOpen,
-  onClose,
-  productId,
-  farmId,
-  isEditing = false,
-  initialData,
-}) => {
+const ReviewModal: React.FC<ReviewModalProps> = ({ isOpen, onClose, productId }) => {
   const mainImageInputRef = useRef<HTMLInputElement>(null);
   const [imageUrl, setImageUrl] = useState<string>();
   const [rating, setRating] = useState<number>(0);
   const [reviewText, setReviewText] = useState<string>("");
-
-  const { mutate: createProductReview } = useCreateProductReviews();
-  const { mutate: createFarmReview } = useCreateFarmReviews();
-  const { mutate: updateReview } = useUpdateReviews(initialData?.id || 0);
-
-  useEffect(() => {
-    if (isEditing && initialData) {
-      setRating(initialData.rating);
-      setReviewText(initialData.content);
-    }
-  }, [isEditing, initialData]);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -66,67 +39,22 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
     setRating(newRating);
   };
 
-  const handleReviewTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleReviewTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setReviewText(event.target.value);
   };
 
   const handleReviewSubmit = () => {
     const reviewData = {
+      productId,
       rating,
-      content: reviewText,
+      reviewText,
+      imageUrl,
     };
-    if (isEditing && initialData) {
-      updateReview(
-        { ...reviewData, farm_id: initialData.id },
-        {
-          onSuccess: () => {
-            <Alert title="리뷰가 성공적으로 수정되었습니다." />;
-            setTimeout(onClose, 2000);
-          },
-          onError: () => {
-            <Alert title="리뷰 수정 중 오류가 발생했습니다." />;
-          },
-        },
-      );
-    } else {
-      if (productId) {
-        createProductReview(
-          { ...reviewData, product_id: productId },
-          {
-            onSuccess: () => {
-              <Alert title="상품 리뷰가 성공적으로 등록되었습니다." />;
-              setTimeout(onClose, 2000);
-            },
-            onError: () => {
-              <Alert title="상품 리뷰 등록 중 오류가 발생했습니다." />;
-            },
-          },
-        );
-      }
-
-      if (farmId) {
-        createFarmReview(
-          { ...reviewData, farm_id: farmId },
-          {
-            onSuccess: () => {
-              <Alert title="농장 리뷰가 성공적으로 등록되었습니다." />;
-              setTimeout(onClose, 2000);
-            },
-            onError: () => {
-              <Alert title="농장 리뷰 등록 중 오류가 발생했습니다." />;
-            },
-          },
-        );
-      }
-    }
-  };
-
-  const handleCancel = () => {
-    onClose();
+    postMessage(reviewData);
   };
 
   return (
-    <BasicModal isOpen={isOpen} onClose={onClose} maxW="800px" maxH="1100px">
+    <BasicModal isOpen={isOpen} onClose={onClose} maxW="800px" maxH="1000px">
       <ModalCloseButton _hover={{ bg: "#FFFFFF" }} />
       <ModalHeader color="#22543D" fontSize="25px" fontWeight="bold">
         후기 쓰기
@@ -152,34 +80,32 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
               as={UploadOutlined}
               mx="5"
               mt={12}
-              ml={-230}
+              ml={-200}
               color="#000000"
               fontSize="30px"
               cursor="pointer"
               onClick={() => mainImageInputRef.current?.click()}
             />
-            <Flex pos="relative" align="flex-end" justify="flex-end" w="100%" h="200px" mt="5" mr={100}>
+            <Flex pos="relative" align="flex-end" justify="flex-end" w="100%" h="200px" mt="5" mr={95}>
               <Image flexShrink="0" w="200px" h="200px" objectFit="cover" alt="main image" src={imageUrl} />
               <Input ref={mainImageInputRef} display="none" accept="image/*" onChange={handleImageChange} type="file" />
             </Flex>
           </Flex>
 
-          <Textarea
-            w="600px"
-            h="150px"
-            mt={10}
-            p="10px"
-            borderWidth="0.4px"
-            borderColor="#000000"
-            _focus={{ borderColor: "#000000", boxShadow: "none" }}
-            _placeholder={{ color: "#D9D9D9", fontWeight: "bold", fontSize: "16px" }}
-            bgColor="#FFFFFF"
-            onChange={handleReviewTextChange}
-            placeholder="구매하신 상품의 후기를 남겨주시면 다른 구매자들에게도 도움이 됩니다."
-            value={reviewText}
-          />
-
-          <Flex justify="center" direction="row" gap="5px" mt={10} mb={10}>
+          <Box w="600px" h="150px" mt={10} borderWidth="0.4px" borderColor="#000000" bgColor="#FFFFFF">
+            <Input
+              w="500px"
+              mt={2}
+              ml={2}
+              border="none"
+              _focus={{ borderColor: "transparent", boxShadow: "none" }}
+              _placeholder={{ color: "#D9D9D9", fontWeight: "bold", fontSize: "16px" }}
+              onChange={handleReviewTextChange}
+              placeholder="구매하신 상품의 후기를 남겨주시면 다른 구매자들에게도 도움이 됩니다."
+              value={reviewText}
+            />
+          </Box>
+          <Flex justify="center" direction="row" gap="5px" mt={10}>
             <Button
               w="230px"
               h="50px"
@@ -191,7 +117,6 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
               borderRadius="12px"
               _hover={{ bgColor: "#FFFFFF" }}
               bgColor="#FFFFFF"
-              onClick={handleCancel}
             >
               작성 취소
             </Button>

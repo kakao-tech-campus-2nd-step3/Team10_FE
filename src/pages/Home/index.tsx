@@ -24,7 +24,7 @@ const Home = () => {
           <Review />
         </Flex>
         <BestScheduleSection />
-        <GridView items={products || []} ItemComponent={ProductCard} py="10" columns={3} gap="25px" />
+        <GridView items={products || []} ItemComponent={ProductCard} columns={3} gap="25px" />
       </Flex>
     </Flex>
   );

@@ -19,8 +19,8 @@ const needAuthDefaultApi = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   headers: {
     "Content-Type": "application/json",
-    Authorization: JSON.parse(localStorage.getItem("poomasi-user") || "{}")?.token
-      ? `Bearer ${JSON.parse(localStorage.getItem("poomasi-user") || "{}").token}`
+    Authorization: JSON.parse(localStorage.getItem("poomasi_user") || "{}")?.token
+      ? `Bearer ${JSON.parse(localStorage.getItem("poomasi_user") || "{}").token}`
       : undefined,
   },
   withCredentials: true,

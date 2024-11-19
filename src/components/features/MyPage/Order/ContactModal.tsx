@@ -6,7 +6,7 @@ import CancelOrderModal from "./CancelOrderModal";
 import ContactNumberModal from "./ContactNumberModal";
 
 interface ContactModalProps {
-  status: "CANCANCEL" | "CANREFUND" | "OTHER";
+  status: "CANCANCLE" | "CANREFUND" | "OTHER";
   isOpen: boolean;
   onClose: () => void;
   maxW?: string;
@@ -101,7 +101,7 @@ const ContactModal: React.FC<ContactModalProps> = ({
         {status === "CANREFUND" && (
           <RefundModal isOpen={isRefundModalOpen} onClose={handleCloseRefundModal} productId={productId} />
         )}
-        {status === "CANCANCEL" && (
+        {status === "CANCANCLE" && (
           <CancelOrderModal isOpen={isRefundModalOpen} onClose={handleCloseRefundModal} productId={productId} />
         )}
       </ModalBody>

@@ -10,7 +10,7 @@ type ProductFilterProps = {
 };
 
 const ProductFilter = ({ items = [], filterState = useFilters() }: ProductFilterProps) => (
-  <Flex direction="column" w="250px" h="100%" pt="10">
+  <Flex direction="column" w="250px" h="100%">
     <Text w="full" py="5" fontSize="xl" fontWeight="bold">
       필터
     </Text>

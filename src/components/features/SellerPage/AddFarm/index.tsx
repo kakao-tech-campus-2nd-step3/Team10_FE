@@ -111,7 +111,6 @@ const AddFarm = ({ isEdit, originFarm }: AddFarm) => {
     setFormData(prevData => ({
       ...prevData,
       ...data,
-      date: [prevData.startDate, prevData.endDate],
     }));
   };
 
