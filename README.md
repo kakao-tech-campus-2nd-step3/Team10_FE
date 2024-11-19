@@ -1,7 +1,7 @@
 # Team10_FE
 ![배너 사진](https://github.com/user-attachments/assets/28dfcd84-c2b5-4890-ac9a-1226a0e5b763)
 
-<p align="center">농산물로 지역을 잇는 플랫폼 “품앗이” 의 백엔드 서버입니다.</p>
+<p align="center">농산물로 지역을 잇는 플랫폼 “품앗이” 의 프론트엔드 서버입니다.</p>
 <p align="center">
     <a href="https://www.kakaotechcampus.com/user/index.do" target="_blank">
         카카오 테크 캠퍼스 2기
