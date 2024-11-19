@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "@components/layouts/MainLayout";
 import MyPageLayout from "@components/layouts/MyPageLayout";
 import SellerLayout from "@components/layouts/SellerLayout";
+import useScrollSaver from "@hooks/useScrollSaver";
 import BuyerMyPage from "@pages/BuyerMyPage";
 import CallbackPage from "@pages/CallbackPage";
 import EmailLoginPage from "@pages/EmailLoginPage";
@@ -19,6 +21,7 @@ import MyOrdersPage from "@pages/MyPage/OrdersPage";
 import ReviewListPage from "@pages/MyPage/ReviewListPage";
 import WithdrawPage from "@pages/MyPage/WithdrawPage";
 import ProductCartPage from "@pages/ProductCartPage";
+import ProductDetailPage from "@pages/ProductDetailPage";
 import RegisterPage from "@pages/RegisterPage";
 import SchedulePage from "@pages/SchedulePage";
 import SellerMyPage from "@pages/SellerMyPage";
@@ -34,10 +37,15 @@ import SellerProductListPage from "@pages/SellerPage/SellerProductList";
 import SellerWithdraw from "@pages/SellerPage/SellerWithdraw";
 import SoldOuts from "@pages/SellerPage/SoldOuts";
 import TaxCalculator from "@pages/SellerPage/TaxCalculator";
-import StoreDetailPage from "@pages/StoreDetailPage";
 import StorePage from "@pages/StorePage";
 
 const AppRouter = () => {
+  const { initScroll } = useScrollSaver();
+
+  useEffect(() => {
+    initScroll();
+  }, []);
+
   const routers = createBrowserRouter([
     {
       path: "/",
@@ -58,10 +66,6 @@ const AppRouter = () => {
         {
           path: "SellerMyPage",
           element: <SellerMyPage />,
-        },
-        {
-          path: "StoreDetail",
-          element: <StoreDetailPage />,
         },
         {
           path: "schedule/:scheduleId",
@@ -178,7 +182,16 @@ const AppRouter = () => {
         },
         {
           path: "store",
-          element: <StorePage />,
+          children: [
+            {
+              index: true,
+              element: <StorePage />,
+            },
+            {
+              path: ":productId",
+              element: <ProductDetailPage />,
+            },
+          ],
         },
         {
           path: "callback/:provider",
