@@ -11,7 +11,6 @@ const BestScheduleSection = () => (
     <GridView
       items={mockBestSchedule.map(item => ({
         ...item,
-        disabled: true,
       }))}
       columns={2}
       gap="20px"
