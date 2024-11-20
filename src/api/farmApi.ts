@@ -34,12 +34,13 @@ const useGetFarm = () => {
   });
 };
 
-const useGetFarms = () => {
+const useGetFarms = (categoryId: number | null = 0) => {
   const fetcher = () => defaultApi.get(`/api/farms`).then(({ data }) => data);
+  const categoryFetcher = () => defaultApi.get(`/api/farms/category/${categoryId}`).then(({ data }) => data);
 
   return useQuery({
-    queryKey: ["farms"],
-    queryFn: fetcher,
+    queryKey: ["farms", categoryId],
+    queryFn: categoryId !== 0 ? categoryFetcher : fetcher,
   });
 };
 

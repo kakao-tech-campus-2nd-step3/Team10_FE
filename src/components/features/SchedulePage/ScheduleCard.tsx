@@ -27,7 +27,7 @@ const ScheduleCard = ({ item, ...props }: ScheduleCardProps) => (
     >
       <Flex align="center" direction="column" w="full" mt="auto" mb="10">
         <Text px="5" color="green" bg="white" borderRadius="xl">
-          {item.farm.address}
+          {item.address}
         </Text>
         <Text color="white" fontSize="2xl" fontWeight="bold">
           {item.name}
