@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Flex, ModalBody, ModalHeader, ModalCloseButton, Button, Text, Divider } from "@chakra-ui/react";
+import { useGetProductDetail } from "@api/productApi";
 import BasicModal from "@components/common/modal/BasicModal";
-import useGetProduct from "./useGetProduct";
 
 interface CancelOrderModalProps {
   isOpen: boolean;
@@ -18,7 +18,7 @@ const CancelOrderModal: React.FC<CancelOrderModalProps> = ({
   maxH = "800px",
   productId,
 }) => {
-  const { data: productData } = useGetProduct(productId);
+  const { data: productData } = useGetProductDetail(productId);
 
   const [totalRefundAmount, setTotalRefundAmount] = useState(0);
 

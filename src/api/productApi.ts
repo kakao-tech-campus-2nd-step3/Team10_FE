@@ -19,12 +19,13 @@ type ProductData = {
   subDesc3: string;
 };
 
-const useGetProducts = () => {
+const useGetProducts = (categoryId = 0) => {
   const fetcher = () => defaultApi.get(`/api/products`).then(({ data }) => data);
+  const categoryFetcher = () => defaultApi.get(`/api/categories/${categoryId}`).then(({ data }) => data);
 
   return useQuery({
-    queryKey: ["products"],
-    queryFn: fetcher,
+    queryKey: ["products", categoryId],
+    queryFn: categoryId ? categoryFetcher : fetcher,
   });
 };
 
