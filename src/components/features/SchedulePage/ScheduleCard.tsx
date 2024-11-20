@@ -4,11 +4,11 @@ import ImageCard, { ImageCardProps } from "@components/common/ImageCard";
 import { Schedule } from "@type/index";
 
 type ScheduleCardProps = ImageCardProps & {
-  item: Schedule;
+  item: Schedule & { disabled?: boolean };
 };
 
 const ScheduleCard = ({ item, ...props }: ScheduleCardProps) => (
-  <Box as={Link} to={`/schedule/${item.id}`}>
+  <Box {...(!item?.disabled && { as: Link, to: `/schedule/${item.id}` })}>
     <ImageCard
       h="full"
       {...props}
@@ -17,9 +17,13 @@ const ScheduleCard = ({ item, ...props }: ScheduleCardProps) => (
         brightness: item?.mainImage ? 1 : 0.6,
       }}
       bgImg={item.mainImage}
-      _hover={{
-        transform: "scale(1.05)",
-      }}
+      _hover={
+        !item?.disabled
+          ? {
+              transform: "scale(1.05)",
+            }
+          : {}
+      }
     >
       <Flex align="center" direction="column" w="full" mt="auto" mb="10">
         <Text px="5" color="green" bg="white" borderRadius="xl">

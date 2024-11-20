@@ -8,7 +8,15 @@ const BestScheduleSection = () => (
     <Text py="3" fontSize="2xl" fontWeight="bold">
       이번주 Best
     </Text>
-    <GridView items={mockBestSchedule} columns={2} gap="20px" ItemComponent={ScheduleCard} />
+    <GridView
+      items={mockBestSchedule.map(item => ({
+        ...item,
+        disabled: true,
+      }))}
+      columns={2}
+      gap="20px"
+      ItemComponent={ScheduleCard}
+    />
   </Box>
 );
 
