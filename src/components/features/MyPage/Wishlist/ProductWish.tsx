@@ -1,41 +1,44 @@
-import { Flex, Button, Text, Box, Alert, Spinner } from "@chakra-ui/react";
-import { useDeleteWishlists, useGetWishlists } from "@api/wishlistApi";
-import farm1 from "@assets/Image/Farm/Farm1.png";
+import { Flex, Button, Text, Box } from "@chakra-ui/react";
+// import { useGetWishlists } from "@api/wishlistApi";
 import Image from "@components/common/Image";
+import mockProducts from "@mocks/mockItem/mockProducts";
 
 type Product = {
   id: number;
   name: string;
-  tag: string;
+  tag?: string;
   price: number;
   deliveryFee: number;
+  mainImage?: string;
 };
 
 const ProductWish = () => {
-  const { data: wishlists, isLoading, refetch } = useGetWishlists("product");
-  const { mutate: deleteWishlist } = useDeleteWishlists();
+  // const { data: wishlists } = useGetWishlists("product");
+  // const { mutate: deleteWishlist } = useDeleteWishlists();
 
-  const handleDelete = (wishlistId: number) => {
-    deleteWishlist(wishlistId, {
-      onSuccess: () => {
-        <Alert title="해당 상품이 위시리스트에서 삭제되었습니다." />;
-        refetch();
-      },
-      onError: () => {
-        <Alert title="삭제에 실패했습니다. 다시 시도해주세요." />;
-      },
-    });
-  };
+  // const handleDelete = (wishlistId: number) => {
+  //   deleteWishlist(wishlistId, {
+  //     onSuccess: () => {
+  //       <Alert title="해당 상품이 위시리스트에서 삭제되었습니다." />;
+  //       refetch();
+  //     },
+  //     onError: () => {
+  //       <Alert title="삭제에 실패했습니다. 다시 시도해주세요." />;
+  //     },
+  //   });
+  // };
 
-  if (isLoading) {
-    return <Spinner color="#22543D" size="xl" />;
-  }
+  // if (isLoading) {
+  //   return <Spinner color="#22543D" size="xl" />;
+  // }
+
+  const wishlists = mockProducts;
 
   return (
     <Flex direction="column">
       {wishlists?.map((product: Product) => (
         <Flex direction="row" gap="10px">
-          <Image mt={3} w="150px" borderRadius="xl" h="150px" src={farm1} alt="Farm image" />
+          <Image mt={3} w="150px" borderRadius="xl" h="150px" src={product.mainImage} alt={`${product.name} 이미지`} />
           <Flex justify="space-between" flex="1">
             <Flex justify="center" direction="column">
               <Flex direction="row">
@@ -85,7 +88,7 @@ const ProductWish = () => {
                 borderRadius="12px"
                 _hover={{ bgColor: "#FFFFFF" }}
                 bgColor="#FFFFFF"
-                onClick={() => handleDelete(product.id)}
+                // onClick={() => handleDelete(product.id)}
               >
                 삭제
               </Button>
