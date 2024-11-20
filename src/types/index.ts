@@ -32,7 +32,11 @@ export type Review = Item & {
 
 export type Schedule = Item & {
   name: string;
-  farm: Farm;
+  address: string;
+  addressDetail: string;
+  latitude: number;
+  longitude: number;
+  description: string;
   mainImage?: string;
 };
 

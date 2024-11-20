@@ -15,7 +15,6 @@ const defaultPosInfo = {
 };
 
 const Delivery = () => {
-  const [currentAddress, setCurrentAddress] = useState("");
   const [pos, setPos] = useState<PosInfo>(defaultPosInfo);
   const [newAddress, setNewAddress] = useState("");
   const [newDetailAddress, setNewDetailAddress] = useState("");
@@ -32,7 +31,6 @@ const Delivery = () => {
 
     updateAddress(updateData, {
       onSuccess: () => {
-        setCurrentAddress(newAddress);
         setNewAddress("");
         setNewDetailAddress("");
       },
@@ -65,12 +63,12 @@ const Delivery = () => {
       bgColor="#FFFFFF"
       dir="column"
     >
-      <Text color="#000000" fontSize="20px" fontWeight="bold">
+      {/* <Text color="#000000" fontSize="20px" fontWeight="bold">
         {"현재 배송지 : "}
         <Text as="span" fontWeight="medium">
           {currentAddress}
         </Text>
-      </Text>
+      </Text> */}
       <Box>
         <Text color="#000000" fontSize="16px" fontWeight="bold">
           도로명 주소

@@ -1,5 +1,5 @@
 import StarRatings from "react-star-ratings";
-import { Text, Image, Flex, Divider } from "@chakra-ui/react";
+import { Text, Image, Flex, Divider, Select } from "@chakra-ui/react";
 import farm3 from "@assets/Image/Farm/Farm3.png";
 
 const reviewsData = [
@@ -37,6 +37,13 @@ const reviewsData = [
 
 const ReviewList = () => (
   <Flex align="flex-start" direction="column" mb={50}>
+    <Flex mt={5}>
+      <Select w="1090px" placeholder="최신순">
+        <option value="option1">인기순</option>
+        <option value="option2">별점 높은순</option>
+        <option value="option2">별점 낮은순</option>
+      </Select>
+    </Flex>
     {reviewsData.map((review, index) => (
       <Flex key={review.id} direction="column" mt={10}>
         <Flex direction="row">

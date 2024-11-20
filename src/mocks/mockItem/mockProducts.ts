@@ -1,19 +1,25 @@
+import dd from "@assets/Image/Farm/Best2.png";
+import ddd from "@assets/Image/Farm/Farm3.png";
+import store1 from "@assets/Image/Store/Store1.png";
+import pump from "@assets/Image/Store/pump.jpg";
+import tomato from "@assets/Image/Store/tomato.jpg";
+import vege from "@assets/Image/Store/vege.jpg";
 import mockFarms from "@mocks/mockItem/mockFarms";
 import { Product } from "@type/index";
 
 const mockProducts: Product[] = [
   {
     id: 1,
-    name: "건호네 미나리",
+    name: "건호네 맛있는 포도",
     unit: "[10kg/20단]",
     pricePerGram: "830원/100g",
     price: 10000,
     deliveryFee: 3000,
     description:
-      "미나미나리. 가끔 그런 생각을 해요. 이렇게 디자인을 하다보면 몰입감이 필요하다는 그런 생각이랄까. 그래서 여러 사진을 넣어요. 진짜처럼.",
+      "포도. 가끔 그런 생각을 해요. 이렇게 디자인을 하다보면 몰입감이 필요하다는 그런 생각이랄까. 그래서 여러 사진을 넣어요. 진짜처럼.",
     farm: mockFarms[0],
     tag: "유기농",
-    mainImage: "/assets/image/fresh_veggies.png",
+    mainImage: store1,
   },
   {
     id: 2,
@@ -26,7 +32,7 @@ const mockProducts: Product[] = [
       "토맛토맛토는 토마토맛토가 되고 싶었어요. 그래서 토맛토맛토밭에서 토마토맛토 밭에 가기 위해서 토마토 수레를 끌고 토맛토마토는 열심히 걸었어요.",
     farm: mockFarms[1],
     tag: "토맛토",
-    mainImage: "/assets/image/fresh_veggies.png",
+    mainImage: tomato,
   },
   {
     id: 3,
@@ -39,7 +45,7 @@ const mockProducts: Product[] = [
       "우리 엄마 손맛 가득한 깻잎입니다. 무농약으로 키워낸 건강한 깻잎, 간장에 절여 먹거나 쌈장에 곁들여 드셔보세요. 향긋하고 신선해요!",
     farm: mockFarms[2],
     tag: "무농약",
-    mainImage: "/assets/image/fresh_veggies.png",
+    mainImage: vege,
   },
   {
     id: 4,
@@ -52,7 +58,7 @@ const mockProducts: Product[] = [
       "할로윈에는 늙은 호박 장신구가 있더라고요. 늙은호박을 채칼로 썰어서 반죽을 조금 묻히고 구우면 바삭하고 맛있는 호박전이 된다는 사실을 아나요?",
     farm: mockFarms[3],
     tag: "유기농",
-    mainImage: "/assets/image/fresh_veggies.png",
+    mainImage: pump,
   },
   {
     id: 5,
@@ -65,7 +71,7 @@ const mockProducts: Product[] = [
       "지민이는 가지를 좋아합니다. 아니 안좋아합니다. 음.. 좋아하는걸까요? 가지나물 볶음은 좋아하는데 가지 튀김은 진짜 개 노맛이더라고요. 왜먹지?",
     farm: mockFarms[4],
     tag: "유기농",
-    mainImage: "/assets/image/fresh_veggies.png",
+    mainImage: dd,
   },
   {
     id: 6,
@@ -78,7 +84,7 @@ const mockProducts: Product[] = [
       "가끔 지민은 학교에서 심각하게 집에 가고싶을 때가 있어요. 그럴 때면 로만이나 자스민에서 산 달달한 복숭아 아이스티를 마시며 향수병을 달랩니다.",
     farm: mockFarms[2],
     tag: "무의식",
-    mainImage: "/assets/image/fresh_veggies.png",
+    mainImage: ddd,
   },
 ];
 

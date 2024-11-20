@@ -139,7 +139,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ formData, onChange }) => {
           mt={5}
           ml={520}
           onChange={handleCategoryChange}
-          placeholder="잎채소"
+          placeholder="카테고리 선택"
           value={formData.categoryId}
         >
           <option value={1}>잎채소</option>

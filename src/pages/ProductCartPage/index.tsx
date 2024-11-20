@@ -69,7 +69,7 @@ const ProductCartPage = () => {
         }))}
         ItemComponent={CartItem}
       />
-      <Text fontSize="xl" fontWeight="bold">
+      <Text mt={10} fontSize="xl" fontWeight="bold">
         결제금액
       </Text>
       <Divider />
@@ -78,7 +78,7 @@ const ProductCartPage = () => {
         <Text>배송비 : {deliveryFeeSum}원</Text>
         <Text>총 결제 금액 : {totalPrice}원</Text>
       </Flex>
-      <Text fontSize="xl" fontWeight="bold">
+      <Text mt={10} fontSize="xl" fontWeight="bold">
         배송지 입력
       </Text>
       <Divider />

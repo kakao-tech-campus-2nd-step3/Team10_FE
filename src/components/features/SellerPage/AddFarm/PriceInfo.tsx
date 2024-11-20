@@ -29,41 +29,19 @@ type PriceInfoProps = {
 const PriceInfo: React.FC<PriceInfoProps> = ({ onChange }) => {
   const [formData, setFormData] = useState<FormData>(defaultFormData);
 
-  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNumberInputChange = (key: keyof FormData) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     if (/^\d*$/.test(value)) {
-      onChange({ price: value });
+      const updatedFormData = { ...formData, [key]: value };
+      setFormData(updatedFormData);
+      onChange(updatedFormData);
     }
   };
 
-  const handleMaxPeopleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    if (/^\d*$/.test(value)) {
-      onChange({ maxPeople: value });
-    }
-  };
-
-  const handleMaxTeamChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    if (/^\d*$/.test(value)) {
-      onChange({ maxTeam: value });
-    }
-  };
-
-  const handleStartDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, startDate: event.target.value });
-  };
-
-  const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, endDate: event.target.value });
-  };
-
-  const handleStartTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, startTime: event.target.value });
-  };
-
-  const handleEndTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, endTime: event.target.value });
+  const handleDateTimeChange = (key: keyof FormData) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const updatedFormData = { ...formData, [key]: event.target.value };
+    setFormData(updatedFormData); // 로컬 상태 업데이트
+    onChange(updatedFormData); // 부모 컴포넌트로 상태 전달
   };
 
   return (
@@ -93,7 +71,7 @@ const PriceInfo: React.FC<PriceInfoProps> = ({ onChange }) => {
           }}
           _placeholder={{ color: "transparent" }}
           bgColor="#FFFFFF"
-          onChange={handlePriceChange}
+          onChange={handleNumberInputChange("price")}
           value={formData.price}
         />
         <Text mt={6} ml={5} color="#000000" fontSize="28px" fontWeight="medium">
@@ -124,7 +102,7 @@ const PriceInfo: React.FC<PriceInfoProps> = ({ onChange }) => {
           }}
           _placeholder={{ color: "transparent" }}
           bgColor="#FFFFFF"
-          onChange={handleMaxPeopleChange}
+          onChange={handleNumberInputChange("maxPeople")}
           value={formData.maxPeople}
         />
         <Text mt={6} ml={5} color="#000000" fontSize="28px" fontWeight="medium">
@@ -155,7 +133,7 @@ const PriceInfo: React.FC<PriceInfoProps> = ({ onChange }) => {
           }}
           _placeholder={{ color: "transparent" }}
           bgColor="#FFFFFF"
-          onChange={handleMaxTeamChange}
+          onChange={handleNumberInputChange("maxTeam")}
           value={formData.maxTeam}
         />
         <Text mt={6} ml={5} color="#000000" fontSize="28px" fontWeight="medium">
@@ -185,7 +163,7 @@ const PriceInfo: React.FC<PriceInfoProps> = ({ onChange }) => {
           }}
           _placeholder={{ color: "transparent" }}
           bgColor="#FFFFFF"
-          onChange={handleStartDateChange}
+          onChange={handleDateTimeChange("startDate")}
           type="date"
           value={formData.startDate}
         />
@@ -210,7 +188,7 @@ const PriceInfo: React.FC<PriceInfoProps> = ({ onChange }) => {
           }}
           _placeholder={{ color: "transparent" }}
           bgColor="#FFFFFF"
-          onChange={handleEndDateChange}
+          onChange={handleDateTimeChange("endDate")}
           type="date"
           value={formData.endDate}
         />
@@ -237,7 +215,7 @@ const PriceInfo: React.FC<PriceInfoProps> = ({ onChange }) => {
             border: "0.7px solid #22543D",
           }}
           bgColor="#FFFFFF"
-          onChange={handleStartTimeChange}
+          onChange={handleDateTimeChange("startTime")}
           type="time"
           value={formData.startTime}
         />
@@ -264,7 +242,7 @@ const PriceInfo: React.FC<PriceInfoProps> = ({ onChange }) => {
             border: "0.7px solid #22543D",
           }}
           bgColor="#FFFFFF"
-          onChange={handleEndTimeChange}
+          onChange={handleDateTimeChange("endTime")}
           type="time"
           value={formData.endTime}
         />

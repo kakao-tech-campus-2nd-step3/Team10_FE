@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Flex, ModalBody, ModalHeader, ModalCloseButton, Button, Text, Divider } from "@chakra-ui/react";
+import { useGetProducts } from "@api/productApi";
 import BasicModal from "@components/common/modal/BasicModal";
-import useGetProduct from "./useGetProduct";
 
 interface CancelOrderModalProps {
   isOpen: boolean;
@@ -18,9 +18,13 @@ const CancelOrderModal: React.FC<CancelOrderModalProps> = ({
   maxH = "800px",
   productId,
 }) => {
-  const { data: productData } = useGetProduct(productId);
-
+  const { data: productData } = useGetProducts(productId);
+  // const { data: orderData } = useGetOrder(orderId);
   const [totalRefundAmount, setTotalRefundAmount] = useState(0);
+
+  // const { mutate: cancelOrder } = useCreateOrderCancel();
+  // const [error, setError] = useState<string>("");
+  // const [success, setSuccess] = useState<boolean>(false);
 
   useEffect(() => {
     if (productData) {
@@ -30,6 +34,31 @@ const CancelOrderModal: React.FC<CancelOrderModalProps> = ({
       setTotalRefundAmount(price * stock + shippingFee);
     }
   }, [productData]);
+
+  // const handleCancelOrder = () => {
+  //   if (!orderData || !productData) {
+  //     setError("주문 정보를 불러올 수 없습니다.");
+  //     return;
+  //   }
+
+  //   const cancelData = {
+  //     orderedProductId: productId,
+  //   };
+
+  //   cancelOrder(cancelData, {
+  //     onSuccess: () => {
+  //       setSuccess(true);
+  //       setError("");
+  //       setTimeout(() => {
+  //         onClose();
+  //       }, 2000);
+  //     },
+  //     onError: () => {
+  //       setError("주문 취소 중 오류가 발생했습니다.");
+  //       setSuccess(false);
+  //     },
+  //   });
+  // };
 
   return (
     <BasicModal isOpen={isOpen} onClose={onClose} maxW={maxW} maxH={maxH}>
@@ -47,6 +76,19 @@ const CancelOrderModal: React.FC<CancelOrderModalProps> = ({
       />
 
       <ModalBody>
+        {/* {error && (
+          <Alert mb={4} borderRadius="md" status="error">
+            <AlertIcon />
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+
+        {success && (
+          <Alert mb={4} borderRadius="md" status="success">
+            <AlertIcon />
+            <AlertTitle>주문이 성공적으로 취소되었습니다.</AlertTitle>
+          </Alert>
+        )} */}
         <Flex justify="center" direction="column">
           <Flex justify="space-between" direction="row" mt={10} mr={70}>
             <Text color="#000000" fontSize="28px" fontWeight="medium">
@@ -99,6 +141,7 @@ const CancelOrderModal: React.FC<CancelOrderModalProps> = ({
               borderColor: "#22543D",
             }}
             bgColor="#22543D"
+            // onClick={handleCancelOrder}
           >
             주문 취소하기
           </Button>

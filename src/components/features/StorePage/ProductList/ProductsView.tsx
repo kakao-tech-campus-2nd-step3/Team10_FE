@@ -1,6 +1,6 @@
+import { useGetProducts } from "@api/productApi";
 import GridView, { GridViewProps } from "@components/ItemView/GridView";
 import ProductCard from "@components/features/StorePage/ProductCard";
-import mockProducts from "@mocks/mockItem/mockProducts";
 import { Product } from "@type/index";
 
 type ProductsViewProps = {
@@ -8,9 +8,15 @@ type ProductsViewProps = {
 } & Omit<GridViewProps<Product>, "items" | "ItemComponent">;
 
 const ProductsView = ({ filters, ...props }: ProductsViewProps) => {
-  const filteredProducts = mockProducts.filter(() => filters.length === 0);
+  const { data: products } = useGetProducts(filters[0] ? Number(filters[0]) : 0);
 
-  return <GridView items={filteredProducts} ItemComponent={ProductCard} {...props} />;
+  return (
+    <GridView
+      items={(products || []).map((p: Product) => ({ ...p, link: `/store/${p.id}` }))}
+      ItemComponent={ProductCard}
+      {...props}
+    />
+  );
 };
 
 export default ProductsView;

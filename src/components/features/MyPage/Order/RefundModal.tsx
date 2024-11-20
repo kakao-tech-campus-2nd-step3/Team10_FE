@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Flex, ModalBody, ModalHeader, ModalCloseButton, Button, Text, Divider } from "@chakra-ui/react";
+import { useGetProductDetail } from "@api/productApi";
 import BasicModal from "@components/common/modal/BasicModal";
-import useGetProduct from "./useGetProduct";
 
 interface RefundModalProps {
   isOpen: boolean;
@@ -12,7 +12,7 @@ interface RefundModalProps {
 }
 
 const RefundModal: React.FC<RefundModalProps> = ({ isOpen, onClose, maxW = "600px", maxH = "800px", productId }) => {
-  const { data: productData } = useGetProduct(productId);
+  const { data: productData } = useGetProductDetail(productId);
 
   const [totalRefundAmount, setTotalRefundAmount] = useState(0);
 
