@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
-import { Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import Avatar from "@components/common/Avatar";
 import Card, { CardProps } from "@components/common/Card";
 import Image from "@components/common/Image";
 import { Product } from "@type/index";
 
 export type ProductCardProps = {
-  item: Product;
+  item: Product & { link?: string };
 } & CardProps;
 
 const ProductCard = ({ item, ...props }: ProductCardProps) => (
-  <Link to={`/store/${item.id}`}>
-    <Card {...props} _hover={{ transform: "translateY(-10px)" }}>
+  <Box {...(!item.link && { as: Link, to: item.link })}>
+    <Card {...props} _hover={item.link ? { transform: "translateY(-10px)" } : {}}>
       <Image w="full" borderRadius="2xl" alt={item.name} aspectRatio="1" src={item.mainImage} />
       <Flex py="3">
         <Text maxW="70%" fontSize="lg" fontWeight="bold" isTruncated>
@@ -34,7 +34,7 @@ const ProductCard = ({ item, ...props }: ProductCardProps) => (
         <Text ml="1">{item.farm.name}</Text>
       </Flex>
     </Card>
-  </Link>
+  </Box>
 );
 
 export default ProductCard;

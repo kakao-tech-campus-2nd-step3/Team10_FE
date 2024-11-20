@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { Flex } from "@chakra-ui/react";
+import { useGetFarms } from "@api/farmApi";
 import GridView from "@components/ItemView/GridView";
 import BestScheduleSection from "@components/features/SchedulePage/BestScheduleSection";
 import ScheduleCard from "@components/features/SchedulePage/ScheduleCard";
 import ScheduleCategory from "@components/features/SchedulePage/ScheduleCategory";
 import size from "@constants/size";
-import mockSchedule from "@mocks/mockItem/mockSchedule";
-import { FarmCategory } from "@type/index";
+import { FarmCategory, Schedule } from "@type/index";
 
 const SchedulePage = () => {
   const [category, setCategory] = useState<FarmCategory | null>(null);
+
+  const { data: schedules } = useGetFarms(category?.id);
 
   return (
     <Flex
@@ -22,7 +24,15 @@ const SchedulePage = () => {
       <Flex direction="column" rowGap="24" w="1100px" my="20">
         <BestScheduleSection />
         <ScheduleCategory category={category} setCategory={ct => setCategory(ct)} />
-        <GridView items={mockSchedule} ItemComponent={ScheduleCard} columns={3} gap="10" />
+        <GridView
+          items={(schedules || []).map((s: Schedule) => ({
+            ...s,
+            link: `/schedule/${s.id}`,
+          }))}
+          ItemComponent={ScheduleCard}
+          columns={3}
+          gap="10"
+        />
       </Flex>
     </Flex>
   );

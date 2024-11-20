@@ -4,11 +4,11 @@ import ImageCard, { ImageCardProps } from "@components/common/ImageCard";
 import { Schedule } from "@type/index";
 
 type ScheduleCardProps = ImageCardProps & {
-  item: Schedule;
+  item: Schedule & { link?: string };
 };
 
 const ScheduleCard = ({ item, ...props }: ScheduleCardProps) => (
-  <Box as={Link} to={`/schedule/${item.id}`}>
+  <Box {...(item.link ? { as: Link, to: item.link } : {})}>
     <ImageCard
       h="full"
       {...props}
@@ -17,13 +17,17 @@ const ScheduleCard = ({ item, ...props }: ScheduleCardProps) => (
         brightness: item?.mainImage ? 1 : 0.6,
       }}
       bgImg={item.mainImage}
-      _hover={{
-        transform: "scale(1.05)",
-      }}
+      _hover={
+        item.link
+          ? {
+              transform: "scale(1.05)",
+            }
+          : {}
+      }
     >
       <Flex align="center" direction="column" w="full" mt="auto" mb="10">
         <Text px="5" color="green" bg="white" borderRadius="xl">
-          {item.farm.address}
+          {item.address}
         </Text>
         <Text color="white" fontSize="2xl" fontWeight="bold">
           {item.name}

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Text, Flex, Input, Image } from "@chakra-ui/react";
 import { useCreateFarmer } from "@api/emailApi";
 import call from "@assets/logo/Call.png";
+import useLogin from "@hooks/useLogin";
 
 type FarmerData = {
   name: string;
@@ -26,10 +27,12 @@ const Farmer = () => {
   const { mutateAsync: createFarmer } = useCreateFarmer();
   const navigate = useNavigate();
 
+  const { refreshLogin } = useLogin();
+
   const handleRegister = () => {
     createFarmer(farmerData)
       .then(() => {
-        navigate("/");
+        refreshLogin().then(() => navigate("/"));
       })
       .catch(() => {
         alert("농부 등록에 실패했습니다.");
