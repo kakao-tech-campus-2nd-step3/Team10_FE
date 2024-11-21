@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { useState } from "react";
 import { Flex } from "@chakra-ui/react";
 import { useGetFarms } from "@api/farmApi";
@@ -6,6 +8,7 @@ import BestScheduleSection from "@components/features/SchedulePage/BestScheduleS
 import ScheduleCard from "@components/features/SchedulePage/ScheduleCard";
 import ScheduleCategory from "@components/features/SchedulePage/ScheduleCategory";
 import size from "@constants/size";
+import mockSchedule from "@mocks/mockItem/mockSchedule";
 import { FarmCategory, Schedule } from "@type/index";
 
 const SchedulePage = () => {
@@ -25,7 +28,7 @@ const SchedulePage = () => {
         <BestScheduleSection />
         <ScheduleCategory category={category} setCategory={ct => setCategory(ct)} />
         <GridView
-          items={(schedules || []).map((s: Schedule) => ({
+          items={(mockSchedule /* schedules */ || []).map((s: Schedule) => ({
             ...s,
             link: `/schedule/${s.id}`,
           }))}

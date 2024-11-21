@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useGetProducts } from "@api/productApi";
 import GridView, { GridViewProps } from "@components/ItemView/GridView";
 import ProductCard from "@components/features/StorePage/ProductCard";
+import mockProducts from "@mocks/mockItem/mockProducts";
 import { Product } from "@type/index";
 
 type ProductsViewProps = {
@@ -12,7 +14,7 @@ const ProductsView = ({ filters, ...props }: ProductsViewProps) => {
 
   return (
     <GridView
-      items={(products || []).map((p: Product) => ({ ...p, link: `/store/${p.id}` }))}
+      items={/* products */ (mockProducts || []).map((p: Product) => ({ ...p, link: `/store/${p.id}` }))}
       ItemComponent={ProductCard}
       {...props}
     />
